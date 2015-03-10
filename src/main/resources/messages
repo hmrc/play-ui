@@ -1,0 +1,20 @@
+# dateTupple labels
+
+date.fields.day=Day
+date.fields.month=Month
+date.fields.year=Year
+
+error.invalid.date.format=You must specify a valid date
+
+# Validator messages
+
+error.email=Enter a valid email address.
+
+error.positive.number=This field must be greater than 0.
+
+error.address.main.line.max.length.violation=This address line field must not be greater than 28 characters
+error.address.optional.line.max.length.violation=This address line field must not be greater than 18 characters
+error.address.blank=This address line field must not be blank
+error.address.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 - ’ , / & space
+error.postcode.length.violation=Postcode is incorrect
+error.postcode.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 space
