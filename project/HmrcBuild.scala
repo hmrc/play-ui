@@ -32,8 +32,8 @@ object HmrcBuild extends Build {
   import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt}
   import Dependencies._
 
-  val nameApp = "play-ui"
-  val versionApp = envOrElse("PLAY_UI_VERSION", "999-SNAPSHOT")
+  val appName = "play-ui"
+  val versionApp = "1.6.0-SNAPSHOT"
 
   val appDependencies = Seq(
     Compile.play,
@@ -46,7 +46,7 @@ object HmrcBuild extends Build {
   )
 
   lazy val playUi = (project in file("."))
-    .settings(name := nameApp)
+    .settings(name := appName)
     .settings(version := versionApp)
     .settings(scalaSettings : _*)
     .settings(defaultSettings() : _*)
