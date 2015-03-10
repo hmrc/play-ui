@@ -33,7 +33,7 @@ object HmrcBuild extends Build {
   import Dependencies._
 
   val appName = "play-ui"
-  val versionApp = "1.6.0-SNAPSHOT"
+  val appVersion = "1.6.0-SNAPSHOT"
 
   val appDependencies = Seq(
     Compile.play,
@@ -47,12 +47,12 @@ object HmrcBuild extends Build {
 
   lazy val playUi = (project in file("."))
     .settings(name := appName)
-    .settings(version := versionApp)
+    .settings(version := appVersion)
     .settings(scalaSettings : _*)
     .settings(defaultSettings() : _*)
     .settings(
       targetJvm := "jvm-1.7",
-      shellPrompt := ShellPrompt(versionApp),
+      shellPrompt := ShellPrompt(appVersion),
       libraryDependencies ++= appDependencies,
       crossScalaVersions := Seq("2.11.4")
     )
