@@ -54,6 +54,12 @@ object HmrcBuild extends Build {
       targetJvm := "jvm-1.7",
       shellPrompt := ShellPrompt(appVersion),
       libraryDependencies ++= appDependencies,
+      resolvers := Seq(
+        Opts.resolver.sonatypeReleases,
+        Opts.resolver.sonatypeSnapshots,
+        "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
+        "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
+      ),
       crossScalaVersions := Seq("2.11.4")
     )
     .settings(publishAllArtefacts: _*)
@@ -63,6 +69,7 @@ object HmrcBuild extends Build {
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
     .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
     .settings(Headers(): _ *)
+    .settings(SonatypeBuild(): _*)
 
 }
 
@@ -111,5 +118,36 @@ object Headers {
     (compile in Compile) <<= (compile in Compile) dependsOn (createHeaders in Compile),
     (compile in Test) <<= (compile in Test) dependsOn (createHeaders in Test)
   )
+}
+
+
+object SonatypeBuild {
+
+  import xerial.sbt.Sonatype._
+
+  def apply() = {
+    sonatypeSettings ++ Seq(
+      pomExtra :=
+        <url>https://www.gov.uk/government/organisations/hm-revenue-customs</url>
+          <licenses>
+            <license>
+              <name>Apache 2</name>
+              <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            </license>
+          </licenses>
+          <scm>
+            <connection>scm:git@github.com:hmrc/play-ui.git</connection>
+            <developerConnection>scm:git@github.com:hmrc/play-ui.git</developerConnection>
+            <url>git@github.com:hmrc/play-ui.git</url>
+          </scm>
+          <developers>
+            <developer>
+              <id>steve-e</id>
+              <name>Steve Etherington</name>
+              <url>http://www.equalexperts.com/</url>
+            </developer>
+          </developers>
+    )
+  }
 }
 
