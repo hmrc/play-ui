@@ -17,3 +17,12 @@ play-ui
 =======
 
 Micro-library containing core for Play UI, incl. formatters, validators, mappers and helper templates.
+
+
+## Adding to your service
+
+Include the following dependency in your SBT build
+
+```scala
+libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "1.1.0"
+```
