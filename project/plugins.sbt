@@ -12,15 +12,12 @@
 // See the License for the specific language governing permissions and
 //  limitations under the License.
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-utils" % "2.0.2")
-
-addSbtPlugin("uk.gov.hmrc" % "hmrc-resolvers" % "0.2.0")
-
 addSbtPlugin("com.typesafe.sbt" % "sbt-twirl" % "1.0.2")
 
-addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.3.4")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.3.8")
+
+addSbtPlugin("uk.gov.hmrc" % "sbt-utils" % "2.2.0")
+
+addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "0.2.2")
 
 addSbtPlugin("de.heikoseeberger" % "sbt-header" % "1.1.1")
-
-addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "0.2.1")
-
