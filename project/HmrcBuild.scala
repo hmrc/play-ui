@@ -24,10 +24,8 @@ import sbt.Keys._
 
 object HmrcBuild extends Build {
 
-  import uk.gov.hmrc.PublishingSettings._
-  import uk.gov.hmrc.NexusPublishing._
   import uk.gov.hmrc.DefaultBuildSettings
-  import scala.util.Properties.envOrElse
+  import uk.gov.hmrc.PublishingSettings._
   import DefaultBuildSettings._
   import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt}
   import Dependencies._
@@ -60,10 +58,9 @@ object HmrcBuild extends Build {
         "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
         "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
       ),
-      crossScalaVersions := Seq("2.11.4")
+      crossScalaVersions := Seq("2.11.6")
     )
     .settings(publishAllArtefacts: _*)
-    .settings(nexusPublishingSettings: _*)
     .settings(SbtBuildInfo(): _*)
     .enablePlugins(SbtTwirl)
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
@@ -81,7 +78,7 @@ object Dependencies {
   }
 
   sealed abstract class Test(scope: String) {
-    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.1" % scope
+    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.4" % scope
     val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
     val jsoup = "org.jsoup" % "jsoup" % "1.7.2" % scope
     val playTest = "com.typesafe.play" %% "play-test" % PlayVersion.current % scope
