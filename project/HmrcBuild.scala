@@ -31,7 +31,7 @@ object HmrcBuild extends Build {
   import Dependencies._
 
   val appName = "play-ui"
-  val appVersion = "1.6.0-SNAPSHOT"
+  val appVersion = "1.6.0"
 
   val appDependencies = Seq(
     Compile.play,
@@ -66,7 +66,7 @@ object HmrcBuild extends Build {
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
     .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
     .settings(Headers(): _ *)
-    .settings(SonatypeBuild(): _*)
+    .settings(POMMetadata(): _*)
 
 }
 
@@ -118,12 +118,8 @@ object Headers {
 }
 
 
-object SonatypeBuild {
-
-  import xerial.sbt.Sonatype._
-
+object POMMetadata {
   def apply() = {
-    sonatypeSettings ++ Seq(
       pomExtra :=
         <url>https://www.gov.uk/government/organisations/hm-revenue-customs</url>
           <licenses>
@@ -144,7 +140,6 @@ object SonatypeBuild {
               <url>http://www.equalexperts.com/</url>
             </developer>
           </developers>
-    )
   }
 }
 

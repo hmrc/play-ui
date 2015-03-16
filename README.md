@@ -24,5 +24,7 @@ Micro-library containing core for Play UI, incl. formatters, validators, mappers
 Include the following dependency in your SBT build
 
 ```scala
-libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "1.1.0"
+resolvers += Resolver.bintrayRepo("hmrc", "releases")
+
+libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "1.6.0"
 ```
