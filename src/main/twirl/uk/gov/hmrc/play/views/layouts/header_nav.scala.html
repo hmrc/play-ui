@@ -1,0 +1,31 @@
+@(navTitle: Option[String],
+  navTitleLink: Option[play.api.mvc.Call],
+  showBetaLink: Boolean,
+  navLinks: Option[Html])
+
+<div class="header-proposition">
+    <div class="content">
+        @if(navLinks) {
+        <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+        }
+        <nav id="proposition-menu" class="header__menu" role="navigation">
+
+            @if(navTitleLink){
+                <a href="@navTitleLink" class="header__menu__proposition-name">@navTitle</a>
+            }else{
+                <span class="header__menu__proposition-name">@navTitle</span>
+            }
+
+            @if(showBetaLink) {
+                <a href="https://www.gov.uk/service-manual" class="phase-tag beta">Beta</a>
+            }
+
+            @if(navLinks) {
+                <ul id="proposition-links" class="header__menu__proposition-links">
+                    @navLinks
+                </ul>
+            }
+
+        </nav>
+    </div>
+</div>

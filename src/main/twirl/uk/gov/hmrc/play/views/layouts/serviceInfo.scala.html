@@ -1,0 +1,9 @@
+@(betaBanner: Html, includeGridWrapper: Boolean, serviceInfoContent: Option[Html])
+
+<div class="service-info @if( includeGridWrapper ){ grid-wrapper}">
+    @betaBanner
+    <div class="logo">
+        <span class="organisation-logo organisation-logo-medium">HM Revenue &amp; Customs</span>
+    </div>
+    @serviceInfoContent
+</div>

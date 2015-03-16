@@ -1,0 +1,26 @@
+@(article: Html = HtmlFormat.empty,
+  mainClass: Option[String] = None,
+  mainDataAttributes: Option[Html] = None,
+  mainContentHeader: Html = HtmlFormat.empty,
+  serviceInfo: Html = HtmlFormat.empty,
+  actingAttorneyBanner: Html = HtmlFormat.empty,
+  sidebar: Html = HtmlFormat.empty,
+  getHelpForm: Html = HtmlFormat.empty)
+
+<main id="wrapper" role="main" @if(mainClass.isDefined) { class="@{mainClass.get}" } @mainDataAttributes>
+    <div id="content">
+
+        @serviceInfo
+
+        @actingAttorneyBanner
+
+        @mainContentHeader
+
+        @article
+
+        @sidebar
+
+        @getHelpForm
+
+    </div>
+</main>
