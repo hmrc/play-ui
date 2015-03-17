@@ -1,0 +1,7 @@
+@(content: Html,
+  includeGridWrapper: Boolean = false,
+  articleClasses: Option[String] = None)
+
+<article class="content__body@if( includeGridWrapper ){ grid-wrapper}@if(articleClasses.isDefined){ @articleClasses.get }">
+    @content
+</article>

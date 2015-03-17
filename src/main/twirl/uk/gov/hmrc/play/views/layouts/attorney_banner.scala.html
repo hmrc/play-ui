@@ -1,0 +1,10 @@
+@(name: Option[String],
+  citizenSwitchOffUrl: String)
+
+<div class="nested-banner">
+
+    <p>You are using online services on behalf of @{name.getOrElse("Name Not Defined").toLowerCase.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}.
+        <a href="@citizenSwitchOffUrl" > Return to your trusted helper list  </a>
+    </p>
+
+</div>

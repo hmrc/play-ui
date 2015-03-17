@@ -1,0 +1,19 @@
+@(displayName: String,
+  previouslyLoggedInAt: scala.Option[org.joda.time.DateTime],
+  logoutUrl: String,
+  showLastLogInTime: Boolean = true)
+
+@import uk.gov.hmrc.play.views.formatting.Dates._
+
+<div id="lastlogin" class="service-info__help">
+    <p>
+        @if(showLastLogInTime) {
+            @if(previouslyLoggedInAt.isEmpty) {
+              @Messages("common.firstlogin", displayName)
+            } else {
+              @Messages("common.previousLoginTime", displayName, formatEasyReadingTimestamp(previouslyLoggedInAt, ""))
+            }
+        }
+        <br><a id="logOutStatusHref" href="@logoutUrl">Sign out</a>
+    </p>
+</div>

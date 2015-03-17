@@ -1,0 +1,15 @@
+@(assetsPrefix:String, linkElem: Option[Html], headScripts: Option[Html])
+
+	<!--[if lt IE 8 ]>
+	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application-ie7.min.css' />
+	<![endif]-->
+	<!--[if IE 8 ]>
+	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application-ie.min.css' />
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application.min.css' />
+	<!--<![endif]-->
+
+	<script src='@{assetsPrefix}/javascripts/vendor/modernizr.js' type='text/javascript'></script>
+@headScripts
+@linkElem
