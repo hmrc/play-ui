@@ -1,4 +1,4 @@
-<!--_
+<!--
 Copyright 2015 HM Revenue & Customs
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,21 @@ limitations under the License.
 play-ui
 =======
 
-Micro-library containing core for Play UI, incl. formatters, validators, mappers and helper templates.
+Micro-library containing core for HMRC's Play UI:
+ 
+### Formatters
+* `Dates` provides various human-readable date formats
+* `Money` formats pounds and pence
+* `Strings` changes the case of phrases and hyphenates
 
+### Form Mappers & Validators
+* `DateTuple` maps year, month, day fields to a `LocalDate`
+* `StopOnFirstFail` applies constraints in order and fails fast
+* `Validators` contains multiple small validation functions such as `addressTuple`, `positiveInteger` & `nonEmptySmallText`
+
+### Helper Templates
+Has many standard snippets for form fields, such as: `address`, `dateFields`, `dropdown`, `fieldGroup`. Each helper 
+correctly adds labels, error messages and CSS classes.
 
 ## Adding to your service
 
