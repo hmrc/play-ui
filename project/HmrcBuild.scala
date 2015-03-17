@@ -31,7 +31,7 @@ object HmrcBuild extends Build {
   import Dependencies._
 
   val appName = "play-ui"
-  val appVersion = "1.7.0"
+  val appVersion = "1.8.0-SNAPSHOT"
 
   val appDependencies = Seq(
     Compile.play,
