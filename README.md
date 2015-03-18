@@ -32,6 +32,9 @@ Micro-library containing core for HMRC's Play UI:
 Has many standard snippets for form fields, such as: `address`, `dateFields`, `dropdown`, `fieldGroup`. Each helper 
 correctly adds labels, error messages and CSS classes.
 
+### Layout Templates
+Contains templates for components used across frontend applications such as: header, footer, sidebar, betaBanner.
+
 ## Adding to your service
 
 Include the following dependency in your SBT build
