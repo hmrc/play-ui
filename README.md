@@ -42,5 +42,5 @@ Include the following dependency in your SBT build
 ```scala
 resolvers += Resolver.bintrayRepo("hmrc", "releases")
 
-libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "1.7.0"
+libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "1.8.0"
 ```
