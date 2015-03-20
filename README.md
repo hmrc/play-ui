@@ -16,6 +16,8 @@ limitations under the License.
 play-ui
 =======
 
+[![Join the chat at https://gitter.im/hmrc/play-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hmrc/play-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Micro-library containing core for HMRC's Play UI:
  
 ### Formatters
