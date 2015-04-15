@@ -25,10 +25,7 @@ object DateTuple extends DateTuple
 
 trait DateTuple {
 
-  import uk.gov.hmrc.play.mappers.DateFields
-  import uk.gov.hmrc.play.mappers.DateFields.day
-  import uk.gov.hmrc.play.mappers.DateFields.month
-  import uk.gov.hmrc.play.mappers.DateFields.year
+  import uk.gov.hmrc.play.mappers.DateFields._
 
   val dateTuple: Mapping[Option[LocalDate]] = dateTuple(validate = true)
 

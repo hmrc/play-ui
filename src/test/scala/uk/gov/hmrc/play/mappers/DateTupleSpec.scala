@@ -42,8 +42,8 @@ class DateTupleSpec extends WordSpec with Matchers {
     }
 
 
-    "create a mapping for an invalid date (with space after month and day)" in {
-      val dateFields = Map(day -> "1 ", month -> "2 ", year -> "2014")
+    "create a mapping for an invalid date (with space after month, day and year)" in {
+      val dateFields = Map(day -> "1 ", month -> "2 ", year -> "2014 ")
       val result = dateTuple.bind(dateFields)
       result.isRight shouldBe true
       result.right.get shouldBe Some(new LocalDate(2014, 2, 1))
