@@ -33,7 +33,7 @@
 
     @if(!labelAfter && elements.args.contains('_label)) { @elements.label }
     @if( elements.args.get('_info) ) { <p>@elements.args.get('_info)</p> }
-    <textarea type="text"
+    <textarea 
     @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
     name="@elements.field.name"
     id="@elements.field.name">@field.value</textarea>
