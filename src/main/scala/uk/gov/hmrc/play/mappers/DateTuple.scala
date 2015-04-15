@@ -25,7 +25,10 @@ object DateTuple extends DateTuple
 
 trait DateTuple {
 
-  import DateFields._
+  import uk.gov.hmrc.play.mappers.DateFields
+  import uk.gov.hmrc.play.mappers.DateFields.day
+  import uk.gov.hmrc.play.mappers.DateFields.month
+  import uk.gov.hmrc.play.mappers.DateFields.year
 
   val dateTuple: Mapping[Option[LocalDate]] = dateTuple(validate = true)
 
@@ -45,7 +48,7 @@ trait DateTuple {
           if (y.length != 4) {
             throw new Exception("Year must be 4 digits")
           }
-          new LocalDate(y.toInt, monthOption.getOrElse(throw new Exception("Month missing")).toInt, dayOption.getOrElse(throw new Exception("Day missing")).toInt)
+          new LocalDate(y.toInt, monthOption.getOrElse(throw new Exception("Month missing")).trim.toInt, dayOption.getOrElse(throw new Exception("Day missing")).trim.toInt)
           true
         } catch {
           case _: Throwable => if (validate) {
@@ -60,7 +63,7 @@ trait DateTuple {
   {
     case (Some(y), Some(m), Some(d)) =>
       try {
-        Some(new LocalDate(y.trim.toInt, m.toInt, d.toInt))
+        Some(new LocalDate(y.trim.toInt, m.trim.toInt, d.trim.toInt))
       } catch {
         case e: Exception =>
           if (validate) {
