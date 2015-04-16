@@ -34,7 +34,6 @@ common.signOut=Sign out
 
 report.a.problem.link = Get help with this page.
 
-
 # Attorney Banner
 attorney.banner.user = This is <span class="heading-small">{0}</span>''s HMRC account
 attorney.banner.link = Return to your own account
