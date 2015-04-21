@@ -1,0 +1,44 @@
+@*
+* Copyright 2015 HM Revenue & Customs
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*@
+@(field: play.api.data.Field, args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
+@parentField = @{args.toMap.get('parentField).asInstanceOf[Option[Field]]}
+
+@parentElements = @{parentField.map(pf => new FieldElements(pf.id, pf, null, Map(), lang) )}
+
+@value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
+
+
+<div class="form-group">
+<label for="@elements.field.name" class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) } @if(elements.hasErrors || (parentElements.isDefined && parentElements.get.hasErrors)) {form-field--error}" @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
+@if(elements.args.contains('_label)) { @elements.label }
+</label>
+
+<input @if(elements.args.contains('_type)){type="@elements.args.get('_type)" }else{type="text" }
+@if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
+@if( elements.args.get('_maxFieldLength) ){ maxlength="@elements.args.get('_maxFieldLength)" }
+
+@if(elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
+@if(elements.args.contains('placeHolder) ){ placeHolder="@elements.args.get('placeHolder)"}
+name="@elements.field.name"
+id="@elements.args.get('_inputId)"
+value="@value"
+/>
+</div>
