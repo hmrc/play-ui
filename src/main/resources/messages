@@ -30,7 +30,9 @@ footer.links.terms_and_conditions.url=/help/terms-and-conditions
 
 common.firstlogin={0}, this is the first time you have logged in
 common.previousLoginTime={0}, you last signed in {1}
+common.signOut=Sign out
 
-#Attorney
+# Attorney Banner
 attorney.banner.user = This is <span class="heading-small">{0}</span>''s HMRC account
 attorney.banner.link = Return to your own account
+

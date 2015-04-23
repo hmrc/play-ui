@@ -16,7 +16,8 @@
 @(displayName: String,
   previouslyLoggedInAt: scala.Option[org.joda.time.DateTime],
   logoutUrl: String,
-  showLastLogInTime: Boolean = true)
+  showLastLogInTime: Boolean = true,
+  showSignOut: Boolean = true)
 
 @import uk.gov.hmrc.play.views.formatting.Dates._
 
@@ -29,6 +30,8 @@
               @Messages("common.previousLoginTime", displayName, formatEasyReadingTimestamp(previouslyLoggedInAt, ""))
             }
         }
-        <br><a id="logOutStatusHref" href="@logoutUrl">Sign out</a>
+        @if(showSignOut){
+        <br><a id="logOutStatusHref" href="@logoutUrl">@Messages("common.signOut")</a>
+        }
     </p>
 </div>
