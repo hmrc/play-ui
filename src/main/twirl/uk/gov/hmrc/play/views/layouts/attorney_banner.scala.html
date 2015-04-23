@@ -14,12 +14,14 @@
 * limitations under the License.
 *@
 @(name: Option[String],
-  citizenSwitchOffUrl: String)
+    citizenSwitchOffUrl: String)
 
-<div class="nested-banner">
-
-    <p>You are using online services on behalf of @{name.getOrElse("Name Not Defined").toLowerCase.split(" ").map(_.toLowerCase.capitalize).mkString(" ")}.
-        <a href="@citizenSwitchOffUrl" > Return to your trusted helper list  </a>
-    </p>
-
+<div id="heightHolder">
+    <div class="attorneyBanner" id="attorneyBanner">
+        <p class="attorneyPara">
+            @Html(Messages("attorney.banner.user", name.getOrElse("Name Not Defined").toLowerCase.split(" ").map(_.toLowerCase.capitalize).mkString(" ")))
+            <a href="@citizenSwitchOffUrl" class="banner-links">@Messages("attorney.banner.link")</a></p>
+    </div>
 </div>
+
+
