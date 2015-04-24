@@ -13,14 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(name: Option[String],
-    citizenSwitchOffUrl: String)
+@(name: Option[String], returnLinkUrl : String, returnLinkText: String)
 
 <div id="heightHolder">
-    <div class="attorneyBanner" id="attorneyBanner">
+    <div class="attorneyBanner" id="attorneyBanner" data-focuses="attorneyBanner">
         <p class="attorneyPara">
             @Html(Messages("attorney.banner.user", name.getOrElse("Name Not Defined").toLowerCase.split(" ").map(_.toLowerCase.capitalize).mkString(" ")))
-            <a href="@citizenSwitchOffUrl" class="banner-links">@Messages("attorney.banner.link")</a></p>
+            <a href="@returnLinkUrl" class="banner-links">@returnLinkText</a></p>
     </div>
 </div>
 
