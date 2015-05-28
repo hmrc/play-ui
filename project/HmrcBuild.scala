@@ -41,6 +41,7 @@ object HmrcBuild extends Build {
   lazy val playUi = (project in file("."))
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
     .settings(
+      name := appName,
       targetJvm := "jvm-1.7",
       libraryDependencies ++= appDependencies,
       resolvers := Seq(
