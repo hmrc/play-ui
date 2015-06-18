@@ -73,6 +73,7 @@
            value="@value"
         @if(elements.args.get('_error_id).isDefined) { aria-labeledby="@elements.args.get('_error_id)" }
         @if(elements.args.get('_hintId).isDefined) { aria-describedby="@elements.args.get('_hintId)" }
+        @if(elements.args.get('_maxlength).isDefined) { maxlength="@elements.args.get('_maxlength)" }
            />
 
     @if(labelAfter && elements.args.contains('_label)) {
