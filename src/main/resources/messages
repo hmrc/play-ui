@@ -32,6 +32,9 @@ common.firstlogin={0}, this is the first time you have logged in
 common.previousLoginTime={0}, you last signed in {1}
 common.signOut=Sign out
 
+report.a.problem.link = Get help with this page.
+
+
 # Attorney Banner
 attorney.banner.user = This is <span class="heading-small">{0}</span>''s HMRC account
 attorney.banner.link = Return to your own account
