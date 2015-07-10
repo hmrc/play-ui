@@ -37,5 +37,5 @@ report.a.problem.link = Get help with this page.
 # Attorney Banner
 
 attorney.banner.link = Return to your own account
-attorney.banner.user = You''re in <span class="heading-small">{0}</span> tax account.
+attorney.banner.user = You''re in <span class="heading-small">{0}''s</span> account.
 attorney.banner.nan = name not defined
