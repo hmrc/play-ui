@@ -13,14 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(name: Option[String], returnLinkUrl : String, returnLinkText: String)
+@(name: Option[String], returnLinkUrl : String, inPertax: Boolean)
 
 <div class=" grid-wrapper attorneyContainer">
     <div class="attorneyBanner grid" id="attorneyBanner">
-        <div class="grid">
-            <div class="inner-block">
-                @Html(Messages("attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan")))) <a href="@returnLinkUrl" class="banner-links">@returnLinkText</a>
-            </div>
+        <div class="inner-block">
+            @if(inPertax) {
+                @Html(Messages("attorney.banner.pertax.user", name.getOrElse(Messages("attorney.banner.nan")))) <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.pertax.link")</a>
+            } else {
+                @Html(Messages("attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan")))) <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.link")</a>
+            }
         </div>
     </div>
 </div>
