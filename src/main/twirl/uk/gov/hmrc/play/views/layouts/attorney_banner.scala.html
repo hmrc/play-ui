@@ -17,12 +17,23 @@
 
 <div class=" grid-wrapper attorneyContainer">
     <div class="attorneyBanner grid" id="attorneyBanner">
-        <div class="inner-block">
-            @if(inPertax) {
-                @Html(Messages("attorney.banner.pertax.user", name.getOrElse(Messages("attorney.banner.nan")))) <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.pertax.link")</a>
-            } else {
-                @Html(Messages("attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan")))) <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.link")</a>
-            }
+        <div class="grid grid-2-3">
+            <div class="inner-block">
+                @if(inPertax) {
+                    @Html(Messages("attorney.banner.pertax.user", name.getOrElse(Messages("attorney.banner.nan"))))
+                } else {
+                    @Html(Messages("attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan"))))
+                }
+            </div>
         </div>
+        <div class="grid grid-1-3">
+            <div class="inner-block">
+                @if(inPertax) {
+                    <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.pertax.link")</a>
+                } else {
+                    <a href="@returnLinkUrl" class="banner-links">@Messages("attorney.banner.link")</a>
+                }
+            </div>
+        </div> 
     </div>
 </div>
