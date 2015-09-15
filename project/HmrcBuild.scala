@@ -42,13 +42,13 @@ object HmrcBuild extends Build {
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
     .settings(
       name := appName,
-      targetJvm := "jvm-1.7",
+      scalaVersion := "2.11.7",
       libraryDependencies ++= appDependencies,
       resolvers := Seq(
         Resolver.bintrayRepo("hmrc", "releases"),
         "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/"
       ),
-      crossScalaVersions := Seq("2.11.6")
+      crossScalaVersions := Seq("2.11.7")
     )
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
     .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
@@ -63,7 +63,7 @@ object Dependencies {
 
   sealed abstract class Test(scope: String) {
     val scalaTest = "org.scalatest" %% "scalatest" % "2.2.4" % scope
-    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
+    val pegdown = "org.pegdown" % "pegdown" % "1.5.0" % scope
     val jsoup = "org.jsoup" % "jsoup" % "1.7.2" % scope
     val playTest = "com.typesafe.play" %% "play-test" % PlayVersion.current % scope
   }
