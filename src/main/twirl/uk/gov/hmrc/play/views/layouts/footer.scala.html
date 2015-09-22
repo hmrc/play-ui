@@ -19,7 +19,8 @@
   ssoUrl: Option[String],
   scriptElem: Option[Html],
   gaCalls: Option[(String,String) => Html],
-  analyticsAnonymizeIp: Boolean = true)
+  analyticsAnonymizeIp: Boolean = true,
+  analyticsAdditionalJs: Option[Html] = None)
 
 @analyticsToken match {
     case Some(token@_) if !token.equals("N/A") => {
@@ -35,6 +36,9 @@
             }{f =>
                 @f(analyticsHost, token)
             }
+
+            @analyticsAdditionalJs
+
         </script>
     }
     case _ => {}
