@@ -1,5 +1,5 @@
 <!--
-Copyright 2015 HM Revenue & Customs
+Copyright 2015 HM Revenue & Custom
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,10 +16,10 @@ limitations under the License.
 play-ui
 =======
 
-[![Join the chat at https://gitter.im/hmrc/play-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hmrc/play-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/hmrc/play-ui.svg)](https://travis-ci.org/hmrc/play-ui) [ ![Download](https://api.bintray.com/packages/hmrc/releases/play-ui/images/download.svg) ](https://bintray.com/hmrc/releases/play-ui/_latestVersion) 
+[![Join the chat at https://gitter.im/hmrc/play-ui](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hmrc/play-ui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/hmrc/play-ui.svg)](https://travis-ci.org/hmrc/play-ui) [ ![Download](https://api.bintray.com/packages/hmrc/releases/play-ui/images/download.svg) ](https://bintray.com/hmrc/releases/play-ui/_latestVersion)
 
 Micro-library containing core for HMRC's Play UI:
- 
+
 ### Formatters
 * `Dates` provides various human-readable date formats
 * `Money` formats pounds and pence
@@ -31,7 +31,7 @@ Micro-library containing core for HMRC's Play UI:
 * `Validators` contains multiple small validation functions such as `addressTuple`, `positiveInteger` & `nonEmptySmallText`
 
 ### Helper Templates
-Has many standard snippets for form fields, such as: `address`, `dateFields`, `dropdown`, `fieldGroup`. Each helper 
+Has many standard snippets for form fields, such as: `address`, `dateFields`, `dropdown`, `fieldGroup`. Each helper
 correctly adds labels, error messages and CSS classes.
 
 ### Layout Templates
@@ -68,5 +68,5 @@ Publish the library locally with
 
 
 ## License ##
- 
+
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
