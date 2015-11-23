@@ -9,7 +9,7 @@
         @if(!exclusions.contains(error.key)){
         <li role="tooltip" data-journey="search-page:error:@error.key">
             <a href="#@error.key" class="error-list" data-focuses="@error.key" id="@{error.key}-error">
-                @Messages(error.message)
+                @Messages(error.message, error.args: _*)
             </a>
         </li>
         }
