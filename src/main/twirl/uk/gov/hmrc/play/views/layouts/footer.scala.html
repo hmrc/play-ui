@@ -32,13 +32,11 @@
 
             @gaCalls.fold {
                 ga('create', '@token', '@analyticsHost');
+                @analyticsAdditionalJs
                 ga('send', 'pageview', { 'anonymizeIp': @analyticsAnonymizeIp });
             }{f =>
                 @f(analyticsHost, token)
             }
-
-            @analyticsAdditionalJs
-
         </script>
     }
     case _ => {}
