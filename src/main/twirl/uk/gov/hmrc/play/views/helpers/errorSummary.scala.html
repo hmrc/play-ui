@@ -1,0 +1,21 @@
+@(heading: String, form: Form[_], classes: Seq[String] = Seq.empty)
+
+<div class="flash error-summary@if(form.hasErrors) { error-summary--show}@classes.mkString(" ")"
+     id="error-summary-display"
+     role="alert"
+     aria-labelledby="error-summary-heading"
+     tabindex="-1">
+
+    <h2 id="error-summary-heading" class="h3-heading">@heading</h2>
+    <ul class="js-error-summary-messages">
+    @if(form.hasErrors) {
+        @form.errors.map { error =>
+            <li role="tooltip" data-journey="search-page:error:@error.key">
+                <a href="#@error.key" data-focuses="@error.key" id="@{error.key}-error-summary">
+                @Messages(error.message)
+                </a>
+            </li>
+        }
+    }
+    </ul>
+</div>
