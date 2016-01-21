@@ -3,6 +3,6 @@
 <span id="@{errorKey}-error-message"
       class="@{(Seq("error-notification") ++ classes).mkString(" ")}"
       role="alert"
-      data-journey="search-page:error:@errorKey">
+      data-input-name="@{errorKey}">
     @Messages(errorMessage)
 </span>
