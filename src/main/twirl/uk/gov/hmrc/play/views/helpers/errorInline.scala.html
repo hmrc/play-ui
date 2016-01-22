@@ -1,0 +1,8 @@
+@(errorKey: String, errorMessage: String, classes: Seq[String] = Seq.empty)
+
+<span id="@{errorKey}-error-message"
+      class="@{(Seq("error-notification") ++ classes).mkString(" ")}"
+      role="alert"
+      data-input-name="@{errorKey}">
+    @Messages(errorMessage)
+</span>
