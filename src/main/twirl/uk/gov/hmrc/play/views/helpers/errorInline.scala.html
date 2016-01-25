@@ -4,5 +4,5 @@
       class="@{(Seq("error-notification") ++ classes).mkString(" ")}"
       role="alert"
       data-input-name="@{errorKey}">
-    @Messages(errorMessage)
+      @errorMessage
 </span>
