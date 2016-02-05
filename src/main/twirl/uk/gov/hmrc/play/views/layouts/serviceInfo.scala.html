@@ -13,12 +13,14 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(betaBanner: Html, includeGridWrapper: Boolean, serviceInfoContent: Option[Html])
+@(betaBanner: Html, includeGridWrapper: Boolean, serviceInfoContent: Option[Html], includeHMRCBranding: Boolean = true)
 
 <div class="service-info @if( includeGridWrapper ){ grid-wrapper}">
     @betaBanner
-    <div class="logo">
-        <span class="organisation-logo organisation-logo-medium">HM Revenue &amp; Customs</span>
-    </div>
+    @if(includeHMRCBranding) {
+        <div class="logo">
+            <span class="organisation-logo organisation-logo-medium">HM Revenue &amp; Customs</span>
+        </div>
+    }
     @serviceInfoContent
 </div>
