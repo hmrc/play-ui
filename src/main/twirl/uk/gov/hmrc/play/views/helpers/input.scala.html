@@ -75,6 +75,8 @@
         @if(elements.args.get('_hintId).isDefined) { aria-describedby="@elements.args.get('_hintId)" }
         @if(elements.args.get('_maxlength).isDefined) { maxlength="@elements.args.get('_maxlength)" }
         @if(elements.args.get('_pattern).isDefined) { pattern="@elements.args.get('_pattern)" }
+        @if(elements.args.get('_title).isDefined) { title="@elements.args.get('_title)" }
+        @if(elements.args.get('_required).isDefined) { required }
            />
 
     @if(labelAfter && elements.args.contains('_label)) {
