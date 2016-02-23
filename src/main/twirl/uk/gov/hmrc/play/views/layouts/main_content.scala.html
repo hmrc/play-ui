@@ -22,10 +22,9 @@
   sidebar: Html = HtmlFormat.empty,
   getHelpForm: Html = HtmlFormat.empty)
 
+<div class="header-banner-wrapper">@serviceInfo</div>
 <main id="wrapper" role="main" @if(mainClass.isDefined) { class="@{mainClass.get}" } @mainDataAttributes>
-    <div id="content">
-
-        @serviceInfo
+      <div id="content">
 
         @actingAttorneyBanner
 
@@ -35,7 +34,7 @@
 
         @sidebar
 
-        @getHelpForm
+        @getHelpForm        
 
     </div>
 </main>
