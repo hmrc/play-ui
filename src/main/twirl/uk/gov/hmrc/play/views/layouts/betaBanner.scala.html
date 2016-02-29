@@ -20,7 +20,7 @@
         noBorder: Boolean = false)
 
 <div class="beta-banner@if(noBorder) { beta-banner--borderless}">
-    <p><strong class="phase-tag">BETA</strong><span>This is a trial service.
+    <p><strong class="phase-tag">BETA</strong><span>This is a new service.
         @if( showFeedbackLinkInBetaBanner ) {
             Help us improve it - send your
             @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
