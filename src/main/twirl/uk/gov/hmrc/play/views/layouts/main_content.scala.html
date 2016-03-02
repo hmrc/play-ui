@@ -23,9 +23,10 @@
   getHelpForm: Html = HtmlFormat.empty)
 
 <main id="wrapper" role="main" @if(mainClass.isDefined) { class="@{mainClass.get}" } @mainDataAttributes>
-    <div id="content">
-
+    <div class="centered-content">
         @serviceInfo
+    </div>
+    <div id="content">
 
         @actingAttorneyBanner
 
