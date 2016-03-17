@@ -26,13 +26,13 @@
         <nav id="proposition-menu" class="header__menu" role="navigation">
 
             @if(navTitleLink){
-                <a href="@navTitleLink" class="header__menu__proposition-name">@navTitle</a>
+                <a id="navTitleLink" href="@navTitleLink" class="header__menu__proposition-name">@navTitle</a>
             }else{
-                <span class="header__menu__proposition-name">@navTitle</span>
+                <span id="navTitle" class="header__menu__proposition-name">@navTitle</span>
             }
 
             @if(showBetaLink) {
-                <a href="https://www.gov.uk/service-manual" class="phase-tag beta">Beta</a>
+                <a id="betaLink" href="https://www.gov.uk/service-manual" class="phase-tag beta">Beta</a>
             }
 
             @if(navLinks) {
