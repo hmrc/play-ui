@@ -5,6 +5,9 @@ date.fields.month=Month
 date.fields.year=Year
 
 error.invalid.date.format=You must specify a valid date
+error.enter_a_date=Enter a date
+error.enter_numbers_=Enter numbers, for example 31 3 2015 is 31 March 2015
+error.enter_valid_date=Enter a valid date
 
 # Validator messages
 

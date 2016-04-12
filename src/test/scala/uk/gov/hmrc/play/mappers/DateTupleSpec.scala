@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 HM Revenue & Customs
+ * Copyright 2016 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,100 @@
 
 package uk.gov.hmrc.play.mappers
 
-import org.joda.time.LocalDate
+import org.joda.time.{DateTime, LocalDate}
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.FormError
+import uk.gov.hmrc.play.mappers.DateFields._
 
 class DateTupleSpec extends WordSpec with Matchers {
 
 
+  "validDateTuple" should {
+
+    import uk.gov.hmrc.play.mappers.DateTuple._
+
+    trait Setup {
+
+      def input: Map[String, String]
+
+      lazy val result = validDateTuple.bind(input)
+    }
+
+
+
+    "return error.enter_a_date when day field is missing" in new Setup {
+
+      lazy val input = Map(month -> "2", year -> "2015")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_a_date"))
+    }
+
+    "return error.enter_a_date when month field is missing" in new Setup {
+
+      lazy val input = Map(day -> "1", year -> "2015")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_a_date"))
+    }
+
+    "return error.enter_a_date when year field is missing" in new Setup {
+
+      lazy val input = Map(day -> "1", month -> "2")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_a_date"))
+    }
+
+
+
+
+
+    "return error.enter_numbers when day field is non-digit" in new Setup {
+
+      lazy val input = Map(day -> "@", month -> "2", year -> "2015")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_numbers"))
+    }
+
+    "return error.enter_numbers when month field is non-digit" in new Setup {
+
+      lazy val input = Map(day -> "1", month -> "j", year -> "2015")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_numbers"))
+    }
+
+    "return error.enter_numbers when year field is non-digit" in new Setup {
+
+      lazy val input = Map(day -> "1", month -> "2", year -> "%")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_numbers"))
+    }
+
+
+
+
+
+    "return error.enter_valid_date when date is not real" in new Setup {
+
+      lazy val input = Map(day -> "30", month -> "2", year -> "2015")
+      result.isLeft shouldBe true
+      result.left.get shouldBe Seq(FormError("", "error.enter_valid_date"))
+    }
+
+
+
+
+
+
+    "return a date on valid input" in new Setup {
+
+      lazy val input = Map(day -> "28", month -> "2", year -> "2015")
+      result.isRight shouldBe true
+      result.right.get shouldBe DateTime.parse("2015-02-28")
+    }
+
+  }
+
   "dateTuple" should {
 
-    import uk.gov.hmrc.play.mappers.DateFields._
     import uk.gov.hmrc.play.mappers.DateTuple._
 
     def assertError(dateFields: Map[String, String]) {
