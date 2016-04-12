@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 HM Revenue & Customs
+ * Copyright 2016 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.play.mappers
 
-import org.joda.time.LocalDate
+import org.joda.time.{DateTime, LocalDate}
 import play.api.data.Forms._
 import play.api.data.Mapping
 import java.text.{DateFormatSymbols => JDateFormatSymbols}
+import scala.util.Try
 
 object DateTuple extends DateTuple
 
@@ -76,6 +77,23 @@ trait DateTuple {
     case _ => (None, None, None)
   }
   )
+
+  def validDateTuple: Mapping[DateTime] = {
+
+    def verifyDigits(triple: (String, String, String )) =
+      !triple._1.exists(!_.isDigit) && !triple._2.exists(!_.isDigit) && !triple._3.exists(!_.isDigit)
+
+    tuple(
+      "year" -> optional(text),
+      "month" -> optional(text),
+      "day" -> optional(text)
+    )
+      .verifying("error.enter_a_date", x => x._1.isDefined && x._2.isDefined && x._3.isDefined)
+      .transform[(String,String,String)]( x => (x._1.get.trim, x._2.get.trim, x._3.get.trim), x => (Some(x._1), Some(x._2), Some(x._3)))
+      .verifying("error.enter_numbers_", verifyDigits _)
+      .verifying("error.enter_valid_date", x => !verifyDigits(x) || Try(new DateTime(x._1.toInt, x._2.toInt, x._3.toInt, 0, 0)).isSuccess)
+      .transform[DateTime](x => new DateTime(x._1.toInt, x._2.toInt, x._3.toInt, 0, 0).withTimeAtStartOfDay, x => (x.getYear.toString, x.getMonthOfYear.toString, x.getDayOfMonth.toString))
+  }
 
 }
 
