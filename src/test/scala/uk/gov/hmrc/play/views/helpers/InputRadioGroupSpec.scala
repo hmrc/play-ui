@@ -92,6 +92,13 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       doc.getElementsByTag("fieldset").first().attr("class") should include("form-field--error")
       doc.getElementsByClass("error-notification").first().text() shouldBe "error.maxLength"
     }
+
+    "render a hint in" in {
+      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue1" -> "myLabel1"),
+        '_hint -> "My Hint"
+      )))
+      doc.getElementsByClass("form-hint").text() shouldEqual "My Hint"
+    }
   }
 
 }
