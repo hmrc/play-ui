@@ -34,7 +34,7 @@ object InputText {
   }
 }
 
-case class Select(values: Seq[(String, String)], emptyValueText: Option[String], label: String, labelClass: Option[String] = None, groupClass: Option[String] = None, additionalTitleText: Option[String] = None) extends FieldType
+case class Select(values: Seq[(String, String)], emptyValueText: Option[String], label: String, labelClass: Option[String] = None, groupClass: Option[String] = None, selectClass: Option[String] = None, additionalTitleText: Option[String] = None) extends FieldType
 
 case class DateControl(yearRange: Range, extraClass: Option[String] = None) extends FieldType
 
