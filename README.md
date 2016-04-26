@@ -47,6 +47,26 @@ resolvers += Resolver.bintrayRepo("hmrc", "releases")
 libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "x.x.x"
 ```
 
+### How to test changes locally
+
+Publish the library locally with
+ 
+ ```sbt clean compile publishLocal```
+ 
+ This will build and install the library into your local Ivy cache. The final lines of the output will contain the version number. 
+ 
+ Then update the configuration of your frontend application to use this version number. 
+ This is in different files depending on the application. 
+ In `business-tax-account`, it is in `FrontendBuild.scala`.
+ In `one-time-password-frontend`, it is in `MicroServiceBuild.scala`.
+ The line will look like 
+ ```"uk.gov.hmrc" %% "play-ui" % "4.10"```
+ 
+ now restart your frontend application, and you will see your local changes.
+ 
+ n.b. you will need to run the sbt command to publish locally each time you make a change.
+
+
 ## License ##
  
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").

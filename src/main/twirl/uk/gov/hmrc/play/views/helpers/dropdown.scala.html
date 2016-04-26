@@ -27,7 +27,7 @@
         @elements.label
     </span>
     @if(elements.args.contains('_additionalTitleText)){<p>@elements.args.get('_additionalTitleText)</p>}
-    <select id="@elements.field.name" name="@elements.field.name">
+    <select id="@elements.field.name" name="@elements.field.name" class="@elements.args.get('_selectClass)">
         @if(displayEmptyValue) {
             <option>@elements.args.get('_emptyValueText)</option>
         }
