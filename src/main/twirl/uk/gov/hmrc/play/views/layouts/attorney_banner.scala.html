@@ -13,13 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(name: Option[String], returnLinkUrl : String, regime: uk.gov.hmrc.play.views.helpers.AttorneyRegime, customReturnLinkText: Option[String] = None, bannerColor: Option[String] = None)
+@(name: Option[String], returnLinkUrl : String, regime: uk.gov.hmrc.play.views.helpers.AttorneyRegime, customReturnLinkText: Option[String] = None, bannerColor: Option[String] = None, bannerText: Option[Html] = None)
 
 <div class=" grid-wrapper attorneyContainer">
     <div class='attorneyBanner grid @bannerColor.getOrElse("")' id="attorneyBanner">
         <div class="grid grid-2-3">
             <div class="inner-block">
-                @Html(Messages(s"${regime.messagePrefix}attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan"))))
+                @bannerText.getOrElse(Html(Messages(s"${regime.messagePrefix}attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan")))))
             </div>
         </div>
         <div class="grid grid-1-3">
