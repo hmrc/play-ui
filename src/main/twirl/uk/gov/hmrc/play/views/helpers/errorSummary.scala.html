@@ -13,7 +13,7 @@
                 <a href="#@error.key"
                    id="@{error.key}-error-summary"
                    data-focuses="@error.key">
-                @Messages(error.message)
+                @Messages(error.message, error.args: _*)
                 </a>
             </li>
         }
