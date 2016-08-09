@@ -37,6 +37,7 @@
     @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
     name="@elements.field.name"
     id="@elements.field.name"
+    @if( elements.args.get('_dataCharField) ){ data-char-field="@elements.args.get('_dataCharField)" }
     @if( elements.args.get('_maxlength) ){ maxlength="@elements.args.get('_maxlength)" }>@field.value</textarea>
     @if(labelAfter && elements.args.contains('_label)) { @elements.label }
     @if(elements.args.contains('_help)) { <small>@elements.infos</small> }
