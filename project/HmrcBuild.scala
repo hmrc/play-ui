@@ -26,7 +26,7 @@ object HmrcBuild extends Build {
   import Dependencies._
   import uk.gov.hmrc.DefaultBuildSettings._
 
-  val appName = "play-ui"
+  val appName = "play-ui-25"
 
   val appDependencies = Seq(
     Compile.play,
