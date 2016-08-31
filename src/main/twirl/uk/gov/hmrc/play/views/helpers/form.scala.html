@@ -13,12 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(action: play.api.mvc.Call, args: (Symbol,String)*)(body: => Html)(implicit request: Request[_])
+@(action: play.api.mvc.Call, args: (Symbol,String)*)(body: => Html)(implicit request: Request[_], messages: Messages)
 @import views.html.helper._
+@import views.html.helper.CSRF
 
 <form action="@action.url" method="@action.method" @toHtmlArgs(args.toMap)>
     @{
-        play.filters.csrf.CSRF.getToken(request).map {token => CSRF.formField(token)}
+        play.filters.csrf.CSRF.getToken(request).map {token => CSRF.formField(request)}
     }
     @body
 </form>

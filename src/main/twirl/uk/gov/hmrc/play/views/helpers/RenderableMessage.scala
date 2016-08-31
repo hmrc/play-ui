@@ -19,6 +19,7 @@ package uk.gov.hmrc.play.views.helpers
 import java.text.{DateFormat, SimpleDateFormat}
 
 import org.joda.time.LocalDate
+import play.api.i18n.Messages
 import play.twirl.api.Html
 import uk.gov.hmrc.play.views.helpers.RenderableMessageProperty.RenderableMessageProperty
 import uk.gov.hmrc.play.views.html.helpers.moneyPoundsRenderer
@@ -39,7 +40,7 @@ object RenderableMessageProperty extends Enumeration {
 }
 
 trait RenderableMessage {
-  
+
   def render: Html
 
   def set(property: (RenderableMessageProperty, String)): RenderableMessage = this
@@ -49,7 +50,7 @@ trait RenderableMessage {
 object RenderableMessage {
   implicit def translateStrings(value: String): RenderableStringMessage = RenderableStringMessage(value)
 
-  implicit def translateMoneyPounds(money: MoneyPounds): RenderableMoneyMessage = RenderableMoneyMessage(money)
+  implicit def translateMoneyPounds(money: MoneyPounds)(implicit messages: Messages): RenderableMoneyMessage = RenderableMoneyMessage(money)
 
   implicit def translateDate(date: LocalDate): RenderableDateMessage = RenderableDateMessage(date)
 
@@ -67,7 +68,7 @@ case class RenderableDateMessage(date: LocalDate)(implicit dateFormat: DateForma
   override def render: Html = Html(formattedDate)
 }
 
-case class RenderableMoneyMessage(moneyPounds: MoneyPounds) extends RenderableMessage {
+case class RenderableMoneyMessage(moneyPounds: MoneyPounds)(implicit messages: Messages) extends RenderableMessage {
   override def render: Html = {
     moneyPoundsRenderer(moneyPounds)
   }

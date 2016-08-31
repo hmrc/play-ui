@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(name: Option[String], returnLinkUrl : String, regime: uk.gov.hmrc.play.views.helpers.AttorneyRegime, customReturnLinkText: Option[String] = None, bannerClasses: Option[String] = None, bannerContent: Option[Html] = None)
+@(name: Option[String], returnLinkUrl : String, regime: uk.gov.hmrc.play.views.helpers.AttorneyRegime, customReturnLinkText: Option[String] = None, bannerClasses: Option[String] = None, bannerContent: Option[Html] = None)(implicit messages: Messages)
 
 @attorneyContent = @{Html(Messages(s"${regime.messagePrefix}attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan"))))}
 

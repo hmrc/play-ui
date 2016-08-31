@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.play.views.helpers
 
-import views.html.helper.FieldConstructor
+import views.html.helper.{FieldConstructor, FieldElements}
 import uk.gov.hmrc.play.views.html.helpers.simpleFieldConstructor
 
 object CustomHelpers {

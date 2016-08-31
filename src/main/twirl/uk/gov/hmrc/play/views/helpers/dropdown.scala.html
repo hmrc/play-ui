@@ -13,12 +13,12 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(field: play.api.data.Field, elementOptions: Seq[(String, String)], displayEmptyValue: Boolean, args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+@(field: play.api.data.Field, elementOptions: Seq[(String, String)], displayEmptyValue: Boolean, args: (Symbol,Any)*)(implicit messages: Messages)
 
 @import play.api.i18n._
 @import views.html.helper._
 
-@elements = @{ new FieldElements(field.id, field, null, args.toMap, lang) }
+@elements = @{ new FieldElements(field.id, field, null, args.toMap, messages) }
 
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
 

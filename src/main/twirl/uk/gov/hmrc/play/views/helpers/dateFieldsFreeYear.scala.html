@@ -13,13 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(formItem:Form[_], fieldName: String, label: Html, args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+@(formItem:Form[_], fieldName: String, label: Html, args: (Symbol,Any)*)(implicit messages: Messages)
 
 @import uk.gov.hmrc.play.mappers.DateFields._
 @import play.api.i18n._
 @import views.html.helper._
 
-@elements = @{ new FieldElements(formItem(fieldName).id, formItem(fieldName), null, args.toMap, lang) }
+@elements = @{ new FieldElements(formItem(fieldName).id, formItem(fieldName), null, args.toMap, messages) }
 
 <fieldset class="@elements.args.get('_groupClass) @if(elements.hasErrors) {form-field--error}">
     <legend>@label</legend>

@@ -15,9 +15,12 @@
 *@
 @(elements: views.html.helper.FieldElements)
 
+@import play.api.i18n.Messages.Implicits._
+@import play.api.Play.current
+
 <div class="@if(elements.hasErrors) {error}">
     <label class="checkbox" for="@elements.id">@elements.input @elements.label</label>
-    @elements.errors(elements.lang).map { error =>
-    <span style="display: block" class="error-notification">@Messages(error)</span>
+    @elements.errors.map { error =>
+    <span style="display: block" class="error-notification">@Messages(error)(applicationMessages)</span>
     }
 </div>

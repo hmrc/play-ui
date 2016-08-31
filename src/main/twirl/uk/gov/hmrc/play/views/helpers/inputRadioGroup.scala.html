@@ -13,15 +13,15 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(field: Field, radioOptions: Seq[(String, String)], args: (Symbol, Any)*)(implicit lang: play.api.i18n.Lang)
+@(field: Field, radioOptions: Seq[(String, String)], args: (Symbol, Any)*)(implicit messages: Messages)
 
 @import play.api.i18n._
 @import views.html.helper._
 
-@elements = @{new FieldElements(field.id, field, null, args.toMap, lang) }
+@elements = @{new FieldElements(field.id, field, null, args.toMap, messages) }
 @fieldsetClass = {@elements.args.get('_groupClass)@if(elements.hasErrors){ form-field--error}}
 @labelAfter = @{ elements.args.get('_labelAfter).getOrElse(false).asInstanceOf[Boolean] }
-<fieldset class="@fieldsetClass" 
+<fieldset class="@fieldsetClass"
 @if(elements.args.get('_fieldsetAttributes).isDefined) {@elements.args.get('_fieldsetAttributes)}>
 @if(elements.args.get('_legend).isDefined) {
     <legend @if(elements.args.get('_legendClass).isDefined) {class="@elements.args.get('_legendClass)"}>
