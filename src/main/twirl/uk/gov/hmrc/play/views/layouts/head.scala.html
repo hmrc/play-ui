@@ -13,18 +13,21 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(assetsPrefix:String, linkElem: Option[Html], headScripts: Option[Html])
+
+@import uk.gov.hmrc.play.config.AssetsPrefix
+
+@(linkElem: Option[Html], headScripts: Option[Html])
 
 	<!--[if lt IE 8 ]>
-	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application-ie7.min.css' />
+	<link rel='stylesheet' href='@{AssetsPrefix.assetsPrefix}/stylesheets/application-ie7.min.css' />
 	<![endif]-->
 	<!--[if IE 8 ]>
-	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application-ie.min.css' />
+	<link rel='stylesheet' href='@{AssetsPrefix.assetsPrefix}/stylesheets/application-ie.min.css' />
 	<![endif]-->
 	<!--[if gt IE 8]><!-->
-	<link rel='stylesheet' href='@{assetsPrefix}/stylesheets/application.min.css' />
+	<link rel='stylesheet' href='@{AssetsPrefix.assetsPrefix}/stylesheets/application.min.css' />
 	<!--<![endif]-->
 
-	<script src='@{assetsPrefix}/javascripts/vendor/modernizr.js' type='text/javascript'></script>
+	<script src='@{AssetsPrefix.assetsPrefix}/javascripts/vendor/modernizr.js' type='text/javascript'></script>
 @headScripts
 @linkElem
