@@ -19,15 +19,15 @@
         showFeedbackLinkInBetaBanner: Boolean = true,
         noBorder: Boolean = false)
 
-<div class="beta-banner@if(noBorder) { beta-banner--borderless}">
-    <p><strong class="phase-tag">BETA</strong><span>This is a new service.
-        @if( showFeedbackLinkInBetaBanner ) {
-            Help us improve it - send your
-            @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
+<div class="beta-banner @if(noBorder) {beta-banner--borderless}">
+    <p>
+        <strong class="phase-tag">BETA</strong>
+        <span>This is a new service @if(showFeedbackLinkInBetaBanner) {
+             - your @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
                 <a id="feedback-link"
                 href="@linkUrl"
                 data-sso="false"
-                data-journey-click="other-global:Click:Feedback">feedback</a>.
+                data-journey-click="other-global:Click:Feedback">feedback</a> will help us to improve it.
             }
         }
     </span>

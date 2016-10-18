@@ -22,12 +22,15 @@
 
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
 
-<label for="@elements.field.name" class="@elements.args.get('_labelClass) @elements.args.get('_groupClass)@if(elements.hasErrors){' ' + error}">
+<label for="@elements.field.name" class="@elements.args.get('_labelClass) @elements.args.get('_groupClass)@if(elements.hasErrors){' error'}">
     <span class="label__text">
         @elements.label
     </span>
     @if(elements.args.contains('_additionalTitleText)){<p>@elements.args.get('_additionalTitleText)</p>}
-    <select id="@elements.field.name" name="@elements.field.name">
+    @if(elements.args.contains('_errorsAboveInput)){
+        @elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
+    }
+    <select id="@elements.field.name" name="@elements.field.name" class="@elements.args.get('_selectClass)">
         @if(displayEmptyValue) {
             <option>@elements.args.get('_emptyValueText)</option>
         }
@@ -42,4 +45,6 @@
         }
     </select>
 </label>
-@elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
+@if(!elements.args.contains('_errorsAboveInput)){
+    @elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
+}

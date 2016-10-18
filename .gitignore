@@ -21,6 +21,7 @@ pids
 
 **/target/*
 target
+out
 
 **/bin/*
 **/lib/*
