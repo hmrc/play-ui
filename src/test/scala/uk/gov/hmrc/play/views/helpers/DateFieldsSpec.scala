@@ -33,8 +33,6 @@ class DateFieldsSpec extends WordSpec with Matchers {
 
   implicit val application = new GuiceApplicationBuilder().build()
 
-//  implicit val messages = applicationMessages
-
   case class DummyFormData(day: Int, month: Int, year: Int)
   def dummyForm = Form(
     mapping(
