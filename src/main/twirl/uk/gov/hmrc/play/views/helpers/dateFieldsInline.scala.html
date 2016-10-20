@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(formItem: Form[_], fieldName: String, label: Html, yearRange: Range, extraClass: Option[String], args: (Symbol, Any)*)(implicit lang: play.api.i18n.Lang)
+@(formItem: Form[_], fieldName: String, label: Html, yearRange: scala.Range, extraClass: Option[String], args: (Symbol, Any)*)(implicit messages: Messages)
 
     @import uk.gov.hmrc.play.mappers.DateFields._
     @import play.api.i18n._

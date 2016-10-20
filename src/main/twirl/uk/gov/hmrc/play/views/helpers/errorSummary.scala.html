@@ -1,4 +1,4 @@
-@(heading: String, form: Form[_], classes: Seq[String] = Seq.empty, dataJourney: Option[String] = None)
+@(heading: String, form: Form[_], classes: Seq[String] = Seq.empty, dataJourney: Option[String] = None)(implicit messages: Messages)
 
 <div class="flash error-summary@if(form.hasErrors) { error-summary--show} @classes.mkString(" ")"
      id="error-summary-display"

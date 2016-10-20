@@ -13,12 +13,12 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
-@(formItem:Form[_], fields: Seq[uk.gov.hmrc.play.views.helpers.FormField], args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+@(formItem:Form[_], fields: Seq[uk.gov.hmrc.play.views.helpers.FormField], args: (Symbol,Any)*)(implicit messages: Messages)
 
 @import play.api.i18n._
 @import views.html.helper._
 
-@allFieldElements = @{ fields.groupBy{_.field}.map{_._2 head}.map{ f => new FieldElements(f.field.id, f.field, null, args.toMap, lang) }.toList}
+@allFieldElements = @{ fields.groupBy{_.field}.map{_._2 head}.map{ f => new FieldElements(f.field.id, f.field, null, args.toMap, messages) }.toList}
 @anyFieldHasError = @{ allFieldElements.exists( _.hasErrors ) }
 @argsMap = @{ args.toMap }
 @valueAfter = @{ argsMap.get('_valueAfter).getOrElse(false).asInstanceOf[Boolean] }

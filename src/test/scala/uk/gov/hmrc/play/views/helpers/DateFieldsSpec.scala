@@ -17,17 +17,21 @@
 package uk.gov.hmrc.play.views.helpers
 
 import org.scalatest.{Matchers, WordSpec}
-import uk.gov.hmrc.play.views.html.helpers.{dateFieldsInline, dateFieldsFreeYearInline}
+import uk.gov.hmrc.play.views.html.helpers.{dateFieldsFreeYearInline, dateFieldsInline}
 import play.twirl.api.Html
 import play.api.data.Form
-import play.api.data.Forms.{of => fieldOf, mapping}
+import play.api.data.Forms.{mapping, of => fieldOf}
 import org.jsoup.Jsoup
 import play.api.test.Helpers._
 import play.api.data.format.Formats._
+import play.api.i18n.Messages.Implicits._
+import play.api.inject.guice.GuiceApplicationBuilder
 
 class DateFieldsSpec extends WordSpec with Matchers {
 
   val months = Seq("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
+  implicit val application = new GuiceApplicationBuilder().build()
 
   case class DummyFormData(day: Int, month: Int, year: Int)
   def dummyForm = Form(

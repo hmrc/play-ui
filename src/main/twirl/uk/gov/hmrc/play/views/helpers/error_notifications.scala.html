@@ -1,4 +1,4 @@
-@(formErrors :  Form[_], errorHead : String, errorText : String, exclusions : Seq[String] = Nil)(implicit request: Request[_])
+@(formErrors :  Form[_], errorHead : String, errorText : String, exclusions : Seq[String] = Nil)(implicit request: Request[_], messages: Messages)
 
 @if(formErrors.hasErrors) {
 <div class="flash error-summary" id="Search-failure" role="group" aria-labelledby="errorSummaryHeading" tabindex="-1">

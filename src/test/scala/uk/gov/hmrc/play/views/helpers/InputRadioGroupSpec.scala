@@ -20,17 +20,23 @@ import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
+import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.views.html.helpers.inputRadioGroup
+import play.api.i18n.Messages.Implicits._
 
 class InputRadioGroupSpec extends WordSpec with Matchers {
 
+  implicit val application = new GuiceApplicationBuilder().build()
+
   case class DummyFormData(radioValue: String)
+
+  val max = 10
 
   def dummyForm = Form(
     mapping(
-      "radioValue" -> text(maxLength = 10)
+      "radioValue" -> text(maxLength = max)
 
     )(DummyFormData.apply)(DummyFormData.unapply))
 
@@ -90,7 +96,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       )
       val doc = Jsoup.parse(contentAsString(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass")))
       doc.getElementsByTag("fieldset").first().attr("class") should include("form-field--error")
-      doc.getElementsByClass("error-notification").first().text() shouldBe "error.maxLength"
+      doc.getElementsByClass("error-notification").first().text() shouldBe applicationMessagesApi.translate("error.maxLength", Seq(max)).get
     }
   }
 

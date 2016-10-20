@@ -16,10 +16,11 @@
 
 package uk.gov.hmrc.play.views.formatting
 
+import play.api.i18n.Messages
 import play.twirl.api.Html
 import uk.gov.hmrc.play.views.helpers.{MoneyPounds, RenderableMoneyMessage}
 
 object Money {
 
-  def pounds(value: BigDecimal, decimalPlaces: Int = 0) : Html = RenderableMoneyMessage(MoneyPounds(value, decimalPlaces)).render
+  def pounds(value: BigDecimal, decimalPlaces: Int = 0)(implicit messages: Messages) : Html = RenderableMoneyMessage(MoneyPounds(value, decimalPlaces)).render
 }
