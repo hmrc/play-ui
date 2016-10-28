@@ -18,10 +18,10 @@ package uk.gov.hmrc.play.config
 
 import play.api.Play
 
-trait AssetsPrefix {
+trait AssetsConfig {
   lazy val assetsUrl = Play.current.configuration.getString("assets.url").getOrElse("")
   lazy val assetsVersion = Play.current.configuration.getString("assets.version").getOrElse("")
   lazy val assetsPrefix = assetsUrl + assetsVersion
 }
 
-object AssetsPrefix extends AssetsPrefix
+object AssetsConfig extends AssetsConfig
