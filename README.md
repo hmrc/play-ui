@@ -47,6 +47,15 @@ resolvers += Resolver.bintrayRepo("hmrc", "releases")
 libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "x.x.x"
 ```
 
+If you require either [head](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/head.scala.html) or [footer](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/footer.scala.html) you'll also need to add some config to your `application.conf` file in order to build the complete urls for assets:
+
+```
+assets {
+  version = "x.x.x"
+  url = ""
+}
+```
+
 ### How to test changes locally
 
 Publish the library locally with
