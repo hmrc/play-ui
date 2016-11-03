@@ -24,7 +24,6 @@ import uk.gov.hmrc.versioning.SbtGitVersioning
 object HmrcBuild extends Build {
 
   import Dependencies._
-  import uk.gov.hmrc.DefaultBuildSettings._
 
   val appName = "play-ui"
 
@@ -63,7 +62,7 @@ object Dependencies {
 
   sealed abstract class Test(scope: String) {
     val scalaTest = "org.scalatest" %% "scalatest" % "2.2.4" % scope
-    val pegdown = "org.pegdown" % "pegdown" % "1.5.0" % scope
+    val pegdown = "org.pegdown" % "pegdown" % "1.6.0" % scope
     val jsoup = "org.jsoup" % "jsoup" % "1.7.2" % scope
     val playTest = "com.typesafe.play" %% "play-test" % PlayVersion.current % scope
   }
