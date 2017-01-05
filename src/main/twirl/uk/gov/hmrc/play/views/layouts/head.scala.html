@@ -29,9 +29,7 @@
 	<link rel='stylesheet' href='@{AssetsConfig.assetsPrefix}/stylesheets/application.min.css' />
 	<!--<![endif]-->
 
-	@optimizelyProjectId.map{ id =>
-		<script src='@{optimizelyBaseUrl}@{id}.js' type='text/javascript'></script>
-	}
+	@optimizelySnippet(optimizelyBaseUrl, optimizelyProjectId)
 	<script src='@{AssetsConfig.assetsPrefix}/javascripts/vendor/modernizr.js' type='text/javascript'></script>
 
 @headScripts
