@@ -20,7 +20,6 @@ import sbt.Keys._
 import sbt.{Build, _}
 import uk.gov.hmrc.SbtAutoBuildPlugin
 import uk.gov.hmrc.versioning.SbtGitVersioning
-import sbt.Tests.{SubProcess, Group}
 
 object HmrcBuild extends Build {
 
@@ -48,16 +47,10 @@ object HmrcBuild extends Build {
         Resolver.bintrayRepo("hmrc", "releases"),
         "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/"
       ),
-      crossScalaVersions := Seq("2.11.7"),
-      testGrouping in sbt.Test := oneForkedJvmPerTest((definedTests in sbt.Test).value)
+      crossScalaVersions := Seq("2.11.7")
     )
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
     .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
-
-  private def oneForkedJvmPerTest(tests: Seq[TestDefinition]) =
-    tests map {
-      test => Group(test.name, Seq(test), SubProcess(ForkOptions(runJVMOptions = Seq("-Dtest.name=" + test.name))))
-    }
 }
 
 object Dependencies {
