@@ -18,10 +18,12 @@ package uk.gov.hmrc.play.config
 
 import play.api.Play
 
-trait AssetsConfig {
-  lazy val assetsUrl = Play.current.configuration.getString("assets.url").getOrElse("")
-  lazy val assetsVersion = Play.current.configuration.getString("assets.version").getOrElse("")
-  lazy val assetsPrefix = assetsUrl + assetsVersion
+trait OptimizelyConfig {
+  def optimizelyBaseUrl : String
+  def optimizelyProjectId : Option[String]
 }
 
-object AssetsConfig extends AssetsConfig
+object OptimizelyConfig extends OptimizelyConfig {
+  override lazy val optimizelyBaseUrl = Play.current.configuration.getString("optimizely.url").getOrElse("")
+  override lazy val optimizelyProjectId = Play.current.configuration.getString("optimizely.projectId")
+}
