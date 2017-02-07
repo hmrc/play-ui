@@ -19,13 +19,11 @@
 @import views.html.helper._
 
 @elements = @{ new FieldElements(field.id, field, null, args.toMap, messages) }
-@value = @{ field.value match { case Some(x) => x case None => "false" case x => x }}
-<div class="form-field-single @if(elements.hasErrors) {error}">
+
+<label class="form-field-single@field.value.map{ v => selected }@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass) }@if(elements.hasErrors){ error form-field--error }" for="@elements.id">
     @elements.errors.map { error =>
-    <span style="display: block" class="error-notification">@Messages(error)</span>
+        <span id="@{elements.field.id}--error" class="error-notification" style="display: block">@Messages(error)</span>
     }
-    <input type="checkbox" id="@elements.id"
-    @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
-    name="@elements.field.name" value="true" @if(value=="true"){checked="checked"}/>
-    <label class="checkbox@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass)}" for="@elements.id"> @elements.label</label>
-</div>
+    @elements.label
+    <input type="checkbox" id="@elements.id" name="@elements.field.name" value="true" @field.value.map{ v => checked="checked" } @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }>
+</label>
