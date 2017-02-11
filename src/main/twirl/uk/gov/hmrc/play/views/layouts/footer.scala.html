@@ -22,7 +22,8 @@
   scriptElem: Option[Html],
   gaCalls: Option[(String,String) => Html],
   analyticsAnonymizeIp: Boolean = true,
-  analyticsAdditionalJs: Option[Html] = None)
+  analyticsAdditionalJs: Option[Html] = None
+)(implicit assetsConfig: AssetsConfig = AssetsConfig)
 
 @analyticsToken match {
     case Some(token@_) if !token.equals("N/A") => {
@@ -44,5 +45,5 @@
     case _ => {}
 }
 <script type="text/javascript">var ssoUrl = "@ssoUrl.getOrElse("")";</script>
-<script src="@AssetsConfig.assetsPrefix/javascripts/application.min.js" type="text/javascript"></script>
+<script src="@assetsConfig.assetsPrefix/javascripts/application.min.js" type="text/javascript"></script>
 @scriptElem
