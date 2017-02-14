@@ -1,0 +1,28 @@
+@import uk.gov.hmrc.play.config.OptimizelyConfig
+@import uk.gov.hmrc.play.config.AssetsConfig
+@()(implicit assetsConfig: AssetsConfig, optimizelyConfig: OptimizelyConfig)
+
+@*
+The HTML produced by this template just needs to include the templates which
+use configuration to ensure that they can be rendered in tests without a
+running Play application
+*@
+
+@headScripts = {
+  head was rendered
+}
+
+@footerScriptElem = {
+  footer was rendered
+}
+
+@head(
+  linkElem = None,
+  headScripts = Some(headScripts))
+
+@footer(
+  analyticsToken = None,
+  analyticsHost = "",
+  ssoUrl = None,
+  scriptElem = Some(footerScriptElem),
+  gaCalls = None)
