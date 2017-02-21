@@ -51,6 +51,7 @@ object HmrcBuild extends Build {
     )
     .settings(TwirlKeys.templateImports ++= Seq("play.api.mvc._", "play.api.data._", "play.api.i18n._", "play.api.templates.PlayMagic._"))
     .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
+    .settings(parallelExecution in sbt.Test := false)
 }
 
 object Dependencies {

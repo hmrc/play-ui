@@ -17,6 +17,7 @@
 package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
+import play.api.Play
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import uk.gov.hmrc.play.views
 import uk.gov.hmrc.play.views.layouts.test.{TestAssetsConfig, TestOptimizelyConfig}
@@ -27,9 +28,16 @@ class TestWithoutPlayAppSpec extends WordSpec with Matchers {
     "be renderable without a started Play application" in {
       val rendered = contentAsString(views.html.layouts.test_header_footer_includes()(TestAssetsConfig, TestOptimizelyConfig))
 
+      thereShouldBeNoStartedPlayApp()
+
       rendered should include("head was rendered")
       rendered should include("footer was rendered")
     }
   }
 
+  private def thereShouldBeNoStartedPlayApp() = {
+    intercept[RuntimeException] {
+      Play.current
+    }.getMessage should include("no started application")
+  }
 }
