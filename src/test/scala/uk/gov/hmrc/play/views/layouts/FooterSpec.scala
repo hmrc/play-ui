@@ -17,27 +17,25 @@
 package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
-import play.api.Play
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
+import play.twirl.api.Html
+import uk.gov.hmrc.play.test.StartedPlayApp
 import uk.gov.hmrc.play.views
-import uk.gov.hmrc.play.views.layouts.test.{TestAssetsConfig, TestOptimizelyConfig}
+import uk.gov.hmrc.play.views.layouts.test.TestAssetsConfig
 
-class TestWithoutPlayAppSpec extends WordSpec with Matchers {
-
-  "Header and Footer templates that use Play configuration" should {
+class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
+  "footer" should {
     "be renderable without a started Play application" in {
-      val rendered = contentAsString(views.html.layouts.test_header_footer_includes()(TestAssetsConfig, TestOptimizelyConfig))
-
       thereShouldBeNoStartedPlayApp()
 
-      rendered should include("head was rendered")
+      val rendered = contentAsString(views.html.layouts.footer(
+        analyticsToken = None,
+        analyticsHost = "",
+        ssoUrl = None,
+        scriptElem = Some(Html("footer was rendered")),
+        gaCalls = None)(TestAssetsConfig))
+
       rendered should include("footer was rendered")
     }
-  }
-
-  private def thereShouldBeNoStartedPlayApp() = {
-    intercept[RuntimeException] {
-      Play.current
-    }.getMessage should include("no started application")
   }
 }
