@@ -26,6 +26,7 @@
     }
     <input type="checkbox" id="@elements.id"
     @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }
+    @if(elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
     name="@elements.field.name" value="true" @if(value=="true"){checked="checked"}/>
     <label class="checkbox@if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass)}" for="@elements.id"> @elements.label</label>
 </div>
