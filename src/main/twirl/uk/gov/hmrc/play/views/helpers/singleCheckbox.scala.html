@@ -25,6 +25,6 @@
     @elements.errors.map { error =>
         <span id="@{elements.field.id}--error" class="error-notification" style="display: block">@Messages(error)</span>
     }
-    @elements.label
     <input type="checkbox" id="@elements.id" name="@elements.field.name" value="true" @if(value == "true"){ checked="checked" } @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }>
+    @elements.label
 </label>
