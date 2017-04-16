@@ -1,0 +1,55 @@
+@*
+* Copyright 2015 HM Revenue & Customs
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*@
+@(formItem:Form[_], fieldName: String)(implicit lang: play.api.i18n.Lang)
+
+@import uk.gov.hmrc.play.mappers.DateFields._
+@import play.api.i18n._
+@import views.html.helper._
+@import uk.gov.hmrc.play.mappers.DateFormatSymbols
+
+@dayElem = @{ fieldName + "." + day }
+@dayInputId = @{ fieldName + "-" + day }
+
+@dateInputText(
+formItem(dayElem),
+'_inputId -> dayInputId,
+'_label -> Messages("date.fields.day"),
+'_labelClass -> "label--inline-tight",
+'_inputClass -> "input--xxsmall form-field--inline push--left",
+'_maxFieldLength -> 2, 'placeHolder ->"DD"
+)
+@monthElem = @{ fieldName + "." + month }
+@monthInputId = @{ fieldName + "-" + month }
+
+@dateInputText(
+formItem(monthElem),
+'_inputId -> monthInputId,
+'_label -> Messages("date.fields.month"),
+'_labelClass -> "label--inline-tight",
+'_inputClass -> "input--xxsmall form-field--inline push--left",
+'_maxFieldLength -> 2, 'placeHolder ->"MM"
+)
+@yearElem = @{ fieldName + "." + year }
+@yearInputId = @{ fieldName + "-" + year }
+
+@dateInputText(
+formItem(yearElem),
+'_inputId -> yearInputId,
+'_label -> Messages("date.fields.year"),
+'_labelClass -> "label--inline-tight",
+'_inputClass -> "input--xsmall form-field--inline push--left",
+'_maxFieldLength -> 4, 'placeHolder ->"YYYY"
+)
