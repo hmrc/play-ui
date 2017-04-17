@@ -34,7 +34,10 @@ object HmrcBuild extends Build {
     Test.scalaTest,
     Test.pegdown,
     Test.jsoup,
-    Test.playTest
+    Test.playTest,
+	
+	"uk.gov.hmrc" %% "emailaddress" % "0.2.0",
+	"uk.gov.hmrc" %% "domain" % "2.11.0"
   )
 
   lazy val playUi = (project in file("."))
