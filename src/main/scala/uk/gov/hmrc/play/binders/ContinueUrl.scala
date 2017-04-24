@@ -26,7 +26,7 @@ case class ContinueUrl(url: String) {
 
   val isAbsoluteUrl = url.startsWith("http")
 
-  val isRelativeUrl = url.startsWith("/")
+  val isRelativeUrl = url.matches("^[/][^/].*")
 
   require(
     (isRelativeUrl || isAbsoluteUrl) && !url.contains("@"),

@@ -21,14 +21,46 @@ import uk.gov.hmrc.play.binders.ContinueUrl._
 
 class ContinueUrlSpec extends WordSpecLike with Matchers with EitherValues with OptionValues {
 
+  "isAbsoluteUrl" should {
+    "return true for an absolute URL" in {
+      ContinueUrl("http://www.example.com").isAbsoluteUrl shouldBe true
+    }
+
+    "return false for a relative URL" in {
+      ContinueUrl("/service/page").isAbsoluteUrl shouldBe false
+    }
+  }
+
+  "isRelativeUrl" should {
+    "return false for an absolute URL" in {
+      ContinueUrl("http://www.example.com").isRelativeUrl shouldBe false
+    }
+
+    "return true for a relative URL" in {
+      ContinueUrl("/service/page").isRelativeUrl shouldBe true
+    }
+  }
+
+  "not work for protocol-relative urls" in {
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("//some/value?with=query")
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("///some/value?with=query")
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("////some/value?with=query")
+  }
+
+  "not work for urls with @" in {
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("/some/value?with=query@meh")
+  }
+
   "not work for path-relative urls" in {
-    val url = "some/value?with=query"
-    an[IllegalArgumentException] should be thrownBy ContinueUrl(url)
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("some/value?with=query")
   }
 
   "not work for non-urls" in {
-    val url = "someasdfasdfa"
-    an[IllegalArgumentException] should be thrownBy ContinueUrl(url)
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("someasdfasdfa")
+  }
+
+  "encodedUrl should produce the expected result" in {
+    ContinueUrl("/some/value?with=query").encodedUrl shouldBe "%2Fsome%2Fvalue%3Fwith%3Dquery"
   }
 
   "Binding a continue URL" should {
