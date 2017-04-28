@@ -28,6 +28,11 @@
         @elements.args.get('_legend)
     </legend>
 }
+@if(elements.args.get('_hint).isDefined) {
+    <span class="form-hint">
+        @elements.args.get('_hint)
+    </span>
+}
 @elements.errors.map{error => <span class="error-notification">@Messages(error)</span>}
 
 @radioOptions.map { case (value, label) =>
