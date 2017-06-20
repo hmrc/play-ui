@@ -44,3 +44,10 @@ attorney.banner.user = You''re using this service for <span class="heading-small
 pertax.attorney.banner.link = Return to your own account
 pertax.attorney.banner.user = You''re in <span class="heading-small">{0}''s</span> account.
 attorney.banner.nan = name not defined
+
+# BETA header
+label.beta = BETA
+label.beta.newservice =  This is a new service
+label.beta.improve =  will help us to improve it.
+label.beta.feedback = feedback
+label.beta.yours = - your
