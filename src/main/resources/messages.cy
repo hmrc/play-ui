@@ -37,7 +37,7 @@ common.firstlogin={0}, this is the first time you have logged in
 common.previousLoginTime={0}, you last signed in {1}
 common.signOut=Sign out
 
-report.a.problem.link = Get help with this page.
+report.a.problem.link = Help gyda''r dudalen hon.
 
 # Attorney Banner
 
