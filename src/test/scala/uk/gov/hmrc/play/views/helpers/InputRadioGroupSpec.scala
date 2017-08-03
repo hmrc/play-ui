@@ -83,7 +83,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       val radioGroupField = radioGroupFieldset.getElementsByTag("label").first()
       radioGroupField.attr("class") should include("myLabelClass")
       radioGroupField.ownText() shouldBe "myLabel"
-      val radioGroupFieldInput = radioGroupField.getElementsByTag("input")
+      val radioGroupFieldInput = radioGroupFieldset.getElementsByTag("input")
       radioGroupFieldInput.attr("class") shouldBe "inputClass"
     }
 
