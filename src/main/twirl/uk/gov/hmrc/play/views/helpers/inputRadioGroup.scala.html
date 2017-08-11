@@ -32,18 +32,7 @@
 
 @radioOptions.map { case (value, label) =>
     @defining(s"${elements.field.name}-${value.toLowerCase.replace(" ","_")}")  { inputId =>
-        <label for="@inputId"
-            @elements.args.get('_labelClass).map{labelClass => class="@labelClass@field.value.filter( _ == value).map{_ => selected}"}>
-            @if(!labelAfter) {
-                @if(elements.args.get('_stackedLabel)) {
-                    @if(label.split(" ").length < 2) {<br>@label
-                    } else {
-                        @for( (l, index) <- label.split(" ").zipWithIndex) {
-                            @if(index != 0) {<br>}@l
-                        }
-                    }
-                } else { @label }
-            }
+        <div class="multiple-choice">
             <input
                 type="radio"
                 id="@inputId"
@@ -52,17 +41,32 @@
                 @elements.args.get('_inputClass).map{inputClass => class="@inputClass"}
                 @if(elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
                 @field.value.filter( _ == value).map{_ => checked="checked"}/>
-            @if(labelAfter) {
-                @if(elements.args.get('_stackedLabel)) {
-                    @if(label.split(" ").length < 2) {<br>@label
-                    } else {
-                        @for( (l, index) <- label.split(" ").zipWithIndex) {
-                            @if(index != 0) {<br>}@l
+                
+            <label for="@inputId"
+                @elements.args.get('_labelClass).map{labelClass => class="@labelClass@field.value.filter( _ == value).map{_ => selected}"}>
+                @if(!labelAfter) {
+                    @if(elements.args.get('_stackedLabel)) {
+                        @if(label.split(" ").length < 2) {<br>@label
+                        } else {
+                            @for( (l, index) <- label.split(" ").zipWithIndex) {
+                                @if(index != 0) {<br>}@l
+                            }
                         }
-                    }
-                } else { @label }
-            }
-        </label>
+                    } else { @label }
+                }
+
+                @if(labelAfter) {
+                    @if(elements.args.get('_stackedLabel)) {
+                        @if(label.split(" ").length < 2) {<br>@label
+                        } else {
+                            @for( (l, index) <- label.split(" ").zipWithIndex) {
+                                @if(index != 0) {<br>}@l
+                            }
+                        }
+                    } else { @label }
+                }
+            </label>
+        </div>
     }
 }
 </fieldset>
