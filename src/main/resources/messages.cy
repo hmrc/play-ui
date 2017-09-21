@@ -50,6 +50,6 @@ attorney.banner.nan = name not defined
 # BETA header
 label.beta = BETA
 label.beta.newservice = Mae hwn yn wasanaeth newydd
-label.beta.improve = yn ein helpu i’w wella.
+label.beta.improve = yn ein helpu i''w wella.
 label.beta.feedback = adborth
 label.beta.yours = - bydd eich
