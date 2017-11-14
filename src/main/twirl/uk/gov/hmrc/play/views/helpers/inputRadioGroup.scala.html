@@ -39,7 +39,7 @@
                 name="@elements.field.name"
                 value="@value"
                 @elements.args.get('_inputClass).map{inputClass => class="@inputClass"}
-                @if(elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
+                @if(elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)@value}
                 @field.value.filter( _ == value).map{_ => checked="checked"}/>
                 
             <label for="@inputId"

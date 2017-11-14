@@ -25,6 +25,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.views.html.helpers.inputRadioGroup
 import play.api.i18n.Messages.Implicits._
+import scala.collection.JavaConverters._
 
 class InputRadioGroupSpec extends WordSpec with Matchers {
 
@@ -97,6 +98,21 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       val doc = Jsoup.parse(contentAsString(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass")))
       doc.getElementsByTag("fieldset").first().attr("class") should include("form-field--error")
       doc.getElementsByClass("error-notification").first().text() shouldBe applicationMessagesApi.translate("error.maxLength", Seq(max)).get
+    }
+
+    "render the radio group with unique data attributes" in {
+      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel", "myValue2" -> "myLabel2"),
+        '_legend -> "My Radio Group",
+        '_groupClass -> "radioGroup",
+        '_labelClass -> "myLabelClass",
+        '_inputClass -> "inputClass",
+        '_dataAttributes -> "data-attribute=attribute-value-prefix:"
+      )))
+
+      doc.getElementsByAttribute("data-attribute").asScala.map(_.attr("data-attribute")).toList shouldBe List(
+        "attribute-value-prefix:myValue",
+        "attribute-value-prefix:myValue2"
+      )
     }
   }
 
