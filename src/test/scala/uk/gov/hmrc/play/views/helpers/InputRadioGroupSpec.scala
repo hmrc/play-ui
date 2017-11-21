@@ -72,12 +72,16 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
     "render the radio group label"  in {
       val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),
         '_legend -> "My Radio Group",
-        '_groupClass -> "radioGroup",
+        '_groupDivClass -> "radioGroupDiv",
+        '_groupClass -> "radioGroupFieldset",
         '_labelClass -> "myLabelClass",
         '_inputClass -> "inputClass"
       )))
 
-      val radioGroupFieldset = doc.getElementsByClass("radioGroup").first()
+      val radioGroupDiv = doc.getElementsByClass("radioGroupDiv").first()
+      radioGroupDiv.attr("class") shouldBe "radioGroupDiv"
+      val radioGroupFieldset = radioGroupDiv.getElementsByTag("fieldset").first()
+      radioGroupFieldset.attr("class") shouldBe "radioGroupFieldset"
       radioGroupFieldset.getElementsByTag("legend").first().text() shouldBe "My Radio Group"
       radioGroupFieldset.attr("class") should not include "form-field--error"
       val radioGroupField = radioGroupFieldset.getElementsByTag("label").first()
@@ -95,7 +99,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
         data => throw new Exception
       )
       val doc = Jsoup.parse(contentAsString(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass")))
-      doc.getElementsByTag("fieldset").first().attr("class") should include("form-field--error")
+      doc.getElementsByTag("div").first().attr("class") should include("form-field--error")
       doc.getElementsByClass("error-notification").first().text() shouldBe applicationMessagesApi.translate("error.maxLength", Seq(max)).get
     }
   }
