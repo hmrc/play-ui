@@ -1,5 +1,5 @@
 @*
-* Copyright 2015 HM Revenue & Customs
+* Copyright 2017 HM Revenue & Customs
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -21,10 +21,14 @@
 @elements = @{ new FieldElements(field.id, field, null, args.toMap, messages) }
 @value = @{ field.value match { case Some(x) => x case None => "false" case x => x }}
 
-<label class="form-field-single @if(value == "true"){ selected } @if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass) }@if(elements.hasErrors){ error form-field--error }" for="@elements.id">
-    @elements.errors.map { error =>
-        <span id="@{elements.field.id}--error" class="error-notification" style="display: block">@Messages(error)</span>
-    }
-    <input type="checkbox" id="@elements.id" name="@elements.field.name" value="true" @if(value == "true"){ checked="checked" } @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }>
-    @elements.label
-</label>
+<div class="form-group @elements.args.get('_groupDivClass) @if(elements.hasErrors){ form-field--error }">
+    <div class="multiple-choice">
+        <input type="checkbox" id="@elements.id" name="@elements.field.name" value="true" @if(value == "true"){ checked="checked" } @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }>
+        <label class="form-field-single @if(value == "true"){ selected } @if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass) }" for="@elements.id">
+            @elements.errors.map { error =>
+                <span id="@{elements.field.id}--error" class="error-notification">@Messages(error)</span>
+            }
+            @elements.label
+        </label>
+    </div>
+</div>
