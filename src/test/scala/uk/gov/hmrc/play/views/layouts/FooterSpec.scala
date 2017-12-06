@@ -37,5 +37,17 @@ class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
 
       rendered should include("footer was rendered")
     }
+
+    "remove the query string from the page data item" in {
+      val rendered = contentAsString(views.html.layouts.footer(
+        analyticsToken = Some("TESTTOKEN"),
+        analyticsHost = "localhost",
+        ssoUrl = Some("localhost"),
+        scriptElem = None,
+        gaCalls = None)(TestAssetsConfig))
+
+      rendered should include("ga('set',  'page', location.pathname);")
+    }
+
   }
 }

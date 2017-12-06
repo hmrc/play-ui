@@ -36,6 +36,7 @@
             @gaCalls.fold {
                 ga('create', '@token', '@analyticsHost');
                 @analyticsAdditionalJs
+                ga('set',  'page', location.pathname);
                 ga('send', 'pageview', { 'anonymizeIp': @analyticsAnonymizeIp });
             }{f =>
                 @f(analyticsHost, token)
