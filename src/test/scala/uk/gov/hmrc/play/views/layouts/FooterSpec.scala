@@ -21,7 +21,7 @@ import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
 import uk.gov.hmrc.play.test.StartedPlayApp
 import uk.gov.hmrc.play.views
-import uk.gov.hmrc.play.views.layouts.test.TestAssetsConfig
+import uk.gov.hmrc.play.views.layouts.test.TestUiConfig
 
 class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
   "footer" should {
@@ -33,7 +33,7 @@ class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
         analyticsHost = "",
         ssoUrl = None,
         scriptElem = Some(Html("footer was rendered")),
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None)(TestUiConfig))
 
       rendered should include("footer was rendered")
     }
@@ -44,7 +44,7 @@ class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
         analyticsHost = "localhost",
         ssoUrl = Some("localhost"),
         scriptElem = None,
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None)(TestUiConfig))
 
       rendered should include("ga('set',  'page', location.pathname);")
     }
@@ -56,7 +56,7 @@ class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
         ssoUrl = Some("localhost"),
         scriptElem = None,
         allowQueryStringInAnalytics = true,
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None)(TestUiConfig))
 
       rendered should not include("ga('set',  'page', location.pathname);")
     }

@@ -18,7 +18,9 @@ package uk.gov.hmrc.play.views.layouts
 
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
+import play.api.Configuration
 import play.api.test.Helpers._
+import uk.gov.hmrc.play.config.OptimizelyConfig
 import uk.gov.hmrc.play.views.html.layouts.optimizelySnippet
 
 import scala.collection.JavaConverters._
@@ -27,21 +29,44 @@ class OptimizelySnippetSpecs extends WordSpec with Matchers {
 
   "optimizelySnippet" should {
 
-    "include script tag if project id is defined" in {
-      val optimizelyBaseUrl = "http://optimizely.com/"
-      val optimizelyProjectId = "1234567"
-      val content = contentAsString(optimizelySnippet(optimizelyBaseUrl, Some(optimizelyProjectId)))
-      val document = Jsoup.parse(content)
+    "include script tag if projectId and baseUrl is defined" in new Setup {
+      val baseUrl = "http://optimizely.com/"
+      val projectId = "1234567"
+
+      val config = configContaining(baseUrl = Some(baseUrl), projectId = Some(projectId))
+
+      val document = Jsoup.parse(contentAsString(optimizelySnippet(config)))
+
       val scripts = document.head().select("script").iterator().asScala.toList.map(_.attr("src"))
-      scripts should contain(s"$optimizelyBaseUrl$optimizelyProjectId.js")
+      scripts should contain(s"$baseUrl$projectId.js")
     }
 
-    "not include script tag if project id is not defined" in {
-      val optimizelyBaseUrl = "http://optimizely.com/"
-      val content = contentAsString(optimizelySnippet(optimizelyBaseUrl, None))
-      val document = Jsoup.parse(content)
-      val scripts = document.head().select("script").iterator().asScala.toList.map(_.attr("src"))
-      scripts shouldBe empty
+    "not include script tag if projectId is not defined" in new Setup {
+      val baseUrl = "http://optimizely.com/"
+
+      val config = configContaining(baseUrl = Some(baseUrl), projectId = None)
+
+      val document = Jsoup.parse(contentAsString(optimizelySnippet(config)))
+
+      document.head().select("script").iterator().asScala.toList.map(_.attr("src")) shouldBe empty
+    }
+
+    "not include script tag if baseUrl is not defined" in new Setup {
+      val projectId = "1234567"
+
+      val config = configContaining(baseUrl = None, projectId = Some(projectId))
+
+      val document = Jsoup.parse(contentAsString(optimizelySnippet(config)))
+
+      document.head().select("script").iterator().asScala.toList.map(_.attr("src")) shouldBe empty
+    }
+  }
+
+  private trait Setup {
+    def configContaining(baseUrl: Option[String], projectId: Option[String]): OptimizelyConfig = new OptimizelyConfig {
+      override protected def configuration: Configuration = Configuration.from(
+        ((baseUrl map (url => "optimizely.url" -> url)) :: (projectId map (id => "optimizely.projectId" -> id)) :: Nil).flatten.toMap
+      )
     }
   }
 }

@@ -16,9 +16,13 @@
 
 package uk.gov.hmrc.play.views.layouts.test
 
-import uk.gov.hmrc.play.config.AssetsConfig
+import play.api.Configuration
+import uk.gov.hmrc.play.config.UiConfig
 
-object TestAssetsConfig extends AssetsConfig {
-  override lazy val assetsUrl: String = "http://localhost:9000/assets/"
-  override lazy val assetsVersion: String = "2.149.0"
+object TestUiConfig extends UiConfig {
+  override protected val configuration: Configuration = Configuration(
+    "assets.url" -> "http://localhost:9000/assets/",
+    "assets.version" -> "2.149.0",
+    "optimizely.url" -> ""
+  )
 }

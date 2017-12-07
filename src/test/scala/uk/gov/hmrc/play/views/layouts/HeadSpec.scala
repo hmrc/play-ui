@@ -21,14 +21,14 @@ import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
 import uk.gov.hmrc.play.test.StartedPlayApp
 import uk.gov.hmrc.play.views
-import uk.gov.hmrc.play.views.layouts.test.{TestAssetsConfig, TestOptimizelyConfig}
+import uk.gov.hmrc.play.views.layouts.test.TestUiConfig
 
 class HeadSpec extends WordSpec with Matchers with StartedPlayApp {
   "head" should {
     "be renderable without a started Play application" in {
       thereShouldBeNoStartedPlayApp()
 
-      val rendered = contentAsString(views.html.layouts.head(linkElem = None, headScripts = Some(Html("head was rendered")))(TestAssetsConfig, TestOptimizelyConfig))
+      val rendered = contentAsString(views.html.layouts.head(linkElem = None, headScripts = Some(Html("head was rendered")))(TestUiConfig))
 
       rendered should include("head was rendered")
     }

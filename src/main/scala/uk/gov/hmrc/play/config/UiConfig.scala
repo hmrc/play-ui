@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.layouts.test
+package uk.gov.hmrc.play.config
 
-import uk.gov.hmrc.play.config.OptimizelyConfig
+import play.api.{Configuration, Play}
 
-object TestOptimizelyConfig extends OptimizelyConfig {
-  override lazy val optimizelyBaseUrl = ""
-  override lazy val optimizelyProjectId = None
+trait UiConfig extends AssetsConfig with OptimizelyConfig
+
+object UiConfig extends UiConfig {
+  override protected lazy val configuration: Configuration = Play.current.configuration
 }

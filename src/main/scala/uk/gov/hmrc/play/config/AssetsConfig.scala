@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.play.config
 
-import play.api.Play
+import play.api.Configuration
 
 trait AssetsConfig {
-  lazy val assetsUrl = Play.current.configuration.getString("assets.url").getOrElse("")
-  lazy val assetsVersion = Play.current.configuration.getString("assets.version").getOrElse("")
-  lazy val assetsPrefix = assetsUrl + assetsVersion
-}
+  protected def configuration: Configuration
 
-object AssetsConfig extends AssetsConfig
+  lazy val assetsUrl: String = configuration.getString("assets.url").getOrElse("")
+  lazy val assetsVersion: String = configuration.getString("assets.version").getOrElse("")
+  lazy val assetsPrefix: String = assetsUrl + assetsVersion
+}

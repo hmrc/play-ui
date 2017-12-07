@@ -16,14 +16,15 @@
 
 package uk.gov.hmrc.play.config
 
-import play.api.Play
+import play.api.Configuration
 
 trait OptimizelyConfig {
-  def optimizelyBaseUrl : String
-  def optimizelyProjectId : Option[String]
-}
+  protected def configuration: Configuration
 
-object OptimizelyConfig extends OptimizelyConfig {
-  override lazy val optimizelyBaseUrl = Play.current.configuration.getString("optimizely.url").getOrElse("")
-  override lazy val optimizelyProjectId = Play.current.configuration.getString("optimizely.projectId")
+  private lazy val maybeBaseUrl: Option[String] = configuration.getString("optimizely.url")
+  private lazy val maybeProjectId: Option[String] = configuration.getString("optimizely.projectId")
+  lazy val optimizelyConfigUrl: Option[String] = for {
+    baseUrl <- maybeBaseUrl
+    projectId <- maybeProjectId
+  } yield s"$baseUrl$projectId.js"
 }
