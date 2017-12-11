@@ -22,7 +22,8 @@
   scriptElem: Option[Html],
   gaCalls: Option[(String,String) => Html],
   analyticsAnonymizeIp: Boolean = true,
-  analyticsAdditionalJs: Option[Html] = None
+  analyticsAdditionalJs: Option[Html] = None,
+  allowQueryStringInAnalytics: Boolean = false
 )(implicit assetsConfig: AssetsConfig = AssetsConfig)
 
 @analyticsToken match {
@@ -36,7 +37,10 @@
             @gaCalls.fold {
                 ga('create', '@token', '@analyticsHost');
                 @analyticsAdditionalJs
+
+                @if(!allowQueryStringInAnalytics){
                 ga('set',  'page', location.pathname);
+                }
                 ga('send', 'pageview', { 'anonymizeIp': @analyticsAnonymizeIp });
             }{f =>
                 @f(analyticsHost, token)
