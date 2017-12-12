@@ -13,22 +13,29 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
+
+@import views.html.helper
+
 @(userLoggedIn: Boolean,
         betaFeedbackUrl: String,
         betaFeedbackUnauthenticatedUrl: String,
         showFeedbackLinkInBetaBanner: Boolean = true,
+        backUrl: Option[String] = None,
         noBorder: Boolean = false)(implicit messages: Messages)
 
 <div class="beta-banner @if(noBorder) {beta-banner--borderless}">
     <p>
         <strong class="phase-tag">@Messages("label.beta")</strong>
         <span>@Messages("label.beta.newservice") @if(showFeedbackLinkInBetaBanner) {
-              @Messages("label.beta.yours") @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
-                <a id="feedback-link"
-                href="@linkUrl"
-                data-sso="false"
-                data-journey-click="other-global:Click:Feedback">@Messages("label.beta.feedback") </a>@Messages("label.beta.improve")
-            }
+              @Messages("label.beta.yours")
+                @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
+                @defining(returnUrl match { case Some(url) => linkUrl + "?backUrl=" + helper.urlEncode(url) case None => linkUrl }) { linkUrlWithReturn =>
+                    <a id="feedback-link"
+                    href="@linkUrlWithReturn"
+                    data-sso="false"
+                    data-journey-click="other-global:Click:Feedback">@Messages("label.beta.feedback") </a>@Messages("label.beta.improve")
+                }
+                }
         }
     </span>
     </p>

@@ -16,25 +16,55 @@
 
 package uk.gov.hmrc.play.views.layouts
 
-import javax.inject.Inject
+import java.net.URLEncoder
 
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
-import play.api.i18n.{I18nSupport, MessagesApi}
+import play.api.i18n.{DefaultLangs, DefaultMessagesApi, Lang, Messages}
 import play.api.test.Helpers._
-import uk.gov.hmrc.play.test.StartedPlayApp
+import play.api.{Configuration, Environment}
 import uk.gov.hmrc.play.views
 
 
-class BetaBannerSpec @Inject()(val messagesApi: MessagesApi) extends WordSpec with I18nSupport  with Matchers with StartedPlayApp{
+class BetaBannerSpec extends WordSpec with Matchers {
+
+  val configuration = Configuration.from(Map("play.i18n.langs" -> List("en", "cy"), "play.i18n.path" -> null))
+  val messagesApi = new DefaultMessagesApi(Environment.simple(), configuration, new DefaultLangs(configuration))
+  implicit val messages = Messages(Lang("en"), messagesApi)
 
   "The BetaBanner" should {
     "include correct banner text" in {
-      val sResult = views.html.layouts.betaBanner(true, "", "", true, false)
+      val sResult = views.html.layouts.betaBanner(true, "", "", true, None, false)
       val content = contentAsString(sResult)
       val document = Jsoup.parse(content)
 
       document.getElementsByClass("beta-banner").text shouldBe "BETA This is a new service - your feedback will help us to improve it."
+    }
+
+    "has proper link if unauthenticated user" in {
+      val sResult = views.html.layouts.betaBanner(false, "http://authenticated", "http://unauthenticated", true, None, false)
+      val content = contentAsString(sResult)
+      val document = Jsoup.parse(content)
+
+      document.getElementById("feedback-link").attr("href") shouldBe "http://unauthenticated"
+    }
+
+    "has proper link if no 'back' button requested" in {
+      val sResult = views.html.layouts.betaBanner(true, "http://authenticated", "http://unauthenticated", true, None, false)
+      val content = contentAsString(sResult)
+      val document = Jsoup.parse(content)
+
+      document.getElementById("feedback-link").attr("href") shouldBe "http://authenticated"
+
+     }
+
+    "has proper link if 'back' button requested" in {
+      val sResult = views.html.layouts.betaBanner(true, "http://authenticated", "http://unauthenticated", true, Some("http://return"), false)
+      val content = contentAsString(sResult)
+      val document = Jsoup.parse(content)
+
+      document.getElementById("feedback-link").attr("href") shouldBe s"http://authenticated?backUrl=${URLEncoder.encode("http://return", "UTF-8")}"
+
     }
   }
 }
