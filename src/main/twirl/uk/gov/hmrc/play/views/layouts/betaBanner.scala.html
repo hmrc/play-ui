@@ -29,7 +29,7 @@
         <span>@Messages("label.beta.newservice") @if(showFeedbackLinkInBetaBanner) {
               @Messages("label.beta.yours")
                 @defining(if (userLoggedIn) betaFeedbackUrl else betaFeedbackUnauthenticatedUrl) { linkUrl =>
-                @defining(returnUrl match { case Some(url) => linkUrl + "?backUrl=" + helper.urlEncode(url) case None => linkUrl }) { linkUrlWithReturn =>
+                @defining(backUrl match { case Some(url) => linkUrl + "?backUrl=" + helper.urlEncode(url) case None => linkUrl }) { linkUrlWithReturn =>
                     <a id="feedback-link"
                     href="@linkUrlWithReturn"
                     data-sso="false"
