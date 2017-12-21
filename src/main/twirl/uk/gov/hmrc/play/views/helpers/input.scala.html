@@ -29,20 +29,6 @@
 
 <label for="@elements.field.name" class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) } @if(elements.hasErrors || (parentElements.isDefined && parentElements.get.hasErrors)) {form-field--error}" @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
 
-    @if(!elements.args.contains('_hideErrors)) {
-        @elements.errors.map { error =>
-              <span class="error-notification"
-                  @if(elements.args.contains('_error_id)) {
-                        id="@elements.args.get('_error_id)"
-                  }
-                  role="tooltip"
-                  data-journey="search-page:error:@elements.field.name">
-                  @Messages(error)
-              </span>
-        }
-    }
-
-
     @if(parentElements.isDefined) {
         @parentElements.get.errors.map { error => <span class="error-notification">@Messages(error)</span>}
     }
@@ -63,6 +49,20 @@
         @if(labelHighlight){</strong>}
 
     }
+
+    @if(!elements.args.contains('_hideErrors)) {
+        @elements.errors.map { error =>
+        <span class="error-notification"
+            @if(elements.args.contains('_error_id)) {
+                id="@elements.args.get('_error_id)"
+            }
+            role="tooltip"
+            data-journey="search-page:error:@elements.field.name">
+            @Messages(error)
+        </span>
+        }
+    }
+
     <input
         @if( elements.args.contains('_type)){type="@elements.args.get('_type)" }else{type="text" }
         @if( elements.args.contains('_dataAttributes) ){ @elements.args.get('_dataAttributes)}
