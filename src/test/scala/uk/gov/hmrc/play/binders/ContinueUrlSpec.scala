@@ -51,6 +51,10 @@ class ContinueUrlSpec extends WordSpecLike with Matchers with EitherValues with 
     an[IllegalArgumentException] should be thrownBy ContinueUrl("/some/value?with=query@meh")
   }
 
+  "not work for urls with /\\" in {
+    an[IllegalArgumentException] should be thrownBy ContinueUrl("/\\www.example.com")
+  }
+
   "not work for path-relative urls" in {
     an[IllegalArgumentException] should be thrownBy ContinueUrl("some/value?with=query")
   }
