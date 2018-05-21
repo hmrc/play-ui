@@ -11,7 +11,7 @@ label.beta=BETA
 label.beta.newservice=Mae hwn yn wasanaeth newydd
 label.beta.improve=yn ein helpu i''w wella.
 label.beta.feedback=adborth
-label.beta.yours=- bydd eich
+label.beta.yours=– bydd eich
 
 report.a.problem.link=Help gyda''r dudalen hon.
 
