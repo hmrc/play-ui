@@ -50,7 +50,7 @@ class WelshMessagesSpec extends WordSpec with Matchers {
       "label.beta.newservice" -> "Mae hwn yn wasanaeth newydd",
       "label.beta.improve" -> "yn ein helpu i'w wella.",
       "label.beta.feedback" -> "adborth",
-      "label.beta.yours" -> "- bydd eich",
+      "label.beta.yours" -> "– bydd eich",
       "report.a.problem.link" -> "Help gyda'r dudalen hon.",
       "footer.links.cookies.text" -> "Cwcis",
       "footer.links.privacy_policy.text" -> "Polisi preifatrwydd",
