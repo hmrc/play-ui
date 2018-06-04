@@ -38,5 +38,17 @@ class ServiceInfoSpec extends WordSpec with Matchers {
       val content = contentAsString(serviceInfo(Html("label"), true, None, false))
       content should not include("<div class=\"logo\">")
     }
+
+    "appear in english when no parameter is specified" in {
+      val content = contentAsString(serviceInfo(Html("label"), true, None, true))
+      content should include ("HM Revenue &amp; Customs")
+      content should not include ("Cyllid a Thollau EM")
+    }
+
+    "appear in welsh when a parameter of 'cy' is specified" in {
+      val content = contentAsString(serviceInfo(Html("label"), true, None, true, "cy"))
+      content should include ("Cyllid a Thollau EM")
+      content should not include ("HM Revenue &amp; Customs")
+    }
   }
 }
