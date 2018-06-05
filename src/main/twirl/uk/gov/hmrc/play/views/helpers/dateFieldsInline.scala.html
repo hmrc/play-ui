@@ -14,40 +14,46 @@
 * limitations under the License.
 *@
 
-@(formItem: Form[_], fieldName: String, label: Html, yearRange: scala.Range, extraClass: Option[String], args: (Symbol, Any)*)(implicit messages: Messages)
+@(formItem: Form[_],
+  fieldName: String,
+  label: Html,
+  yearRange: scala.Range,
+  extraClass: Option[String],
+  args: (Symbol, Any)*
+)(implicit messages: Messages)
 
-    @import uk.gov.hmrc.play.mappers.DateFields._
-    @import play.api.i18n._
-    @import uk.gov.hmrc.play.mappers.DateFormatSymbols._
+@import uk.gov.hmrc.play.mappers.DateFields._
+@import play.api.i18n._
+@import uk.gov.hmrc.play.mappers.DateFormatSymbols._
 
-    @className = @{ " form-field--inline" + extraClass.map(" " + _).getOrElse("") }
+@className = @{ " form-field--inline" + extraClass.map(" " + _).getOrElse("") }
 
-    @dayElem = @{ fieldName + "." + day }
-    @dropdown(
-        formItem(dayElem),
-        (1 to 31) map { i => (i.toString, i.toString)},
-        displayEmptyValue = true,
-        '_label -> Messages("date.fields.day"),
-        '_labelClass -> "label--inlineDropdown".concat(className),
-        '_emptyValueText -> " "
-    )
-    @monthElem = @{ fieldName + "." + month }
-    @dropdown(
-        formItem(monthElem),
-        monthsWithIndexes,
-        displayEmptyValue = true,
-        '_label -> Messages("date.fields.month"),
-        '_groupDivClass -> className,
-        '_labelClass -> "label--inlineDropdown".concat(className),
-        '_emptyValueText -> " "
-    )
-    @yearElem = @{ fieldName + "." + year }
-    @dropdown(
-        formItem(yearElem),
-        yearRange map { i => (i.toString, i.toString)},
-        displayEmptyValue = true,
-        '_label -> Messages("date.fields.year"),
-        '_groupDivClass -> className,
-        '_labelClass -> "label--inlineDropdown".concat(className),
-        '_emptyValueText -> "   "
-    )
+@dayElem = @{ fieldName + "." + day }
+@dropdown(
+    formItem(dayElem),
+    (1 to 31) map { i => (i.toString, i.toString)},
+    displayEmptyValue = true,
+    '_label -> Messages("date.fields.day"),
+    '_labelClass -> "label--inlineDropdown".concat(className),
+    '_emptyValueText -> " "
+)
+@monthElem = @{ fieldName + "." + month }
+@dropdown(
+    formItem(monthElem),
+    monthsWithIndexes,
+    displayEmptyValue = true,
+    '_label -> Messages("date.fields.month"),
+    '_groupDivClass -> className,
+    '_labelClass -> "label--inlineDropdown".concat(className),
+    '_emptyValueText -> " "
+)
+@yearElem = @{ fieldName + "." + year }
+@dropdown(
+    formItem(yearElem),
+    yearRange map { i => (i.toString, i.toString)},
+    displayEmptyValue = true,
+    '_label -> Messages("date.fields.year"),
+    '_groupDivClass -> className,
+    '_labelClass -> "label--inlineDropdown".concat(className),
+    '_emptyValueText -> "   "
+)

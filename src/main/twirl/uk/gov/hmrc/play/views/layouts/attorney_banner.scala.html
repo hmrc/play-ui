@@ -14,9 +14,19 @@
 * limitations under the License.
 *@
 
-@(name: Option[String], returnLinkUrl : String, regime: uk.gov.hmrc.play.views.helpers.AttorneyRegime, customReturnLinkText: Option[String] = None, bannerClasses: Option[String] = None, bannerContent: Option[Html] = None)(implicit messages: Messages)
+@import uk.gov.hmrc.play.views.helpers.AttorneyRegime
 
-@attorneyContent = @{Html(Messages(s"${regime.messagePrefix}attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan"))))}
+@(name: Option[String],
+  returnLinkUrl: String,
+  regime: AttorneyRegime,
+  customReturnLinkText: Option[String] = None,
+  bannerClasses: Option[String] = None,
+  bannerContent: Option[Html] = None
+)(implicit messages: Messages)
+
+@attorneyContent = @{
+  Html(Messages(s"${regime.messagePrefix}attorney.banner.user", name.getOrElse(Messages("attorney.banner.nan"))))
+}
 
 <div class=" grid-wrapper attorneyContainer">
     <div class='attorneyBanner grid @bannerClasses.getOrElse("")' id="attorneyBanner">
@@ -27,7 +37,9 @@
         </div>
         <div class="grid grid-1-3">
             <div class="inner-block">
-                <a href="@returnLinkUrl" class="banner-links">@customReturnLinkText.getOrElse(Html(Messages(s"${regime.messagePrefix}attorney.banner.link")))</a>
+                <a href="@returnLinkUrl" class="banner-links">
+                    @customReturnLinkText.getOrElse(Html(Messages(s"${regime.messagePrefix}attorney.banner.link")))
+                </a>
             </div>
         </div>
     </div>

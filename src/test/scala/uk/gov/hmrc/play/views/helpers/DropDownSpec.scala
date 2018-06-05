@@ -20,13 +20,11 @@ import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
-import play.api.i18n.Messages.Implicits._
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.Helpers._
+import uk.gov.hmrc.play.MessagesSupport
 import uk.gov.hmrc.play.views.html.helpers.dropdown
 
-class DropDownSpec extends WordSpec with Matchers {
-  implicit val application = new GuiceApplicationBuilder().build()
+class DropDownSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(country: String)
 

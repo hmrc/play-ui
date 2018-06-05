@@ -18,19 +18,16 @@ package uk.gov.hmrc.play.views.helpers
 
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
-import play.api.data.{Field, Form, FormError}
 import play.api.data.Forms.{mapping, text}
-import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.test.Helpers.contentAsString
-import play.api.i18n.Messages.Implicits._
-import play.api.test.Helpers._
+import play.api.data.{Field, Form, FormError}
+import play.api.test.Helpers.{contentAsString, _}
+import uk.gov.hmrc.play.MessagesSupport
 import uk.gov.hmrc.play.views.html.helpers.input
+
 import scala.collection.JavaConverters._
 
 
-class InputSpec extends WordSpec with Matchers {
-
-  implicit val application = new GuiceApplicationBuilder().build()
+class InputSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(inputBoxValue: String)
 
