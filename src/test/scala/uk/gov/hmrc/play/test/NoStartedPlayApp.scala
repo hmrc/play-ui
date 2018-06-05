@@ -19,7 +19,7 @@ package uk.gov.hmrc.play.test
 import org.scalatest.Matchers
 import play.api.Play
 
-trait StartedPlayApp { this: Matchers =>
+trait NoStartedPlayApp { this: Matchers =>
 
   def thereShouldBeNoStartedPlayApp(): Unit = {
     intercept[RuntimeException] {

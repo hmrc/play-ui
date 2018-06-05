@@ -16,6 +16,8 @@
 
 @import uk.gov.hmrc.play.config.AssetsConfig
 
+@this(assetsConfig: AssetsConfig)
+
 @(analyticsToken: Option[String],
   analyticsHost: String,
   ssoUrl: Option[String],
@@ -24,7 +26,7 @@
   analyticsAnonymizeIp: Boolean = true,
   analyticsAdditionalJs: Option[Html] = None,
   allowQueryStringInAnalytics: Boolean = false
-)(implicit assetsConfig: AssetsConfig = AssetsConfig)
+)
 
 @analyticsToken match {
     case Some(token@_) if !token.equals("N/A") => {
