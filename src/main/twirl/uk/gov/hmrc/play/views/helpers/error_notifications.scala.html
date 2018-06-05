@@ -1,19 +1,25 @@
-@(formErrors :  Form[_], errorHead : String, errorText : String, exclusions : Seq[String] = Nil)(implicit request: Request[_], messages: Messages)
+@(formErrors: Form[_],
+  errorHead: String,
+  errorText: String,
+  exclusions: Seq[String] = Nil
+)(implicit request: Request[_], messages: Messages)
 
 @if(formErrors.hasErrors) {
-<div class="flash error-summary" id="Search-failure" role="group" aria-labelledby="errorSummaryHeading" tabindex="-1">
-    <h2 id="errorSummaryHeading" class="h3-heading">@Messages(errorHead)</h2>
-    <p>@Messages(errorText)</p>
-    <ul>
-        @formErrors.errors.map { error =>
-        @if(!exclusions.contains(error.key)){
-        <li role="tooltip" data-journey="search-page:error:@error.key">
-            <a href="#@error.key" class="error-list" data-focuses="@error.key" id="@{error.key}-error">
-                @Messages(error.message, error.args: _*)
-            </a>
-        </li>
-        }
-        }
-    </ul>
-</div>
+
+    <div class="flash error-summary" id="Search-failure" role="group" aria-labelledby="errorSummaryHeading" tabindex="-1">
+        <h2 id="errorSummaryHeading" class="h3-heading">@Messages(errorHead)</h2>
+        <p>@Messages(errorText)</p>
+        <ul>
+            @formErrors.errors.map { error =>
+            @if(!exclusions.contains(error.key)){
+            <li role="tooltip" data-journey="search-page:error:@error.key">
+                <a href="#@error.key" class="error-list" data-focuses="@error.key" id="@{error.key}-error">
+                    @Messages(error.message, error.args: _*)
+                </a>
+            </li>
+            }
+            }
+        </ul>
+    </div>
+
 }

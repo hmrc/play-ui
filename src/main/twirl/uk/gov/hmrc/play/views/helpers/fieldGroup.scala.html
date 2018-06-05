@@ -14,9 +14,13 @@
 * limitations under the License.
 *@
 
-@(formItem:Form[_], fields: Seq[uk.gov.hmrc.play.views.helpers.FormField], args: (Symbol,Any)*)(implicit messages: Messages)
+@import uk.gov.hmrc.play.views.helpers.FormField
 
-@import play.api.i18n._
+@(formItem:Form[_],
+  fields: Seq[FormField],
+  args: (Symbol,Any)*
+)(implicit messages: Messages)
+
 @import views.html.helper._
 
 @allFieldElements = @{ fields.groupBy{_.field}.map{_._2 head}.map{ f => new FieldElements(f.field.id, f.field, null, args.toMap, messages) }.toList}

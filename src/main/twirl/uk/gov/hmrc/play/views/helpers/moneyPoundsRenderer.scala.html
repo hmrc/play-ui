@@ -14,9 +14,8 @@
 * limitations under the License.
 *@
 
-@(money : uk.gov.hmrc.play.views.helpers.MoneyPounds)(implicit messages: Messages)
+@(money : uk.gov.hmrc.play.views.helpers.MoneyPounds)
 
-@import play.api.i18n._
 @import views.html.helper._
 
 @if(money.isNegative){&minus;}&pound;@money.quantity

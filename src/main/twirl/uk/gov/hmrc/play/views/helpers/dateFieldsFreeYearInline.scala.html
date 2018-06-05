@@ -14,10 +14,13 @@
 * limitations under the License.
 *@
 
-@(formItem:Form[_], fieldName: String, label: Html, args: (Symbol,Any)*)(implicit messages: Messages)
+@(formItem:Form[_],
+  fieldName: String,
+  label: Html,
+  args: (Symbol,Any)*
+)(implicit messages: Messages)
 
 @import uk.gov.hmrc.play.mappers.DateFields._
-@import play.api.i18n._
 @import uk.gov.hmrc.play.mappers.DateFormatSymbols._
 
 @dayElem = @{fieldName + "." + day}

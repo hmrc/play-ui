@@ -14,7 +14,12 @@
 * limitations under the License.
 *@
 
-@(betaBanner: Html, includeGridWrapper: Boolean, serviceInfoContent: Option[Html], includeHMRCBranding: Boolean = true, setLang: String = "en")
+@(betaBanner: Html,
+  includeGridWrapper: Boolean,
+  serviceInfoContent: Option[Html],
+  includeHMRCBranding: Boolean = true,
+  setLang: String = "en"
+)
 
 <div class="service-info @if( includeGridWrapper ){ grid-wrapper}">
     @betaBanner

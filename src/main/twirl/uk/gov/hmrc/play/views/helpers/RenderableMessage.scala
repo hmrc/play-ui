@@ -50,7 +50,7 @@ trait RenderableMessage {
 object RenderableMessage {
   implicit def translateStrings(value: String): RenderableStringMessage = RenderableStringMessage(value)
 
-  implicit def translateMoneyPounds(money: MoneyPounds)(implicit messages: Messages): RenderableMoneyMessage = RenderableMoneyMessage(money)
+  implicit def translateMoneyPounds(money: MoneyPounds): RenderableMoneyMessage = RenderableMoneyMessage(money)
 
   implicit def translateDate(date: LocalDate): RenderableDateMessage = RenderableDateMessage(date)
 
@@ -68,8 +68,6 @@ case class RenderableDateMessage(date: LocalDate)(implicit dateFormat: DateForma
   override def render: Html = Html(formattedDate)
 }
 
-case class RenderableMoneyMessage(moneyPounds: MoneyPounds)(implicit messages: Messages) extends RenderableMessage {
-  override def render: Html = {
-    moneyPoundsRenderer(moneyPounds)
-  }
+case class RenderableMoneyMessage(moneyPounds: MoneyPounds) extends RenderableMessage {
+  override def render: Html = moneyPoundsRenderer(moneyPounds)
 }

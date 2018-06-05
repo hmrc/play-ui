@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play
 
-import views.html.helper.{FieldConstructor, FieldElements}
-import uk.gov.hmrc.play.views.html.helpers.simpleFieldConstructor
+import play.api.i18n.DefaultMessagesApi
+import play.api.mvc.MessagesRequest
+import play.api.test.FakeRequest
 
-object CustomHelpers {
-
-  implicit val myFields = FieldConstructor(simpleFieldConstructor.f)
-
+trait MessagesSupport {
+  implicit val messagesRequest: MessagesRequest[_] =
+    new MessagesRequest(FakeRequest(), new DefaultMessagesApi())
 }

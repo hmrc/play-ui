@@ -14,7 +14,11 @@
 * limitations under the License.
 *@
 
-@(action: play.api.mvc.Call, args: (Symbol,String)*)(body: => Html)(implicit request: Request[_], messages: Messages)
+@(action: play.api.mvc.Call,
+  args: (Symbol,String)*
+)(body: => Html
+)(implicit request: Request[_], messages: Messages)
+
 @import views.html.helper._
 @import views.html.helper.CSRF
 
