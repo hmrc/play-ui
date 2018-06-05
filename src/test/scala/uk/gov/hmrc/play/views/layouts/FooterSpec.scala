@@ -19,46 +19,49 @@ package uk.gov.hmrc.play.views.layouts
 import org.scalatest.{Matchers, WordSpec}
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
-import uk.gov.hmrc.play.test.StartedPlayApp
-import uk.gov.hmrc.play.views
-import uk.gov.hmrc.play.views.layouts.test.TestAssetsConfig
+import uk.gov.hmrc.play.test.NoStartedPlayApp
+import uk.gov.hmrc.play.views.html.layouts.footer
+import uk.gov.hmrc.play.views.layouts.test.TestConfigs._
 
-class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
+class FooterSpec extends WordSpec with Matchers with NoStartedPlayApp {
   "footer" should {
+
+    val footer = new footer(testAssetsConfig)
+
     "be renderable without a started Play application" in {
       thereShouldBeNoStartedPlayApp()
 
-      val rendered = contentAsString(views.html.layouts.footer(
+      val rendered = contentAsString(footer(
         analyticsToken = None,
         analyticsHost = "",
         ssoUrl = None,
         scriptElem = Some(Html("footer was rendered")),
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None))
 
       rendered should include("footer was rendered")
     }
 
     "remove the query string by default from the page data item" in {
-      val rendered = contentAsString(views.html.layouts.footer(
+      val rendered = contentAsString(footer(
         analyticsToken = Some("TESTTOKEN"),
         analyticsHost = "localhost",
         ssoUrl = Some("localhost"),
         scriptElem = None,
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None))
 
       rendered should include("ga('set',  'page', location.pathname);")
     }
 
     "allow the query string by exception in the page data item" in {
-      val rendered = contentAsString(views.html.layouts.footer(
+      val rendered = contentAsString(footer(
         analyticsToken = Some("TESTTOKEN"),
         analyticsHost = "localhost",
         ssoUrl = Some("localhost"),
         scriptElem = None,
         allowQueryStringInAnalytics = true,
-        gaCalls = None)(TestAssetsConfig))
+        gaCalls = None))
 
-      rendered should not include("ga('set',  'page', location.pathname);")
+      rendered should not include "ga('set',  'page', location.pathname);"
     }
   }
 }

@@ -16,12 +16,11 @@
 
 package uk.gov.hmrc.play.config
 
-import play.api.Play
+import javax.inject.Inject
+import play.api.Configuration
 
-trait AssetsConfig {
-  lazy val assetsUrl = Play.current.configuration.getString("assets.url").getOrElse("")
-  lazy val assetsVersion = Play.current.configuration.getString("assets.version").getOrElse("")
-  lazy val assetsPrefix = assetsUrl + assetsVersion
+class AssetsConfig @Inject() (configuration: Configuration) {
+  private val assetsUrl     = configuration.get[String]("assets.url")
+  private val assetsVersion = configuration.get[String]("assets.version")
+  val assetsPrefix: String  = assetsUrl + assetsVersion
 }
-
-object AssetsConfig extends AssetsConfig

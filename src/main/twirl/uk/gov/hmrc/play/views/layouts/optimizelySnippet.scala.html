@@ -1,4 +1,9 @@
-@(optimizelyBaseUrl : String, optimizelyProjectId: Option[String])
-@optimizelyProjectId.map{ id =>
-    <script src='@{optimizelyBaseUrl}@{id}.js' type='text/javascript'></script>
+@import uk.gov.hmrc.play.config.OptimizelyConfig
+
+@this(optimizelyConfig: OptimizelyConfig)
+
+@()
+
+@optimizelyConfig.url.map { url =>
+    <script src='@{url}' type='text/javascript'></script>
 }
