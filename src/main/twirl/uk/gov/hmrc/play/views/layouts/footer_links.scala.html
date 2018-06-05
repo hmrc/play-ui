@@ -1,6 +1,5 @@
-@(additionalLinks: Option[Html] = None)(implicit lang: Lang = Lang("en"), messages: Messages)
 @*
-* Copyright 2015 HM Revenue & Customs
+* Copyright 2018 HM Revenue & Customs
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -14,6 +13,8 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
+
+@(additionalLinks: Option[Html] = None)(implicit lang: Lang = Lang("en"), messages: Messages)
 <ul class="platform-help-links">
     <li><a href='@Messages("footer.links.cookies.url")' target="_blank" data-sso="false" data-journey-click="footer:Click:Cookies">@Messages("footer.links.cookies.text")</a></li>
     <li><a href='@Messages("footer.links.privacy_policy.url")' target="_blank" data-sso="false" data-journey-click="footer:Click:Privacy policy">@Messages("footer.links.privacy_policy.text")</a></li>
