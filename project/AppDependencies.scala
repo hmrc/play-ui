@@ -4,8 +4,9 @@ import sbt._
 object AppDependencies {
 
   val compile = Seq(
-    "com.typesafe.play" %% "play"            % PlayVersion.current % Provided,
-    "com.typesafe.play" %% "filters-helpers" % PlayVersion.current % Provided
+    "com.typesafe.play" %% "play"            % PlayVersion.current,
+    "com.typesafe.play" %% "filters-helpers" % PlayVersion.current,
+    "org.joda"          % "joda-convert"     % "2.0.2"
   )
 
   val test = Seq(
