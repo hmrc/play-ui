@@ -25,7 +25,7 @@ import play.api.mvc.MessagesRequest
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
-import uk.gov.hmrc.play.views.html.helpers.inputRadioGroup
+import uk.gov.hmrc.play.views.html.helpers.InputRadioGroup
 
 class InputRadioGroupSpec extends WordSpec with Matchers {
 
@@ -38,6 +38,8 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       "radioValue" -> text(maxLength = max)
 
     )(DummyFormData.apply)(DummyFormData.unapply))
+
+  val inputRadioGroup = new InputRadioGroup()
 
   "@helpers.inputRadioGroup" should {
     "render an option" in new MessagesSupport {

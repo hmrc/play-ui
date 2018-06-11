@@ -14,11 +14,11 @@
 * limitations under the License.
 *@
 
+@this(dateFieldsFreeYearInline: DateFieldsFreeYearInline)
+
 @(formItem:Form[_],
   fieldName: String,
   label: Html,
-  yearRange: scala.Range,
-  extraClass: Option[String],
   args: (Symbol,Any)*
 )(implicit messages: Messages)
 
@@ -27,12 +27,12 @@
 
 @elements = @{ new FieldElements(formItem(fieldName).id, formItem(fieldName), null, args.toMap, messages) }
 
-<fieldset class="@elements.args.get('_groupClass) @if(elements.hasErrors) {form-field--error}" id="@fieldName.replaceAll("[.]", "_")">
+<fieldset class="@elements.args.get('_groupClass) @if(elements.hasErrors) {form-field--error}">
     <legend>@label</legend>
     @if(elements.args.get('_hintText).isDefined) {
-    <p class="form-hint">@elements.args.get('_hintText)</p>
+        <p class="form-hint">@elements.args.get('_hintText)</p>
     }
     @elements.errors.map { error => <span class="error-notification">@Messages(error)</span>}
 
-    @dateFieldsInline(formItem, fieldName, label, yearRange, extraClass, args : _*)
+    @dateFieldsFreeYearInline(formItem, fieldName, label, args : _*)
 </fieldset>

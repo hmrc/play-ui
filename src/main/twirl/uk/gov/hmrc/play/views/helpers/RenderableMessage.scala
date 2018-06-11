@@ -19,10 +19,8 @@ package uk.gov.hmrc.play.views.helpers
 import java.text.{DateFormat, SimpleDateFormat}
 
 import org.joda.time.LocalDate
-import play.api.i18n.Messages
 import play.twirl.api.Html
 import uk.gov.hmrc.play.views.helpers.RenderableMessageProperty.RenderableMessageProperty
-import uk.gov.hmrc.play.views.html.helpers.moneyPoundsRenderer
 
 case class MoneyPounds(value: BigDecimal, decimalPlaces: Int = 2, roundUp: Boolean = false) {
 
@@ -69,5 +67,9 @@ case class RenderableDateMessage(date: LocalDate)(implicit dateFormat: DateForma
 }
 
 case class RenderableMoneyMessage(moneyPounds: MoneyPounds) extends RenderableMessage {
-  override def render: Html = moneyPoundsRenderer(moneyPounds)
+
+  private val maybeMinus = if (moneyPounds.isNegative) "&minus;" else ""
+
+  override val render: Html = Html(s"$maybeMinus&pound;${moneyPounds.quantity}")
+
 }
