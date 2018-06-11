@@ -23,7 +23,8 @@ import play.api.mvc.MessagesRequest
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.inject.guice.GuiceApplicationBuilder
-import uk.gov.hmrc.play.{MessagesSupport, views}
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.layouts.BetaBanner
 
 class BetaBannerSpec extends WordSpec with Matchers with MessagesSupport {
 
@@ -40,7 +41,7 @@ class BetaBannerSpec extends WordSpec with Matchers with MessagesSupport {
         new MessagesRequest(FakeRequest(), messagesApi)
       }
 
-      val sResult = views.html.layouts.betaBanner(true, "", "", true, false)
+      val sResult = new BetaBanner()(true, "", "", true, false)
       val content = contentAsString(sResult)
       val document = Jsoup.parse(content)
 

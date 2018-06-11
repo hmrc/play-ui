@@ -14,9 +14,10 @@
 * limitations under the License.
 *@
 
-@(sidebarLinks: Html,
-  sidebarClass: Option[String] = None)
+@this()
 
-<aside @if( sidebarClass.isDefined ) {class="@sidebarClass.get"}>
-    @sidebarLinks
-</aside>
+@(contentHeader: Html)
+
+<header class="page-header">
+    @contentHeader
+</header>
