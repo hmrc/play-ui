@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play.views
+package helpers
 
-import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
-import uk.gov.hmrc.play.views.html.helpers.dropdown
+import uk.gov.hmrc.play.views.html.helpers.Dropdown
 
 class DropDownSpec extends WordSpec with Matchers with MessagesSupport {
 
@@ -33,12 +33,14 @@ class DropDownSpec extends WordSpec with Matchers with MessagesSupport {
       "country" -> text
     )(DummyFormData.apply)(DummyFormData.unapply))
 
+  val dropdown = new Dropdown()
+
   "@helpers.dropDown" should {
     "render element options" in {
 
       val countries = Seq("AU" -> "Australia", "JP" -> "Japan")
 
-      val doc = Jsoup.parse(contentAsString(dropdown(dummyForm("country"), countries, displayEmptyValue = false)))
+      val doc = jsoupDocument(dropdown(dummyForm("country"), countries, displayEmptyValue = false))
 
       doc.getElementById("country-AU").outerHtml() shouldBe "<option id=\"country-AU\" value=\"AU\">Australia</option>"
       doc.getElementById("country-JP").outerHtml() shouldBe "<option id=\"country-JP\" value=\"JP\">Japan</option>"

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play.views
+package helpers
 
-import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, of => fieldOf}
@@ -42,7 +42,7 @@ class DateFieldsSpec extends WordSpec with Matchers with MessagesSupport {
   "The Date Fields with a freeform year input box" should {
     "Display months using long nouns" in {
       val dateFieldsFreeYearInline = new DateFieldsFreeYearInline(new Input(), new Dropdown())
-      val doc = Jsoup.parse(contentAsString(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label"))))
+      val doc = jsoupDocument(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label")))
       months.zipWithIndex.foreach { case (month: String, i: Int) =>
         doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
       }
@@ -52,7 +52,7 @@ class DateFieldsSpec extends WordSpec with Matchers with MessagesSupport {
   "The Date Fields with a limited year input box" should {
     "Display months using long nouns" in {
       val dateFieldsInline = new DateFieldsInline(new Dropdown())
-      val doc = Jsoup.parse(contentAsString(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None)))
+      val doc = jsoupDocument(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None))
       months.zipWithIndex.foreach { case (month: String, i: Int) =>
         doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
       }

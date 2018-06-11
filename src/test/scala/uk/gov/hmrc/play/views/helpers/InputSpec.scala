@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play.views
+package helpers
 
-import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Forms.{mapping, text}
 import play.api.data.{Field, Form, FormError}
-import play.api.test.Helpers.{contentAsString, _}
+import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
-import uk.gov.hmrc.play.views.html.helpers.input
+import uk.gov.hmrc.play.views.html.helpers.Input
 
 import scala.collection.JavaConverters._
-
 
 class InputSpec extends WordSpec with Matchers with MessagesSupport {
 
@@ -37,9 +36,11 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
 
     )(DummyFormData.apply)(DummyFormData.unapply))
 
+  val input = new Input()
+
   "@helpers.input" should {
     "render an input box" in {
-      val doc = Jsoup.parse(contentAsString(input(field = dummyForm("inputValue"),'_inputClass -> "myInputClass", '_label -> "myLabel")))
+      val doc = jsoupDocument(input(field = dummyForm("inputValue"),'_inputClass -> "myInputClass", '_label -> "myLabel"))
       val inputBox = doc.getElementById("inputValue")
 
       inputBox.attr("type") shouldBe "text"
@@ -50,22 +51,22 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
     }
 
     "render error notification when errors are present" in {
-      val doc = Jsoup.parse(contentAsString(input(
+      val doc = jsoupDocument(input(
         field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Enter a value")), Some("")),
-        '_inputClass -> "myInputClass", '_label -> "myLabel", '_error_id -> "myError")))
+        '_inputClass -> "myInputClass", '_label -> "myLabel", '_error_id -> "myError"))
       val errorMessage = doc.getElementById("myError").text
       errorMessage shouldBe "Enter a value"
     }
 
     "render input box with errors in the right order" in {
-      val doc = Jsoup.parse(contentAsString(input(
+      val doc = jsoupDocument(input(
         field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Form Error Text")), Some("")),
         '_inputClass -> "inputClass",
         '_label -> "Label Text",
         '_error_id -> "errorId",
         '_inputHint -> "Input Hint Text",
         '_labelClass -> "myLabelClass")
-      ))
+      )
       val inputBox = doc.getElementsByClass("myLabelClass").first
       val listOfInputBoxTextInOrder = inputBox.getElementsByTag("span").asScala.toList.map(_.text)
 
