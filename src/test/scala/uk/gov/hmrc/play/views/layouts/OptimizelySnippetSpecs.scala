@@ -21,7 +21,7 @@ import org.scalatest.{Matchers, WordSpec}
 import play.api.Configuration
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.config.OptimizelyConfig
-import uk.gov.hmrc.play.views.html.layouts.optimizelySnippet
+import uk.gov.hmrc.play.views.html.layouts.OptimizelySnippet
 
 import scala.collection.JavaConverters._
 
@@ -49,12 +49,12 @@ class OptimizelySnippetSpecs extends WordSpec with Matchers {
     }
   }
 
-  private def createSnippet(baseUrl: String, projectId: String): optimizelySnippet =
-    new optimizelySnippet(
+  private def createSnippet(baseUrl: String, projectId: String): OptimizelySnippet =
+    new OptimizelySnippet(
       new OptimizelyConfig(Configuration("optimizely.url" -> baseUrl, "optimizely.projectId" -> projectId))
     )
 
-  private def scripts(snippet: optimizelySnippet): List[String] = {
+  private def scripts(snippet: OptimizelySnippet): List[String] = {
     val content = contentAsString(snippet())
     val document = Jsoup.parse(content)
     document.head().select("script").iterator().asScala.toList.map(_.attr("src"))

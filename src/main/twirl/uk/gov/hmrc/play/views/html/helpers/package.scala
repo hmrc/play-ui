@@ -19,8 +19,9 @@ package uk.gov.hmrc.play.views.html
 package object helpers {
 
   /*
-   * Values added for backwards compatibility.
+   * Values added for backwards compatibility to not enforce DI.
    */
+
   @deprecated("Use DI")
   val input = new Input()
 

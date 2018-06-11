@@ -14,20 +14,12 @@
 * limitations under the License.
 *@
 
-@(betaBanner: Html,
-  includeGridWrapper: Boolean,
-  serviceInfoContent: Option[Html],
-  includeHMRCBranding: Boolean = true,
-  setLang: String = "en"
-)
+@this()
 
-<div class="service-info @if( includeGridWrapper ){ grid-wrapper}">
-    @betaBanner
-    @if(includeHMRCBranding) {
-    <div class="logo">
-        <span class="organisation-logo organisation-logo-medium">@if(setLang == "cy") { Cyllid a Thollau EM } else { HM Revenue &amp; Customs }</span>
-    </div>
-    }
-    @serviceInfoContent
-</div>
+@(content: Html,
+  includeGridWrapper: Boolean = false,
+  articleClasses: Option[String] = None)
 
+<article class="content__body@if( includeGridWrapper ){ grid-wrapper}@if(articleClasses.isDefined){ @articleClasses.get }">
+    @content
+</article>
