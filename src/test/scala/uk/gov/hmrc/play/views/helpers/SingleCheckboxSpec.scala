@@ -22,7 +22,7 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
-import uk.gov.hmrc.play.views.html.helpers.singleCheckbox
+import uk.gov.hmrc.play.views.html.helpers.SingleCheckbox
 
 class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
 
@@ -32,6 +32,8 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
     mapping(
       "exampleCheckbox" -> optional(boolean)
     )(DummyFormData.apply)(DummyFormData.unapply))
+
+  val singleCheckbox = new SingleCheckbox()
 
   "Have the checked attribute when value is 'true'" in {
 

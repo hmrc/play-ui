@@ -14,12 +14,13 @@
 * limitations under the License.
 *@
 
+@this(dropdown: Dropdown)
+
 @(formItem: Form[_],
   fieldName: String,
   label: Html,
   yearRange: scala.Range,
-  extraClass: Option[String],
-  args: (Symbol, Any)*
+  extraClass: Option[String]
 )(implicit messages: Messages)
 
 @import uk.gov.hmrc.play.mappers.DateFields._

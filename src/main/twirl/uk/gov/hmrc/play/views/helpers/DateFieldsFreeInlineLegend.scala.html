@@ -13,13 +13,14 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *@
+
+@this(input: Input)
+
 @(formItem:Form[_], fieldName: String, args: (Symbol,Any)*)(implicit messages: Messages)
 
 @import uk.gov.hmrc.play.mappers.DateFields._
 @import play.api.i18n._
 @import uk.gov.hmrc.play.mappers.DateFormatSymbols._
-
-
 
 @fieldsetClasses = @{if(formItem(fieldName).hasErrors) "form-field--error" else "" }
 
