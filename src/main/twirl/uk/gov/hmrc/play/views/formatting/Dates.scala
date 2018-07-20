@@ -22,6 +22,9 @@ import play.api.i18n.Lang
 
 object Dates {
 
+  private val MonthNamesInWelsh = Map(1 -> "Ionawr", 2 -> "Chwefror", 3 -> "Mawrth", 4 -> "Ebrill", 5 -> "Mai", 6 -> "Mehefin", 7 -> "Gorffennaf", 8 -> "Awst", 9 -> "Medi", 10 -> "Hydref", 11 -> "Tachwedd", 12 -> "Rhagfyr")
+  private val WeekDaysInWelsh = Map(1 -> "Dydd Llun", 2 -> "Dydd Mawrth", 3 -> "Dydd Mercher", 4 -> "Dydd Iau", 5 -> "Dydd Gwener", 6 -> "Dydd Sadwrn", 7 -> "Dydd Sul")
+
   private[formatting] val dateFormat = DateTimeFormat.forPattern("d MMMM y").withZone(DateTimeZone.forID("Europe/London"))
   private[formatting] val dateFormatAbbrMonth = DateTimeFormat.forPattern("d MMM y").withZone(DateTimeZone.forID("Europe/London"))
   private[formatting] val shortDateFormat = DateTimeFormat.forPattern("yyyy-MM-dd").withZone(DateTimeZone.forID("Europe/London"))
