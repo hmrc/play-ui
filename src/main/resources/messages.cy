@@ -33,8 +33,8 @@ footer.links.cookies.url=/help/cookies
 footer.links.privacy_policy.url=/help/privacy
 footer.links.terms_and_conditions.url=/help/terms-and-conditions
 
-common.firstlogin={0}, this is the first time you have logged in
-common.previousLoginTime={0}, you last signed in {1}
+common.firstlogin={0}, dyma''r tro cyntaf i chi fewngofnodi
+common.previousLoginTime={0}, y tro diwethaf i chi fewngofnodi oedd {1}
 common.signOut=Sign out
 
 report.a.problem.link = Help gyda''r dudalen hon.

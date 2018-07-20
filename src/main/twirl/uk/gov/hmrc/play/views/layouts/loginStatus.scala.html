@@ -19,7 +19,7 @@
   showLastLogInTime: Boolean = true,
   showSignOut: Boolean = true)(implicit messages: Messages)
 
-@import uk.gov.hmrc.play.views.formatting.Dates._
+@import uk.gov.hmrc.play.views.formatting.Dates.formatEasyReadingTimestamp
 
 <div id="lastlogin" class="service-info__help">
     <p>
@@ -27,7 +27,7 @@
             @if(previouslyLoggedInAt.isEmpty) {
               @Messages("common.firstlogin", displayName)
             } else {
-              @Messages("common.previousLoginTime", displayName, formatEasyReadingTimestamp(previouslyLoggedInAt, ""))
+              @Messages("common.previousLoginTime", displayName, formatEasyReadingTimestamp(previouslyLoggedInAt, "")(messages.lang))
             }
         }
         @if(showSignOut){
