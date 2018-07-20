@@ -18,6 +18,7 @@ package uk.gov.hmrc.play.views.formatting
 
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{DateTime, DateTimeZone, LocalDate}
+import play.api.i18n.Lang
 
 object Dates {
 
@@ -38,11 +39,27 @@ object Dates {
 
   def formatDateTime(date: DateTime) = dateFormat.print(date)
 
-  def formatEasyReadingTimestamp(date: Option[DateTime], default: String) = date match {
-    case Some(d) => {
-      s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${easyReadingDateFormat.print(d)}"
+  def formatEasyReadingTimestamp(date: Option[DateTime], default: String)(implicit lang: Lang) = {
+
+    def englishEasyDate = date match {
+      case Some(d) => {
+        s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${easyReadingDateFormat.print(d)}"
+      }
+      case None => default
     }
-    case None => default
+
+    def welshEasyDate = date match {
+      case Some(d) => {
+        s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${WeekDaysInWelsh(d.getDayOfWeek)} ${d.getDayOfMonth} ${MonthNamesInWelsh(d.getMonthOfYear)} ${d.getYear}"
+      }
+      case None => default
+    }
+
+    lang.code match {
+      case "cy" => welshEasyDate
+      case _ => englishEasyDate
+    }
+
   }
 
   def shortDate(date: LocalDate) = shortDateFormat.print(date)
