@@ -45,7 +45,7 @@ class LoginStatusSpec extends WordSpec with Matchers {
     "show the first login message in Welsh" in {
       implicit val lang = Lang("cy")
       val content = contentAsString(loginStatus(userName, None, "logoutUrl"))
-      content should include("Ivor, dyma’r tro cyntaf i chi fewngofnodi")
+      content should include("Ivor, dyma&#x27;r tro cyntaf i chi fewngofnodi")
     }
 
     "show the previous login message in English" in {
