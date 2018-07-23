@@ -34,7 +34,7 @@ class LoginStatusSpec extends WordSpec with Matchers {
   "The loginStatus" should {
 
     val userName = "Ivor"
-    val previouslyLoggedInAt = new DateTime(2018, 4, 20, 16, 20, 0, 0).withZone(DateTimeZone.forID("Europe/London"))
+    val previouslyLoggedInAt = new DateTime(2018, 4, 20, 16, 20, 0, 0,DateTimeZone.forID("Europe/London"))
 
     "show the first login message in English" in {
       implicit val lang = Lang("en")
@@ -51,13 +51,13 @@ class LoginStatusSpec extends WordSpec with Matchers {
     "show the previous login message in English" in {
       implicit val lang = Lang("en")
       val content = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl"))
-      content should include("Ivor, you last signed in 5:20pm, Friday 20 April 2018")
+      content should include("Ivor, you last signed in 4:20pm, Friday 20 April 2018")
     }
 
     "show the previous login message in Welsh (with the day and month in Welsh)" in {
       implicit val lang = Lang("cy")
       val content = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl"))
-      content should include("Ivor, y tro diwethaf i chi fewngofnodi oedd 5:20pm, Dydd Gwener 20 Ebrill 2018")
+      content should include("Ivor, y tro diwethaf i chi fewngofnodi oedd 4:20pm, Dydd Gwener 20 Ebrill 2018")
     }
 
   }
