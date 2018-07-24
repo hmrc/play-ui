@@ -43,26 +43,14 @@ object Dates {
   def formatDateTime(date: DateTime) = dateFormat.print(date)
 
   def formatEasyReadingTimestamp(date: Option[DateTime], default: String)(implicit lang: Lang) = {
-
-    def englishEasyDate = date match {
-      case Some(d) => {
-        s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${easyReadingDateFormat.print(d)}"
-      }
-      case None => default
-    }
-
-    def welshEasyDate = date match {
-      case Some(d) => {
-        s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${WeekDaysInWelsh(d.getDayOfWeek)} ${d.getDayOfMonth} ${MonthNamesInWelsh(d.getMonthOfYear)} ${d.getYear}"
-      }
-      case None => default
-    }
-
-    lang.code match {
+    val englishEasyDate: DateTime => String = d => s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${easyReadingDateFormat.print(d)}"
+    val welshEasyDate: DateTime => String = d => s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${WeekDaysInWelsh(d.getDayOfWeek)} ${d.getDayOfMonth} ${MonthNamesInWelsh(d.getMonthOfYear)} ${d.getYear}"
+    val formatter = lang.code match {
       case "cy" => welshEasyDate
       case _ => englishEasyDate
     }
-
+    
+    date.fold(default)(formatter)
   }
 
   def shortDate(date: LocalDate) = shortDateFormat.print(date)
