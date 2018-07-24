@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,10 @@ import org.joda.time.chrono.ISOChronology
 import org.scalatest.{Matchers, WordSpec}
 import Dates._
 import org.scalatest.prop.TableDrivenPropertyChecks._
+import play.api.i18n.Lang
+import play.api.inject.guice.GuiceApplicationBuilder
 
 class DatesSpec extends WordSpec with Matchers {
-
   val UTC = ISOChronology.getInstanceUTC
 
   "Calling formatDate with a LocalDate object" should {
@@ -70,13 +71,28 @@ class DatesSpec extends WordSpec with Matchers {
   }
 
   "formatEasyReadingTimestamp " should {
-    "correctly format given dates " in {
+    "correctly format given dates in english" in {
       val dateTable =
         Table(
           // UTC internally to -> Lon externally.
           ("date", "expectedDateFormat"),
           (new DateTime(2013, 10, 23, 12, 30, UTC), "1:30pm, Wednesday 23 October 2013"),
           (new DateTime(1899, 7, 3, 12, 30, UTC), "12:30pm, Monday 3 July 1899")
+        )
+      forAll (dateTable) { (date : DateTime, expectedDateFormat : String) =>
+        formatEasyReadingTimestamp(Some(date), "") shouldBe expectedDateFormat
+      }
+    }
+
+    "correctly format given dates in welsh" in {
+      implicit val lang = Lang("cy")
+
+      val dateTable =
+        Table(
+          // UTC internally to -> Lon externally.
+          ("date", "expectedDateFormat"),
+          (new DateTime(2013, 10, 23, 12, 30, UTC), "1:30pm, Dydd Mercher 23 Hydref 2013"),
+          (new DateTime(1899, 7, 3, 12, 30, UTC), "12:30pm, Dydd Llun 3 Gorffennaf 1899")
         )
       forAll (dateTable) { (date : DateTime, expectedDateFormat : String) =>
         formatEasyReadingTimestamp(Some(date), "") shouldBe expectedDateFormat
