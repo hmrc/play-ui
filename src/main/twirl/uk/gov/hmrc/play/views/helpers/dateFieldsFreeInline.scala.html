@@ -21,32 +21,38 @@
 
 
 
-@fieldsetClasses = @{if(formItem(fieldName).hasErrors) "form-field--error" else "" }
+@fieldsetClasses = @{if(formItem.hasErrors) "form-field--error" else "" }
 
 <fieldset class="form-group form-date @fieldsetClasses" id="@fieldName-fieldset">
 
-    @formItem(fieldName).errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
+    @formItem.errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
 
     @input(
         formItem(s"${fieldName}.day"),
         '_label -> Messages("date.fields.day"),
         '_labelClass -> "form-group form-group-day",
         '_inputClass -> "form-control input--xsmall",
-        '_emptyValueText -> " "
+        '_emptyValueText -> " ",
+        '_hideErrors -> " ",
+        '_hideBar -> " "
     )
     @input(
         formItem(s"${fieldName}.month"),
         '_label -> Messages("date.fields.month"),
         '_labelClass -> "form-group form-group-month",
         '_inputClass -> "form-control input--xsmall",
-        '_emptyValueText -> " "
+        '_emptyValueText -> " ",
+        '_hideErrors -> " ",
+        '_hideBar -> " "
     )
     @input(
         formItem(s"${fieldName}.year"),
         '_label -> Messages("date.fields.year"),
         '_labelClass -> "form-group form-group-year",
         '_inputClass -> "form-control input--xsmall",
-        '_emptyValueText -> " "
+        '_emptyValueText -> " ",
+        '_hideErrors -> " ",
+        '_hideBar -> " "
     )
 
 </fieldset>

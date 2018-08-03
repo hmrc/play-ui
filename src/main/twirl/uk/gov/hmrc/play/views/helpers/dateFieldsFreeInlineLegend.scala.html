@@ -21,7 +21,7 @@
 
 
 
-@fieldsetClasses = @{if(formItem(fieldName).hasErrors) "form-field--error" else "" }
+@fieldsetClasses = @{if(formItem.hasErrors) "form-field--error" else "" }
 
 <div class="form-group @fieldsetClasses soft--ends">
     <fieldset class="form-date" id="@fieldName">
@@ -33,7 +33,7 @@
             @args.toMap.get('_inputHint).map { hint =>
                 <span class="form-hint">@hint</span>
             }
-            @formItem(fieldName).errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
+            @formItem.errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
         </legend>
 
         @input(
@@ -43,7 +43,9 @@
             '_inputClass -> "form-control input--xsmall",
             '_emptyValueText -> " ",
             '_type -> "tel",
-            '_maxlength -> "2"
+            '_maxlength -> "2",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
 
         )
         @input(
@@ -53,7 +55,9 @@
             '_inputClass -> "form-control input--xsmall",
             '_emptyValueText -> " ",
             '_type -> "tel",
-            '_maxlength -> "2"
+            '_maxlength -> "2",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
         )
         @input(
             formItem(s"${fieldName}.year"),
@@ -62,7 +66,9 @@
             '_inputClass -> "form-control input--xsmall",
             '_emptyValueText -> " ",
             '_type -> "tel",
-            '_maxlength -> "4"
+            '_maxlength -> "4",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
         )
 
     </fieldset>
