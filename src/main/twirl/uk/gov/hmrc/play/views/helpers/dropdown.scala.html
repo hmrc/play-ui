@@ -22,7 +22,7 @@
 
 @value = @{ field.value match { case Some(x) => x case None => "" case x => x }}
 
-<label for="@elements.field.name" class="@elements.args.get('_labelClass) @elements.args.get('_groupClass)@if(elements.hasErrors){' error'}">
+<label for="@elements.field.name" class="@elements.args.get('_labelClass) @elements.args.get('_groupClass)@if(elements.hasErrors){ error}">
     <span class="label__text">
         @elements.label
     </span>
