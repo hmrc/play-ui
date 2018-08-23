@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 HM Revenue & Customs
+ * Copyright 2018 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,6 +72,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
     "render the radio group label"  in {
       val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),
         '_legend -> "My Radio Group",
+        '_legendID -> "radioGroup legendID",
         '_groupDivClass -> "radioGroupDiv",
         '_groupClass -> "radioGroupFieldset",
         '_labelClass -> "myLabelClass",
@@ -83,6 +84,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       val radioGroupFieldset = radioGroupDiv.getElementsByTag("fieldset").first()
       radioGroupFieldset.attr("class") shouldBe "radioGroupFieldset"
       radioGroupFieldset.getElementsByTag("legend").first().text() shouldBe "My Radio Group"
+      radioGroupFieldset.getElementsByTag("legend").attr("id") shouldBe "radioGroup legendID"
       radioGroupFieldset.attr("class") should not include "form-field--error"
       val radioGroupField = radioGroupFieldset.getElementsByTag("label").first()
       radioGroupField.attr("class") should include("myLabelClass")
