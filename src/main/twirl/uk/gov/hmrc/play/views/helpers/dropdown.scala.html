@@ -26,23 +26,24 @@
     <span class="label__text">
         @elements.label
     </span>
-    @if(elements.args.contains('_additionalTitleText)){<p>@elements.args.get('_additionalTitleText)</p>}
-    @if(elements.args.contains('_errorsAboveInput)){
-        @elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
-    }
-    <select id="@elements.field.name" name="@elements.field.name" class="@elements.args.get('_selectClass)">
-        @if(displayEmptyValue) {
-            <option>@elements.args.get('_emptyValueText)</option>
-        }
-        @for(option <- elementOptions) {
-            <option
-                    id="@elements.field.name-@option._1"
-                    value="@option._1"
-            @if(value==option._1){selected="selected"}
-            >@option._2</option>
-        }
-    </select>
 </label>
+
+@if(elements.args.contains('_additionalTitleText)){<p>@elements.args.get('_additionalTitleText)</p>}
+@if(elements.args.contains('_errorsAboveInput)){
+    @elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
+}
+<select id="@elements.field.name" name="@elements.field.name" class="@elements.args.get('_selectClass)">
+    @if(displayEmptyValue) {
+        <option>@elements.args.get('_emptyValueText)</option>
+    }
+    @for(option <- elementOptions) {
+        <option
+                id="@elements.field.name-@option._1"
+                value="@option._1"
+        @if(value==option._1){selected="selected"}
+        >@option._2</option>
+    }
+</select>
 @if(!elements.args.contains('_errorsAboveInput)){
     @elements.errors.map { error => <span style="display: block" class="error-notification">@Messages(error)</span>}
 }
