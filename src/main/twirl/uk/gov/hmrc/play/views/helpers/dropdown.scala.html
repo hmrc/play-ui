@@ -34,7 +34,7 @@
 }
 <select id="@elements.field.name" name="@elements.field.name" class="@elements.args.get('_selectClass)">
     @if(displayEmptyValue) {
-        <option>@elements.args.get('_emptyValueText)</option>
+        <option value="@elements.args.get('_emptyValue)">@elements.args.get('_emptyValueText)</option>
     }
     @for(option <- elementOptions) {
         <option
