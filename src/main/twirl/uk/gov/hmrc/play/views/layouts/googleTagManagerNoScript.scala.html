@@ -1,0 +1,13 @@
+@import uk.gov.hmrc.play.config.GoogleTagManagerConfig
+
+@()(implicit googleTagManagerConfig: GoogleTagManagerConfig = GoogleTagManagerConfig )
+
+@googleTagManagerConfig.containerId.trim match {
+  case "N/A" | "" =>  {}
+  case containerId => {
+    <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=@containerId"
+                        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  }
+}

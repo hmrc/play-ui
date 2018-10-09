@@ -27,9 +27,12 @@ import uk.gov.hmrc.play.views.layouts.test.TestGoogleTagManagerConfig
 class GoogleTagManagerSpec extends WordSpec with Matchers with StartedPlayApp {
 
   "script snippet" should {
+    val rendered = contentAsString(views.html.layouts.googleTagManagerScript()(TestGoogleTagManagerConfig))
     "be included when a Google Tag Manager container ID is present" in {
-      val rendered = contentAsString(views.html.layouts.googleTagManager()(TestGoogleTagManagerConfig))
       rendered should include regex ".*'gtm\\.js'.*"
+    }
+    "include the gtm container ID from the config" in {
+      rendered should include("GTM-CONTAINERID")
     }
 
     "" +: "N/A" +: Nil foreach { gtmContainerId =>
@@ -37,8 +40,26 @@ class GoogleTagManagerSpec extends WordSpec with Matchers with StartedPlayApp {
         val googleTagManagerConfig = new GoogleTagManagerConfig {
           override lazy val containerId: String = gtmContainerId
         }
-        val rendered = contentAsString(views.html.layouts.googleTagManager()(googleTagManagerConfig))
+        val rendered = contentAsString(views.html.layouts.googleTagManagerScript()(googleTagManagerConfig))
         rendered should not include regex (".*'gtm\\.js'.*")
+      }
+    }
+  }
+  "noscript snippet" should {
+    val rendered = contentAsString(views.html.layouts.googleTagManagerNoScript()(TestGoogleTagManagerConfig))
+    "be included when a Google Tag Manager container ID is present" in {
+      rendered should include regex "ns\\.html"
+    }
+    "include the GTM container ID" in {
+      rendered should include("GTM-CONTAINERID")
+    }
+    "" +: "N/A" +: Nil foreach { gtmContainerId =>
+      s"not be included when a Google Tag Manager container ID is '$gtmContainerId'" in {
+        val googleTagManagerConfig = new GoogleTagManagerConfig {
+          override lazy val containerId: String = gtmContainerId
+        }
+        val rendered = contentAsString(views.html.layouts.googleTagManagerScript()(googleTagManagerConfig))
+        rendered should not include regex (".*'ns\\.html'.*")
       }
     }
   }
