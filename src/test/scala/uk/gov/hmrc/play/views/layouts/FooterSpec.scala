@@ -49,6 +49,16 @@ class FooterSpec extends WordSpec with Matchers with StartedPlayApp {
       rendered should include("ga('set',  'page', location.pathname);")
     }
 
+    "include a ga script if an analyticsToken is supplied" in {
+      val rendered = contentAsString(views.html.layouts.footer(
+        analyticsToken = Some("GA-ANALYTICS"),
+        ssoUrl = None,
+        scriptElem = Some(Html("")),
+        gaCalls = None)(TestAssetsConfig))
+
+      rendered should include("analytics.js")
+    }
+
     "allow the query string by exception in the page data item" in {
       val rendered = contentAsString(views.html.layouts.footer(
         analyticsToken = Some("TESTTOKEN"),

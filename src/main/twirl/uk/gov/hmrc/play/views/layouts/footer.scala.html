@@ -17,7 +17,7 @@
 @import uk.gov.hmrc.play.config.AssetsConfig
 
 @(analyticsToken: Option[String],
-  analyticsHost: String,
+  analyticsHost: String = "",
   ssoUrl: Option[String],
   scriptElem: Option[Html],
   gaCalls: Option[(String,String) => Html],
