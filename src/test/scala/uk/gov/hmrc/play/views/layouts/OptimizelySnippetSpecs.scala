@@ -33,25 +33,28 @@ class OptimizelySnippetSpecs extends WordSpec with Matchers {
       val optimizelyBaseUrl   = "http://optimizely.com/"
       val optimizelyProjectId = "1234567"
 
-      val snippet = createSnippet(optimizelyBaseUrl, optimizelyProjectId)
+      val snippet = createSnippet(Some(optimizelyBaseUrl), Some(optimizelyProjectId))
 
       scripts(snippet) should contain(s"$optimizelyBaseUrl$optimizelyProjectId.js")
     }
 
     "not include script tag if project id is not defined" in {
-      val snippet = createSnippet(baseUrl = "base-url", projectId = null)
+      val snippet = createSnippet(baseUrl = Some("base-url"))
       scripts(snippet) shouldBe empty
     }
 
     "not include script tag if baseUrl is not defined" in {
-      val snippet = createSnippet(baseUrl = null, projectId = "id")
+      val snippet = createSnippet(projectId = Some("id"))
       scripts(snippet) shouldBe empty
     }
   }
 
-  private def createSnippet(baseUrl: String, projectId: String): OptimizelySnippet =
+  private def createSnippet(baseUrl: Option[String] = None, projectId: Option[String] = None): OptimizelySnippet =
     new OptimizelySnippet(
-      new OptimizelyConfig(Configuration("optimizely.url" -> baseUrl, "optimizely.projectId" -> projectId))
+      new OptimizelyConfig(Configuration(Seq(
+        baseUrl.map("optimizely.url" -> _),
+        projectId.map("optimizely.projectId" -> _)
+      ).flatten: _*))
     )
 
   private def scripts(snippet: OptimizelySnippet): List[String] = {

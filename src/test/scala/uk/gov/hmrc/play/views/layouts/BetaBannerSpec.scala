@@ -18,11 +18,7 @@ package uk.gov.hmrc.play.views.layouts
 
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
-import play.api.i18n.MessagesApi
-import play.api.mvc.MessagesRequest
-import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import play.inject.guice.GuiceApplicationBuilder
 import uk.gov.hmrc.play.MessagesSupport
 import uk.gov.hmrc.play.views.html.layouts.BetaBanner
 
@@ -30,16 +26,6 @@ class BetaBannerSpec extends WordSpec with Matchers with MessagesSupport {
 
   "The BetaBanner" should {
     "include correct banner text" in {
-
-      implicit val messagesRequest: MessagesRequest[_] = {
-        val messagesApi: MessagesApi =
-          new GuiceApplicationBuilder()
-            .build
-            .injector()
-            .instanceOf(classOf[MessagesApi])
-
-        new MessagesRequest(FakeRequest(), messagesApi)
-      }
 
       val sResult = new BetaBanner()(true, "", "", true, false)
       val content = contentAsString(sResult)

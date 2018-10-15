@@ -20,14 +20,12 @@ package helpers
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
-import play.api.i18n.{DefaultMessagesApi, Lang}
-import play.api.mvc.MessagesRequest
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
 import uk.gov.hmrc.play.views.html.helpers.InputRadioGroup
 
-class InputRadioGroupSpec extends WordSpec with Matchers {
+class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(radioValue: String)
 
@@ -42,7 +40,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
   val inputRadioGroup = new InputRadioGroup()
 
   "@helpers.inputRadioGroup" should {
-    "render an option" in new MessagesSupport {
+    "render an option" in {
       val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass"))
       val input = doc.getElementById("radioValue-myvalue")
 
@@ -53,24 +51,24 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       input.parent().text() shouldBe "myLabel"
     }
 
-    "render label for radio button with the correct class" in new MessagesSupport {
+    "render label for radio button with the correct class" in {
       val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_labelClass -> "labelClass"))
       doc.getElementsByAttributeValue("for","radioValue-myvalue").attr("class") shouldBe "labelClass"
     }
 
-    "render multiple options" in new MessagesSupport {
+    "render multiple options" in {
       val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue1" -> "myLabel1","myValue2" -> "myLabel2")))
       doc.getElementById("radioValue-myvalue1") should not be null
       doc.getElementById("radioValue-myvalue2") should not be null
     }
 
-    "render a selected option" in new MessagesSupport {
+    "render a selected option" in {
       val doc = jsoupDocument(inputRadioGroup(dummyForm.fill(DummyFormData("myValue"))("radioValue"), Seq("myValue" -> "myLabel")))
       val input = doc.getElementById("radioValue-myvalue")
       input.attr("checked") shouldBe "checked"
     }
 
-    "render the radio group label" in new MessagesSupport {
+    "render the radio group label" in {
       val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),
         '_legend -> "My Radio Group",
         '_legendID -> "radioGroup legendID",
@@ -96,14 +94,6 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
 
     "renders errors" in {
 
-      implicit val messagesRequest: MessagesRequest[_] =
-        new MessagesRequest(
-          FakeRequest(),
-          new DefaultMessagesApi(
-            Map(Lang.defaultLang.code -> Map("error.maxLength" -> "Maximum length is {0}"))
-          )
-        )
-
       val field = dummyForm.bindFromRequest()(FakeRequest().withFormUrlEncodedBody("radioValue" -> "Value is too long!")).fold(
         error => {
           error("radioValue")
@@ -112,7 +102,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
       )
       val doc = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass"))
       doc.getElementsByTag("div").first().attr("class") should include("form-field--error")
-      doc.getElementsByClass("error-notification").first().text() shouldBe messagesRequest.messages.translate("error.maxLength", Seq(max)).get
+      doc.getElementsByClass("error-notification").first().text() shouldBe messages("error.maxLength", max)
     }
   }
 

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play
+package uk.gov.hmrc.play.config
 
-import play.api.i18n.DefaultMessagesApi
-import play.api.mvc.MessagesRequest
-import play.api.test.FakeRequest
+import javax.inject.Inject
+import play.api.Configuration
 
-trait MessagesSupport {
-  implicit val messagesRequest: MessagesRequest[_] =
-    new MessagesRequest(FakeRequest(), new DefaultMessagesApi())
+class AssetsConfig @Inject() (configuration: Configuration) {
+  private val assetsUrl     = configuration.underlying.getString("assets.url")
+  private val assetsVersion = configuration.underlying.getString("assets.version")
+  val assetsPrefix: String  = assetsUrl + assetsVersion
 }

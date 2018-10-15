@@ -17,11 +17,10 @@
 package uk.gov.hmrc.play.language
 
 import org.scalatest.{Matchers, WordSpecLike}
-import play.Application
+import play.api.Application
 import play.api.Configuration
 import play.api.i18n.{Lang, MessagesApi}
-import play.api.test.Injecting
-import play.inject.guice.GuiceApplicationBuilder
+import play.api.inject.guice.GuiceApplicationBuilder
 
 class WelshMessagesSpec extends WordSpecLike with Matchers {
 
@@ -29,10 +28,10 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
 
   val app: Application =
     new GuiceApplicationBuilder()
-      .configure(configuration.underlying)
-      .build
+      .configure(configuration)
+      .build()
 
-  val messagesApi: MessagesApi = app.injector().instanceOf(classOf[MessagesApi])
+  val messagesApi: MessagesApi = app.injector.instanceOf(classOf[MessagesApi])
 
   val allMessages = messagesApi.messages
 
