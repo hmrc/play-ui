@@ -16,39 +16,55 @@
 
 package uk.gov.hmrc.play.views.html
 
+import play.api.Play
+import uk.gov.hmrc.play.config.{AssetsConfig, OptimizelyConfig}
+
 package object layouts {
 
   /*
    * Values added for backwards compatibility to not enforce DI.
    */
 
-  @deprecated("Use DI")
-  val article = new Article()
+  private lazy val assetsConfig = Play.current.injector.instanceOf[AssetsConfig]
+
+  private lazy val optimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
 
   @deprecated("Use DI")
-  val attorney_banner = new AttorneyBanner()
+  lazy val article = new Article()
 
   @deprecated("Use DI")
-  val betaBanner = new BetaBanner()
+  lazy val attorney_banner = new AttorneyBanner()
 
   @deprecated("Use DI")
-  val footer_links = new FooterLinks()
+  lazy val betaBanner = new BetaBanner()
 
   @deprecated("Use DI")
-  val header_nav = new HeaderNav()
+  lazy val footer = new Footer(assetsConfig)
 
   @deprecated("Use DI")
-  val loginStatus = new LoginStatus()
+  lazy val footer_links = new FooterLinks()
 
   @deprecated("Use DI")
-  val main_content = new MainContent()
+  lazy val head = new Head(optimizely_snippet, assetsConfig)
 
   @deprecated("Use DI")
-  val main_content_header = new MainContentHeader()
+  lazy val header_nav = new HeaderNav()
 
   @deprecated("Use DI")
-  val serviceInfo = new ServiceInfo()
+  lazy val loginStatus = new LoginStatus()
 
   @deprecated("Use DI")
-  val sidebar = new Sidebar()
+  lazy val main_content = new MainContent()
+
+  @deprecated("Use DI")
+  lazy val main_content_header = new MainContentHeader()
+
+  @deprecated("Use DI")
+  lazy val optimizely_snippet = new OptimizelySnippet(optimizelyConfig)
+
+  @deprecated("Use DI")
+  lazy val serviceInfo = new ServiceInfo()
+
+  @deprecated("Use DI")
+  lazy val sidebar = new Sidebar()
 }

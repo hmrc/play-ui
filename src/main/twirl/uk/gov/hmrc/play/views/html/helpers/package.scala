@@ -23,54 +23,56 @@ package object helpers {
    */
 
   @deprecated("Use DI")
-  val input = new Input()
+  lazy val address = new Address(input)
 
   @deprecated("Use DI")
-  val dropdown = new Dropdown()
+  lazy val dateFields = new DateFields(dateFieldsInline)
 
   @deprecated("Use DI")
-  val singleCheckbox = new SingleCheckbox()
+  lazy val dateFieldsFreeInline = new DateFieldsFreeInline(input)
 
   @deprecated("Use DI")
-  val textArea = new TextArea()
+  lazy val dateFieldsFreeInlineLegend = new DateFieldsFreeInlineLegend(input)
 
   @deprecated("Use DI")
-  val form = new FormWithCSRF()
+  lazy val dateFieldsFreeYearInline = new DateFieldsFreeYearInline(input, dropdown)
 
   @deprecated("Use DI")
-  val dateFieldsInline = new DateFieldsInline(dropdown)
+  lazy val dateFieldsFreeYear = new DateFieldsFreeYear(dateFieldsFreeYearInline)
 
   @deprecated("Use DI")
-  val dateFields = new DateFields(dateFieldsInline)
+  lazy val dateFieldsInline = new DateFieldsInline(dropdown)
 
   @deprecated("Use DI")
-  val dateFieldsFreeInline = new DateFieldsFreeInline(input)
+  lazy val dropdown = new Dropdown()
 
   @deprecated("Use DI")
-  val dateFieldsFreeInlineLegend = new DateFieldsFreeInlineLegend(input)
+  lazy val errorInline = new ErrorInline()
 
   @deprecated("Use DI")
-  val dateFieldsFreeYearInline = new DateFieldsFreeYearInline(input, dropdown)
+  lazy val error_notifications = new ErrorNotifications()
 
   @deprecated("Use DI")
-  val dateFieldsFreeYear = new DateFieldsFreeYear(dateFieldsFreeYearInline)
+  lazy val errorSummary = new ErrorSummary()
 
   @deprecated("Use DI")
-  val fieldGroup = new FieldGroup(dateFieldsInline, dropdown)
+  lazy val fieldGroup = new FieldGroup(dateFieldsInline, dropdown)
 
   @deprecated("Use DI")
-  val errorInline = new ErrorInline()
+  lazy val form = new FormWithCSRF()
 
   @deprecated("Use DI")
-  val error_notifications = new ErrorNotifications()
+  lazy val input = new Input()
 
   @deprecated("Use DI")
-  val errorSummary = new ErrorSummary()
+  lazy val input_radio_group = new InputRadioGroup()
 
   @deprecated("Use DI")
-  val reportAProblemLink = new ReportAProblemLink()
+  lazy val reportAProblemLink = new ReportAProblemLink()
 
   @deprecated("Use DI")
-  val address = new Address(input)
+  lazy val singleCheckbox = new SingleCheckbox()
 
+  @deprecated("Use DI")
+  lazy val textArea = new TextArea()
 }
