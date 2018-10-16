@@ -4,8 +4,9 @@ import PlayCrossCompilation.dependencies
 val appName = "play-ui"
 
 lazy val root = Project(appName, file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
+  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
   .settings(
+    majorVersion        := 7,
     scalaVersion        := "2.11.7",
     libraryDependencies ++= appDependencies,
     resolvers           :=
