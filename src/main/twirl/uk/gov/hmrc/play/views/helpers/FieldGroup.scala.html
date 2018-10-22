@@ -1,0 +1,103 @@
+@*
+ * Copyright 2018 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@import uk.gov.hmrc.play.views.helpers.FormField
+
+@this(dateFieldsInline: DateFieldsInline, dropdown: Dropdown)
+
+@(formItem:Form[_],
+  fields: Seq[FormField],
+  args: (Symbol,Any)*
+)(implicit messages: Messages)
+
+@import views.html.helper._
+
+@allFieldElements = @{ fields.groupBy{_.field}.map{_._2 head}.map{ f => new FieldElements(f.field.id, f.field, null, args.toMap, messages) }.toList}
+@anyFieldHasError = @{ allFieldElements.exists( _.hasErrors ) }
+@argsMap = @{ args.toMap }
+@valueAfter = @{ argsMap.get('_valueAfter).getOrElse(false).asInstanceOf[Boolean] }
+
+<fieldset class="@argsMap.get('_groupClass) @if(anyFieldHasError) {form-field--error}">
+    <legend>@Html(allFieldElements(0).label.toString())</legend>
+    @if(argsMap.get('_hintText).isDefined) {
+        <p class="form-hint">@argsMap.get('_hintText)</p>
+    }
+    @if(argsMap.contains('_additionalTitleText)){<p>@argsMap.get('_additionalTitleText)</p>}
+    @for(elements <- allFieldElements) {
+        @elements.errors.map { error => <span class="error-notification">@Messages(error)</span> }
+    }
+    @for(field <- fields) {
+        @for(input <- field.inputs) {
+             @input match {
+                case select: uk.gov.hmrc.play.views.helpers.Select => {
+                     @dropdown(field.field, select.values, select.emptyValueText.isDefined,
+                                                          '_emptyValueText -> select.emptyValueText.getOrElse(""),
+                                                          '_label -> select.label,
+                                                          '_labelClass -> select.labelClass.getOrElse(""),
+                                                          '_groupClass -> select.groupClass.getOrElse(""),
+                                                          '_selectClass -> select.selectClass.getOrElse(""),
+                                                          '_additionalTitleText -> select.additionalTitleText.getOrElse(""))
+                }
+                case dateControl: uk.gov.hmrc.play.views.helpers.DateControl => {
+                    @dateFieldsInline(formItem, field.field.id, Html(""), dateControl.yearRange, dateControl.extraClass)
+                }
+                case inputType: uk.gov.hmrc.play.views.helpers.InputType => {
+                    @defining(field.field.value match { case Some(x) => x case None => "" case x => x }) { currentValue =>
+                    @defining(field.field.name + (if(inputType.key != ""){"-"+ inputType.key} else ""))  { inputId =>
+                        <label for="@inputId" class='@inputType.labelClass.getOrElse("") @inputType.divClass.getOrElse("")'>
+
+                                @if(inputType.label.isDefined) {@inputType.label}
+                                @if(!valueAfter) {
+                                    <span class= "label__text">
+                                        @inputType.value
+                                    </span>
+                                }
+                                <input type="@inputType.inputType"
+                                        id="@inputId"
+                                        class="@inputType.inputClass"
+                                        name="@field.field.name"
+                                        @inputType.dataAttribute
+                                        value="@{inputType.inputType match {
+                                           case "radio" => inputType.key
+                                           case "checkbox" => "true"
+                                           case _ => currentValue
+                                            }}"
+
+                                        @if(inputType.inputType == "radio") {
+                                            @if(currentValue==inputType.key){checked="checked"}
+                                        }
+                                        @if(inputType.inputType == "checkbox"){
+                                            @if(currentValue=="true"){checked="checked"}
+                                        }
+                                        @if(argsMap.contains('_maxFieldLength)){
+                                            maxlength="@argsMap.get('_maxFieldLength)"
+                                        }
+                                />
+                                @if(valueAfter) {
+                                    <span class= "label__text">
+                                        @inputType.value
+                                    </span>
+                                }
+                        </label>
+                        @if(field.explanationText.isDefined) {
+                            <p>@field.explanationText</p>
+                        }
+                    }}
+                }
+             }
+        }
+    }
+</fieldset>

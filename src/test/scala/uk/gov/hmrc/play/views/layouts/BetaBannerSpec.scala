@@ -16,25 +16,22 @@
 
 package uk.gov.hmrc.play.views.layouts
 
-import javax.inject.Inject
-
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
-import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.test.Helpers._
-import uk.gov.hmrc.play.test.StartedPlayApp
-import uk.gov.hmrc.play.views
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.layouts.BetaBanner
 
-
-class BetaBannerSpec @Inject()(val messagesApi: MessagesApi) extends WordSpec with I18nSupport  with Matchers with StartedPlayApp{
+class BetaBannerSpec extends WordSpec with Matchers with MessagesSupport {
 
   "The BetaBanner" should {
     "include correct banner text" in {
-      val sResult = views.html.layouts.betaBanner(true, "", "", true, false)
+
+      val sResult = new BetaBanner()(true, "", "", true, false)
       val content = contentAsString(sResult)
       val document = Jsoup.parse(content)
 
-      document.getElementsByClass("beta-banner").text shouldBe "BETA This is a new service - your feedback will help us to improve it."
+      document.getElementsByClass("beta-banner").text shouldBe "BETA This is a new service – your feedback will help us to improve it."
     }
   }
 }

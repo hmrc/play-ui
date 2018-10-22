@@ -16,20 +16,30 @@
 
 package uk.gov.hmrc.play.language
 
-import org.scalatest.{Matchers, WordSpec}
-import play.api.i18n.{DefaultLangs, DefaultMessagesApi, Lang}
-import play.api.{Configuration, Environment}
+import org.scalatest.{Matchers, WordSpecLike}
+import play.api.Application
+import play.api.Configuration
+import play.api.i18n.{Lang, MessagesApi}
+import play.api.inject.guice.GuiceApplicationBuilder
 
-class WelshMessagesSpec extends WordSpec with Matchers {
+class WelshMessagesSpec extends WordSpecLike with Matchers {
 
   val configuration = Configuration.from(Map("play.i18n.langs" -> List("en", "cy"), "play.i18n.path" -> null))
-  val messagesApi = new DefaultMessagesApi(Environment.simple(), configuration, new DefaultLangs(configuration))
+
+  val app: Application =
+    new GuiceApplicationBuilder()
+      .configure(configuration)
+      .build()
+
+  val messagesApi: MessagesApi = app.injector.instanceOf(classOf[MessagesApi])
+
   val allMessages = messagesApi.messages
 
   val defaultMessageKeys = allMessages("default").keySet
   val welshMessagesKeys = allMessages("cy").keySet
 
   "all default messages" should {
+
     "have a welsh translation" in new SetupMessageKeysToIgnore {
       val keysMissingForWelsh = defaultMessageKeys.diff(welshMessagesKeys).filterNot(keyIgnoreRule)
 
@@ -66,7 +76,7 @@ class WelshMessagesSpec extends WordSpec with Matchers {
       val args = Seq[String]("arg0", "arg1")
 
       val welshTranslation = messagesApi.apply(key, args:_*)(Lang("cy"))
-      val defaultTranslation = messagesApi.apply(key, args:_*)
+      val defaultTranslation = messagesApi.apply(key, args:_*)(Lang.defaultLang)
 
       s"have expected value for key $key" in {
         welshTranslation shouldBe expectedTranslation

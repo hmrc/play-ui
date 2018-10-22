@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play.views
+package helpers
 
 import org.scalatest.{Matchers, WordSpec}
-import uk.gov.hmrc.play.views.html.helpers.{dateFieldsFreeYearInline, dateFieldsInline}
-import play.twirl.api.Html
 import play.api.data.Form
 import play.api.data.Forms.{mapping, of => fieldOf}
-import org.jsoup.Jsoup
-import play.api.test.Helpers._
 import play.api.data.format.Formats._
-import play.api.i18n.Messages.Implicits._
-import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.test.Helpers._
+import play.twirl.api.Html
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.helpers._
 
-class DateFieldsSpec extends WordSpec with Matchers {
+class DateFieldsSpec extends WordSpec with Matchers with MessagesSupport {
 
   val months = Seq("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 
-  implicit val application = new GuiceApplicationBuilder().build()
-
   case class DummyFormData(day: Int, month: Int, year: Int)
+
   def dummyForm = Form(
     mapping(
       "dummyField.day" -> fieldOf[Int],
@@ -43,7 +41,8 @@ class DateFieldsSpec extends WordSpec with Matchers {
 
   "The Date Fields with a freeform year input box" should {
     "Display months using long nouns" in {
-      val doc = Jsoup.parse(contentAsString(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label"))))
+      val dateFieldsFreeYearInline = new DateFieldsFreeYearInline(new Input(), new Dropdown())
+      val doc = jsoupDocument(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label")))
       months.zipWithIndex.foreach { case (month: String, i: Int) =>
         doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
       }
@@ -52,7 +51,8 @@ class DateFieldsSpec extends WordSpec with Matchers {
 
   "The Date Fields with a limited year input box" should {
     "Display months using long nouns" in {
-      val doc = Jsoup.parse(contentAsString(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None)))
+      val dateFieldsInline = new DateFieldsInline(new Dropdown())
+      val doc = jsoupDocument(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None))
       months.zipWithIndex.foreach { case (month: String, i: Int) =>
         doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
       }

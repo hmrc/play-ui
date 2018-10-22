@@ -16,13 +16,12 @@
 
 package uk.gov.hmrc.play.views.formatting
 
-import org.joda.time.{DateTime, LocalDate}
 import org.joda.time.chrono.ISOChronology
-import org.scalatest.{Matchers, WordSpec}
-import Dates._
+import org.joda.time.{DateTime, LocalDate}
 import org.scalatest.prop.TableDrivenPropertyChecks._
+import org.scalatest.{Matchers, WordSpec}
 import play.api.i18n.Lang
-import play.api.inject.guice.GuiceApplicationBuilder
+import uk.gov.hmrc.play.views.formatting.Dates._
 
 class DatesSpec extends WordSpec with Matchers {
   val UTC = ISOChronology.getInstanceUTC
@@ -72,6 +71,9 @@ class DatesSpec extends WordSpec with Matchers {
 
   "formatEasyReadingTimestamp " should {
     "correctly format given dates in english" in {
+
+      implicit val lang: Lang = Lang("en")
+
       val dateTable =
         Table(
           // UTC internally to -> Lon externally.
@@ -85,7 +87,8 @@ class DatesSpec extends WordSpec with Matchers {
     }
 
     "correctly format given dates in welsh" in {
-      implicit val lang = Lang("cy")
+
+      implicit val lang: Lang = Lang("cy")
 
       val dateTable =
         Table(

@@ -19,16 +19,21 @@ package uk.gov.hmrc.play.views.layouts
 import org.scalatest.{Matchers, WordSpec}
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
-import uk.gov.hmrc.play.test.StartedPlayApp
-import uk.gov.hmrc.play.views
-import uk.gov.hmrc.play.views.layouts.test.{TestAssetsConfig, TestOptimizelyConfig}
+import uk.gov.hmrc.play.test.NoStartedPlayApp
+import uk.gov.hmrc.play.views.html.layouts.{Head, OptimizelySnippet}
+import uk.gov.hmrc.play.views.layouts.test.TestConfigs._
 
-class HeadSpec extends WordSpec with Matchers with StartedPlayApp {
+class HeadSpec extends WordSpec with Matchers with NoStartedPlayApp {
   "head" should {
     "be renderable without a started Play application" in {
       thereShouldBeNoStartedPlayApp()
 
-      val rendered = contentAsString(views.html.layouts.head(linkElem = None, headScripts = Some(Html("head was rendered")))(TestAssetsConfig, TestOptimizelyConfig))
+      val head = new Head(
+        new OptimizelySnippet(testOptimizelyConfig),
+        testAssetsConfig
+      )
+
+      val rendered = contentAsString(head(linkElem = None, headScripts = Some(Html("head was rendered"))))
 
       rendered should include("head was rendered")
     }

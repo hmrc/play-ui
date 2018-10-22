@@ -1,0 +1,57 @@
+@*
+ * Copyright 2018 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@this()
+
+@(additionalLinks: Option[Html] = None)(implicit messages: Messages)
+
+<ul class="platform-help-links">
+    <li>
+        <a href='@Messages("footer.links.cookies.url")'
+           target="_blank"
+           data-sso="false"
+           data-journey-click="footer:Click:Cookies">
+            @Messages("footer.links.cookies.text")
+        </a>
+    </li>
+    <li>
+        <a href='@Messages("footer.links.privacy_policy.url")'
+           target="_blank"
+           data-sso="false"
+           data-journey-click="footer:Click:Privacy policy">
+            @Messages("footer.links.privacy_policy.text")
+        </a>
+    </li>
+    <li>
+        <a href='@Messages("footer.links.terms_and_conditions.url")'
+           target="_blank"
+           data-sso="false"
+           data-journey-click="footer:Click:Terms and conditions">
+            @Messages("footer.links.terms_and_conditions.text")
+        </a>
+    </li>
+    <li>
+        <a href='@Messages("footer.links.help_page.url")'
+           target="_blank"
+           data-sso="false"
+           data-journey-click="footer:Click:Help">
+            @Messages("footer.links.help_page.text")
+        </a>
+    </li>
+
+    @additionalLinks
+
+</ul>

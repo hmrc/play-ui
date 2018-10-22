@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play.views.helpers
+package uk.gov.hmrc.play.views
+package helpers
 
-import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
-import uk.gov.hmrc.play.views.html.helpers.inputRadioGroup
-import play.api.i18n.Messages.Implicits._
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.helpers.InputRadioGroup
 
-class InputRadioGroupSpec extends WordSpec with Matchers {
-
-  implicit val application = new GuiceApplicationBuilder().build()
+class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(radioValue: String)
 
@@ -40,9 +37,11 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
 
     )(DummyFormData.apply)(DummyFormData.unapply))
 
+  val inputRadioGroup = new InputRadioGroup()
+
   "@helpers.inputRadioGroup" should {
     "render an option" in {
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass")))
+      val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass"))
       val input = doc.getElementById("radioValue-myvalue")
 
       input.attr("type") shouldBe "radio"
@@ -53,31 +52,31 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
     }
 
     "render label for radio button with the correct class" in {
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_labelClass -> "labelClass")))
+      val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),'_labelClass -> "labelClass"))
       doc.getElementsByAttributeValue("for","radioValue-myvalue").attr("class") shouldBe "labelClass"
     }
 
     "render multiple options" in {
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue1" -> "myLabel1","myValue2" -> "myLabel2"))))
+      val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue1" -> "myLabel1","myValue2" -> "myLabel2")))
       doc.getElementById("radioValue-myvalue1") should not be null
       doc.getElementById("radioValue-myvalue2") should not be null
     }
 
     "render a selected option" in {
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm.fill(DummyFormData("myValue"))("radioValue"), Seq("myValue" -> "myLabel"))))
+      val doc = jsoupDocument(inputRadioGroup(dummyForm.fill(DummyFormData("myValue"))("radioValue"), Seq("myValue" -> "myLabel")))
       val input = doc.getElementById("radioValue-myvalue")
       input.attr("checked") shouldBe "checked"
     }
 
-    "render the radio group label"  in {
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),
+    "render the radio group label" in {
+      val doc = jsoupDocument(inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"),
         '_legend -> "My Radio Group",
         '_legendID -> "radioGroup legendID",
         '_groupDivClass -> "radioGroupDiv",
         '_groupClass -> "radioGroupFieldset",
         '_labelClass -> "myLabelClass",
         '_inputClass -> "inputClass"
-      )))
+      ))
 
       val radioGroupDiv = doc.getElementsByClass("radioGroupDiv").first()
       radioGroupDiv.attr("class") shouldBe "radioGroupDiv"
@@ -94,15 +93,16 @@ class InputRadioGroupSpec extends WordSpec with Matchers {
     }
 
     "renders errors" in {
+
       val field = dummyForm.bindFromRequest()(FakeRequest().withFormUrlEncodedBody("radioValue" -> "Value is too long!")).fold(
         error => {
           error("radioValue")
         },
         data => throw new Exception
       )
-      val doc = Jsoup.parse(contentAsString(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass")))
+      val doc = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"),'_inputClass -> "myInputClass"))
       doc.getElementsByTag("div").first().attr("class") should include("form-field--error")
-      doc.getElementsByClass("error-notification").first().text() shouldBe applicationMessagesApi.translate("error.maxLength", Seq(max)).get
+      doc.getElementsByClass("error-notification").first().text() shouldBe messages("error.maxLength", max)
     }
   }
 

@@ -1,4 +1,0 @@
-@(optimizelyBaseUrl : String, optimizelyProjectId: Option[String])
-@optimizelyProjectId.map{ id =>
-    <script src='@{optimizelyBaseUrl}@{id}.js' type='text/javascript'></script>
-}

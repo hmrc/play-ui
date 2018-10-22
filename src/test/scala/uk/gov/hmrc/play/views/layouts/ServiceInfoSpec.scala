@@ -18,12 +18,15 @@ package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
 import play.twirl.api.Html
-import uk.gov.hmrc.play.views.html.layouts.serviceInfo
+import uk.gov.hmrc.play.views.html.layouts.ServiceInfo
 import play.api.test.Helpers._
 
 class ServiceInfoSpec extends WordSpec with Matchers {
 
   "The serviceInfo" should {
+
+    val serviceInfo = new ServiceInfo()
+
     "include hmrc branding when not specified" in {
       val content = contentAsString(serviceInfo(Html("label"), true, None))
       content should include("<div class=\"logo\">")

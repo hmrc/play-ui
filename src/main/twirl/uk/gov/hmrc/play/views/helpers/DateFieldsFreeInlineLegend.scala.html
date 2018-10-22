@@ -1,0 +1,78 @@
+@*
+ * Copyright 2018 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@this(input: Input)
+
+@(formItem:Form[_], fieldName: String, args: (Symbol,Any)*)(implicit messages: Messages)
+
+@import uk.gov.hmrc.play.mappers.DateFields._
+@import play.api.i18n._
+@import uk.gov.hmrc.play.mappers.DateFormatSymbols._
+
+
+
+@fieldsetClasses = @{if(formItem.hasErrors) "form-field--error" else "" }
+
+<div class="form-group @fieldsetClasses soft--ends">
+    <fieldset class="form-date" id="@fieldName">
+
+        <legend class="@args.toMap.get('_legendClass).map { legendClass => @legendClass}">
+            <span class="@args.toMap.get('_legendSpanClass).map { legendSpanClass => @legendSpanClass}">
+                @args.toMap.get('_legend).map { legend => @legend}
+            </span>
+            @args.toMap.get('_inputHint).map { hint =>
+                <span class="form-hint">@hint</span>
+            }
+            @formItem.errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
+        </legend>
+
+        @input(
+            formItem(s"${fieldName}.day"),
+            '_label -> Messages("date.fields.day"),
+            '_labelClass -> "form-group form-group-day",
+            '_inputClass -> "form-control input--xsmall",
+            '_emptyValueText -> " ",
+            '_type -> "tel",
+            '_maxlength -> "2",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
+
+        )
+        @input(
+            formItem(s"${fieldName}.month"),
+            '_label -> Messages("date.fields.month"),
+            '_labelClass -> "form-group form-group-month",
+            '_inputClass -> "form-control input--xsmall",
+            '_emptyValueText -> " ",
+            '_type -> "tel",
+            '_maxlength -> "2",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
+        )
+        @input(
+            formItem(s"${fieldName}.year"),
+            '_label -> Messages("date.fields.year"),
+            '_labelClass -> "form-group form-group-year",
+            '_inputClass -> "form-control input--xsmall",
+            '_emptyValueText -> " ",
+            '_type -> "tel",
+            '_maxlength -> "4",
+            '_hideErrors -> " ",
+            '_hideBar -> " "
+        )
+
+    </fieldset>
+</div>
