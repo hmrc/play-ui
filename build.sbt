@@ -12,7 +12,7 @@ lazy val root = Project(appName, file("."))
     dependencyOverrides ++= overrides,
     resolvers           :=
       Seq(
-        Resolver.bintrayRepo("hmrc", "releases"),
+        "HMRC Releases" at "https://dl.bintray.com/hmrc/releases",
         "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/"
       )
   )
