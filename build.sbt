@@ -9,6 +9,7 @@ lazy val root = Project(appName, file("."))
     majorVersion        := 7,
     scalaVersion        := "2.11.7",
     libraryDependencies ++= appDependencies,
+    dependencyOverrides ++= overrides,
     resolvers           :=
       Seq(
         Resolver.bintrayRepo("hmrc", "releases"),
@@ -46,12 +47,14 @@ lazy val appDependencies: Seq[ModuleID] = dependencies(
     ).map(_ % Test)
 
     compile ++ test
-  },
-
-  play25 = Seq(
-    "com.typesafe.play" %% "twirl-api" % "1.1.1" force()
-  )
+  }
 )
+
+lazy val overrides: Set[ModuleID] = dependencies(
+  play25 = Seq(
+    "com.typesafe.play" %% "twirl-api" % "1.1.1"
+  )
+).toSet
 
 lazy val templateImports: Seq[String] = {
 
