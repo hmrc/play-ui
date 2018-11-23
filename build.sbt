@@ -7,7 +7,7 @@ lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
   .settings(
     majorVersion        := 7,
-    scalaVersion        := "2.11.7",
+    scalaVersion        := "2.11.12",
     libraryDependencies ++= appDependencies,
     dependencyOverrides ++= overrides,
     resolvers           :=
@@ -29,7 +29,7 @@ lazy val appDependencies: Seq[ModuleID] = dependencies(
   shared = {
 
     val playVersion = PlayCrossCompilation.playVersion match {
-      case Play25 => "2.5.12"
+      case Play25 => "2.5.19"
       case Play26 => "2.6.20"
     }
 
