@@ -20,7 +20,7 @@ import org.scalatest.{Matchers, WordSpec}
 
 /*
  * Verifies that old pre play 2.6 way of accessing templates
- * continues to work after we made the injectable.
+ * continues to work after we've made them injectable.
  */
 class BackwardsCompatibilitySpec extends WordSpec with Matchers {
 
