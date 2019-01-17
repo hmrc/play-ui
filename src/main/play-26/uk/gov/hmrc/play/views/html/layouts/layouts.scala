@@ -42,6 +42,9 @@ package object layouts {
   lazy val footer = new Footer(assetsConfig)
 
   @deprecated("Use DI")
+  lazy val eu_exit_links = new EuExitLinks()
+
+  @deprecated("Use DI")
   lazy val footer_links = new FooterLinks()
 
   @deprecated("Use DI")

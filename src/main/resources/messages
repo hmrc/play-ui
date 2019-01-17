@@ -22,6 +22,11 @@ error.address.invalid.character=This line contains an invalid character. Valid c
 error.postcode.length.violation=Postcode is incorrect
 error.postcode.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 space
 
+eu-exit.links.business-prepare.text=Prepare your business for the UK leaving the EU
+eu-exit.links.individual-prepare.text=Prepare for EU Exit if you live in the UK
+eu-exit.links.live-in-europe.text=Living in Europe after the UK leaves the EU
+eu-exit.links.live-in-uk.text=Continue to live in the UK after it leaves the EU
+
 footer.links.help_page.text=Help using GOV.UK
 footer.links.help_page.url=https://www.gov.uk/help
 footer.links.cookies.text=Cookies

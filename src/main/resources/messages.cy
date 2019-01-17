@@ -15,6 +15,11 @@ label.beta.yours=– bydd eich
 
 report.a.problem.link=Help gyda''r dudalen hon.
 
+eu-exit.links.business-prepare.text=
+eu-exit.links.individual-prepare.text=
+eu-exit.links.live-in-europe.text=
+eu-exit.links.live-in-uk.text=
+
 footer.links.cookies.text=Cwcis
 footer.links.privacy_policy.text=Polisi preifatrwydd
 footer.links.terms_and_conditions.text=Telerau ac Amodau
