@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ package object layouts {
   lazy val attorney_banner = new AttorneyBanner()
   lazy val betaBanner = new BetaBanner()
   lazy val footer = new Footer(assetsConfig)
+  lazy val eu_exit_links = new EuExitLinks()
   lazy val footer_links = new FooterLinks()
   lazy val head = new Head(optimizely_snippet, assetsConfig)
   lazy val header_nav = new HeaderNav()

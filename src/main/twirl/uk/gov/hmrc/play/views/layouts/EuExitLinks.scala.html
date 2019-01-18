@@ -1,0 +1,53 @@
+@*
+ * Copyright 2019 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@this()
+
+@(implicit messages: Messages)
+
+<h2 class="heading-medium">@Messages("eu-exit.links.heading.text")</h2>
+<hr>
+<div class="grid-row">
+  <ul class="push--bottom">
+    <div class="column-one-half">
+      <li><p><a href="https://www.gov.uk/business-uk-leaving-eu"
+                target="_blank"
+                data-sso="false"
+                data-journey-click="footer:Click:Prepare your business for the UK leaving the EU">
+        @Messages("eu-exit.links.business-prepare.text")></a></p></li>
+
+      <li><p><a href="https://www.gov.uk/prepare-eu-exit"
+                target="_blank"
+                data-sso="false"
+                data-journey-click="footer:Prepare for EU Exit if you live in the UK">
+        @Messages("eu-exit.links.individual-prepare.text")></a></p></li>
+    </div>
+    <div class="column-one-half">
+      <li><p><a href="https://www.gov.uk/uk-nationals-living-eu"
+                target="_blank"
+                data-sso="false"
+                data-journey-click="footer:Click:Living in Europe after the UK leaves the EU">
+        @Messages("eu-exit.links.live-in-europe.text")</a></p></li>
+
+      <li><p><a href="https://www.gov.uk/staying-uk-eu-citizen"
+                target="_blank"
+                data-sso="false"
+                data-journey-click="footer:Click:Continue to live in the UK after it leaves the EU">
+        @Messages("eu-exit.links.live-in-uk.text")</a></p></li>
+    </div>
+  </ul>
+</div>
+<hr>
