@@ -1,5 +1,5 @@
 @*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 @this()
 
-@(additionalLinks: Option[Html] = None)(implicit messages: Messages)
+@(additionalLinks: Option[Html] = None, euExitLinks: Option[Html] = None)(implicit messages: Messages)
+
+@euExitLinks
 
 <ul class="platform-help-links">
     <li>
