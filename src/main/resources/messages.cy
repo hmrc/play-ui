@@ -15,10 +15,11 @@ label.beta.yours=– bydd eich
 
 report.a.problem.link=Help gyda''r dudalen hon.
 
-eu-exit.links.business-prepare.text=
-eu-exit.links.individual-prepare.text=
-eu-exit.links.live-in-europe.text=
-eu-exit.links.live-in-uk.text=
+eu-exit.links.heading.text=Paratoi ar gyfer Ymadael â’r UE (Saesneg yn unig)
+eu-exit.links.business-prepare.text=Paratoi eich busnes ar gyfer y DU yn gadael yr UE (Saesneg yn unig)
+eu-exit.links.individual-prepare.text=Paratoi ar gyfer Ymadael â’r UE os ydych yn byw yn y DU (Saesneg yn unig)
+eu-exit.links.live-in-europe.text=Byw yn Ewrop ar ôl i’r DU adael yr UE (Saesneg yn unig)
+eu-exit.links.live-in-uk.text=Parhau i fyw yn y DU ar ôl iddi adael yr UE (Saesneg yn unig)
 
 footer.links.cookies.text=Cwcis
 footer.links.privacy_policy.text=Polisi preifatrwydd
