@@ -1,5 +1,5 @@
 @*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@
 @import play.api.i18n._
 @import uk.gov.hmrc.play.mappers.DateFormatSymbols._
 
-
+@fieldNames = @{
+    Set(fieldName, s"${fieldName}.day", s"${fieldName}.month", s"${fieldName}.year")
+}
 
 @fieldsetClasses = @{if(formItem.hasErrors) "form-field--error" else "" }
 
@@ -36,7 +38,7 @@
             @args.toMap.get('_inputHint).map { hint =>
                 <span class="form-hint">@hint</span>
             }
-            @formItem.errors.map { error => <span class="error-notification">@Messages(error.message)</span>}
+            @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">@Messages(error.message)</span>}
         </legend>
 
         @input(
