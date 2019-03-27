@@ -51,14 +51,16 @@ class OptimizelySnippetSpecs extends WordSpec with Matchers {
 
   private def createSnippet(baseUrl: Option[String] = None, projectId: Option[String] = None): OptimizelySnippet =
     new OptimizelySnippet(
-      new OptimizelyConfig(Configuration(Seq(
-        baseUrl.map("optimizely.url" -> _),
-        projectId.map("optimizely.projectId" -> _)
-      ).flatten: _*))
+      new OptimizelyConfig(
+        Configuration(
+          Seq(
+            baseUrl.map("optimizely.url"         -> _),
+            projectId.map("optimizely.projectId" -> _)
+          ).flatten: _*))
     )
 
   private def scripts(snippet: OptimizelySnippet): List[String] = {
-    val content = contentAsString(snippet())
+    val content  = contentAsString(snippet())
     val document = Jsoup.parse(content)
     document.head().select("script").iterator().asScala.toList.map(_.attr("src"))
   }

@@ -36,7 +36,7 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
   val allMessages = messagesApi.messages
 
   val defaultMessageKeys = allMessages("default").keySet
-  val welshMessagesKeys = allMessages("cy").keySet
+  val welshMessagesKeys  = allMessages("cy").keySet
 
   "all default messages" should {
 
@@ -52,41 +52,42 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
   "welsh translations" should {
 
     val expectedTranslations = Map[String, String](
-      "date.fields.day" -> "Diwrnod",
-      "date.fields.month" -> "Mis",
-      "date.fields.year" -> "Blwyddyn",
-      "error.invalid.date.format" -> "Rhaid i chi nodi dyddiad dilys",
-      "label.beta" -> "BETA",
-      "label.beta.newservice" -> "Mae hwn yn wasanaeth newydd",
-      "label.beta.improve" -> "yn ein helpu i'w wella.",
-      "label.beta.feedback" -> "adborth",
-      "label.beta.yours" -> "– bydd eich",
-      "report.a.problem.link" -> "Help gyda'r dudalen hon.",
-      "footer.links.cookies.text" -> "Cwcis",
-      "footer.links.privacy_policy.text" -> "Polisi preifatrwydd",
+      "date.fields.day"                        -> "Diwrnod",
+      "date.fields.month"                      -> "Mis",
+      "date.fields.year"                       -> "Blwyddyn",
+      "error.invalid.date.format"              -> "Rhaid i chi nodi dyddiad dilys",
+      "label.beta"                             -> "BETA",
+      "label.beta.newservice"                  -> "Mae hwn yn wasanaeth newydd",
+      "label.beta.improve"                     -> "yn ein helpu i'w wella.",
+      "label.beta.feedback"                    -> "adborth",
+      "label.beta.yours"                       -> "– bydd eich",
+      "report.a.problem.link"                  -> "Help gyda'r dudalen hon.",
+      "footer.links.cookies.text"              -> "Cwcis",
+      "footer.links.privacy_policy.text"       -> "Polisi preifatrwydd",
       "footer.links.terms_and_conditions.text" -> "Telerau ac Amodau",
-      "footer.links.help_page.text" -> "Help wrth ddefnyddio GOV.UK",
-      "footer.links.help_page.url" -> "https://www.gov.uk/help",
-      "footer.links.cookies.url" -> "/help/cookies",
-      "footer.links.privacy_policy.url" -> "/help/privacy",
-      "footer.links.terms_and_conditions.url" -> "/help/terms-and-conditions"
+      "footer.links.help_page.text"            -> "Help wrth ddefnyddio GOV.UK",
+      "footer.links.help_page.url"             -> "https://www.gov.uk/help",
+      "footer.links.cookies.url"               -> "/help/cookies",
+      "footer.links.privacy_policy.url"        -> "/help/privacy",
+      "footer.links.terms_and_conditions.url"  -> "/help/terms-and-conditions"
     )
 
-    expectedTranslations.foreach{ case (key: String, expectedTranslation: String) =>
-      val args = Seq[String]("arg0", "arg1")
+    expectedTranslations.foreach {
+      case (key: String, expectedTranslation: String) =>
+        val args = Seq[String]("arg0", "arg1")
 
-      val welshTranslation = messagesApi.apply(key, args:_*)(Lang("cy"))
-      val defaultTranslation = messagesApi.apply(key, args:_*)(Lang.defaultLang)
+        val welshTranslation   = messagesApi.apply(key, args: _*)(Lang("cy"))
+        val defaultTranslation = messagesApi.apply(key, args: _*)(Lang.defaultLang)
 
-      s"have expected value for key $key" in {
-        welshTranslation shouldBe expectedTranslation
-      }
-
-      s"equal number of replacements made for $key" in new SetupStringWithOccurrenceCounting {
-        args.foreach { arg =>
-          welshTranslation.occurrencesOf(arg) shouldBe defaultTranslation.occurrencesOf(arg)
+        s"have expected value for key $key" in {
+          welshTranslation shouldBe expectedTranslation
         }
-      }
+
+        s"equal number of replacements made for $key" in new SetupStringWithOccurrenceCounting {
+          args.foreach { arg =>
+            welshTranslation.occurrencesOf(arg) shouldBe defaultTranslation.occurrencesOf(arg)
+          }
+        }
     }
   }
 

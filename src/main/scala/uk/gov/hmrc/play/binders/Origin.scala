@@ -20,7 +20,7 @@ import play.api.mvc.QueryStringBindable
 
 import scala.util.{Success, Try}
 
-case class Origin(origin: String){
+case class Origin(origin: String) {
   require(Origin.Allowed.pattern.matcher(origin).find())
 }
 
@@ -33,10 +33,11 @@ object Origin {
   implicit def queryBinder(implicit stringBinder: QueryStringBindable[String]) = new QueryStringBindable[Origin] {
     def bind(key: String, params: Map[String, Seq[String]]) = {
       val result = stringBinder.bind(key, params).map {
-        case Right(s) => Try(Origin(s)) match {
-          case Success(url) => Right(url)
-          case _ => Right(Default)
-        }
+        case Right(s) =>
+          Try(Origin(s)) match {
+            case Success(url) => Right(url)
+            case _            => Right(Default)
+          }
         case _ => Right(Default)
       }
       result.orElse(Some(Right(Default)))

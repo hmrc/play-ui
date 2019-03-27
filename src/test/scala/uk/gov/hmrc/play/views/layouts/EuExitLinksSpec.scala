@@ -51,9 +51,9 @@ class EuExitLinksSpec extends WordSpec with Matchers {
 
   "Eu Exit Links on an English Language Page" should {
     implicit val lang = Lang("en")
-    val markup = contentAsString(eu_exit_links())
-    val document = Jsoup.parse(markup)
-    val links = document.getElementsByTag("a")
+    val markup        = contentAsString(eu_exit_links())
+    val document      = Jsoup.parse(markup)
+    val links         = document.getElementsByTag("a")
 
     "Include the section header" in {
       markup should include("<h2 class=\"heading-medium\">Prepare for EU Exit</h2>")
@@ -68,9 +68,9 @@ class EuExitLinksSpec extends WordSpec with Matchers {
 
   "Eu Exit Links on a Welsh Language Page" should {
     implicit val lang = Lang("cy")
-    val markup = contentAsString(eu_exit_links())
-    val document = Jsoup.parse(markup)
-    val links = document.getElementsByTag("a")
+    val markup        = contentAsString(eu_exit_links())
+    val document      = Jsoup.parse(markup)
+    val links         = document.getElementsByTag("a")
 
     "Include the section header" in {
       markup should include("<h2 class=\"heading-medium\">Paratoi ar gyfer Ymadael â’r UE (Saesneg yn unig)</h2>")

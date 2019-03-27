@@ -30,9 +30,9 @@ trait MessagesSupport {
     val langs = new DefaultLangs(configuration)
 
     new DefaultMessagesApi(
-      environment = environment,
+      environment   = environment,
       configuration = configuration,
-      langs = langs
+      langs         = langs
     )
   }
 

@@ -28,10 +28,11 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(exampleCheckbox: Option[Boolean])
 
-  def dummyForm = Form(
-    mapping(
-      "exampleCheckbox" -> optional(boolean)
-    )(DummyFormData.apply)(DummyFormData.unapply))
+  def dummyForm =
+    Form(
+      mapping(
+        "exampleCheckbox" -> optional(boolean)
+      )(DummyFormData.apply)(DummyFormData.unapply))
 
   val singleCheckbox = new SingleCheckbox()
 
@@ -42,7 +43,7 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
       contentAsString(
         singleCheckbox(
           WithTrueCheckboxValueForm("exampleCheckbox"),
-          '_label -> "exampleLabel",
+          '_label      -> "exampleLabel",
           '_inputClass -> "inputClass",
           '_labelClass -> "labelClass"
         )
@@ -50,14 +51,14 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
     )
 
     val checkboxElement = doc.getElementById("exampleCheckbox")
-    val labelElement = doc.select("label")
+    val labelElement    = doc.select("label")
 
-    checkboxElement.hasAttr("checked") shouldBe true
-    checkboxElement.attr("checked") shouldBe "checked"
+    checkboxElement.hasAttr("checked")     shouldBe true
+    checkboxElement.attr("checked")        shouldBe "checked"
     checkboxElement.hasClass("inputClass") shouldBe true
-    labelElement.text() shouldBe "exampleLabel"
-    labelElement.hasClass("labelClass") shouldBe true
-    labelElement.hasClass("selected") shouldBe true
+    labelElement.text()                    shouldBe "exampleLabel"
+    labelElement.hasClass("labelClass")    shouldBe true
+    labelElement.hasClass("selected")      shouldBe true
   }
 
   "The Single CheckBox" should {
@@ -67,7 +68,7 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
         contentAsString(
           singleCheckbox(
             dummyForm("exampleCheckbox"),
-            '_label -> "exampleLabel",
+            '_label      -> "exampleLabel",
             '_inputClass -> "inputClass",
             '_labelClass -> "labelClass"
           )
@@ -75,13 +76,13 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
       )
 
       val checkboxElement = doc.getElementById("exampleCheckbox")
-      val labelElement = doc.select("label")
+      val labelElement    = doc.select("label")
 
-      checkboxElement.hasAttr("checked") shouldBe false
+      checkboxElement.hasAttr("checked")     shouldBe false
       checkboxElement.hasClass("inputClass") shouldBe true
-      labelElement.text() shouldBe "exampleLabel"
-      labelElement.hasClass("labelClass") shouldBe true
-      labelElement.hasClass("selected") shouldBe false
+      labelElement.text()                    shouldBe "exampleLabel"
+      labelElement.hasClass("labelClass")    shouldBe true
+      labelElement.hasClass("selected")      shouldBe false
     }
 
     "Not have the checked attribute when value is 'false'" in {
@@ -90,7 +91,7 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
         contentAsString(
           singleCheckbox(
             WithFalseCheckboxValueForm("exampleCheckbox"),
-            '_label -> "exampleLabel",
+            '_label      -> "exampleLabel",
             '_inputClass -> "inputClass",
             '_labelClass -> "labelClass"
           )
@@ -98,13 +99,13 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
       )
 
       val checkboxElement = doc.getElementById("exampleCheckbox")
-      val labelElement = doc.select("label")
+      val labelElement    = doc.select("label")
 
-      checkboxElement.hasAttr("checked") shouldBe false
+      checkboxElement.hasAttr("checked")     shouldBe false
       checkboxElement.hasClass("inputClass") shouldBe true
-      labelElement.text() shouldBe "exampleLabel"
-      labelElement.hasClass("labelClass") shouldBe true
-      labelElement.hasClass("selected") shouldBe false
+      labelElement.text()                    shouldBe "exampleLabel"
+      labelElement.hasClass("labelClass")    shouldBe true
+      labelElement.hasClass("selected")      shouldBe false
     }
   }
 }

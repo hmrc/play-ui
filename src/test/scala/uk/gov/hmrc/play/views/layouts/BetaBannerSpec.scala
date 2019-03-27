@@ -27,11 +27,13 @@ class BetaBannerSpec extends WordSpec with Matchers with MessagesSupport {
   "The BetaBanner" should {
     "include correct banner text" in {
 
-      val sResult = new BetaBanner()(true, "", "", true, false)
-      val content = contentAsString(sResult)
+      val sResult  = new BetaBanner()(true, "", "", true, false)
+      val content  = contentAsString(sResult)
       val document = Jsoup.parse(content)
 
-      document.getElementsByClass("beta-banner").text shouldBe "BETA This is a new service – your feedback will help us to improve it."
+      document
+        .getElementsByClass("beta-banner")
+        .text shouldBe "BETA This is a new service – your feedback will help us to improve it."
     }
   }
 }

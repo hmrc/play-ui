@@ -26,7 +26,11 @@ case class MoneyPounds(value: BigDecimal, decimalPlaces: Int = 2, roundUp: Boole
 
   def isNegative = value < 0
 
-  def quantity = s"%,.${decimalPlaces}f".format(value.setScale(decimalPlaces, if (roundUp) BigDecimal.RoundingMode.CEILING else BigDecimal.RoundingMode.FLOOR).abs)
+  def quantity =
+    s"%,.${decimalPlaces}f".format(
+      value
+        .setScale(decimalPlaces, if (roundUp) BigDecimal.RoundingMode.CEILING else BigDecimal.RoundingMode.FLOOR)
+        .abs)
 }
 
 object RenderableMessageProperty extends Enumeration {
@@ -44,7 +48,6 @@ trait RenderableMessage {
   def set(property: (RenderableMessageProperty, String)): RenderableMessage = this
 }
 
-
 object RenderableMessage {
   implicit def translateStrings(value: String): RenderableStringMessage = RenderableStringMessage(value)
 
@@ -59,8 +62,8 @@ case class RenderableStringMessage(value: String) extends RenderableMessage {
   override def render: Html = Html(value)
 }
 
-
-case class RenderableDateMessage(date: LocalDate)(implicit dateFormat: DateFormat = new SimpleDateFormat("d MMM yyy")) extends RenderableMessage {
+case class RenderableDateMessage(date: LocalDate)(implicit dateFormat: DateFormat = new SimpleDateFormat("d MMM yyy"))
+    extends RenderableMessage {
   val formattedDate = dateFormat.format(date.toDate)
 
   override def render: Html = Html(formattedDate)

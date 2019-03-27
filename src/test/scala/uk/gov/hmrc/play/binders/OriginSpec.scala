@@ -24,10 +24,10 @@ class OriginSpec extends WordSpecLike with Matchers with EitherValues with Optio
   "Origin" should {
 
     "be valid" in {
-      Origin("testing1").origin shouldBe "testing1"
-      Origin("Testing1").origin shouldBe "Testing1"
-      Origin("test-ing1").origin shouldBe "test-ing1"
-      Origin("tesA.ing1").origin shouldBe "tesA.ing1"
+      Origin("testing1").origin                   shouldBe "testing1"
+      Origin("Testing1").origin                   shouldBe "Testing1"
+      Origin("test-ing1").origin                  shouldBe "test-ing1"
+      Origin("tesA.ing1").origin                  shouldBe "tesA.ing1"
       Origin(List.fill(100)('0').mkString).origin shouldBe List.fill(100)('0').mkString
     }
 
@@ -50,7 +50,8 @@ class OriginSpec extends WordSpecLike with Matchers with EitherValues with Optio
     }
 
     "take the first when two origins supplied" in {
-      queryBinder.bind("origin", Map("origin" -> Seq("origin1", "origin2"))).value.right.value should be(Origin("origin1"))
+      queryBinder.bind("origin", Map("origin" -> Seq("origin1", "origin2"))).value.right.value should be(
+        Origin("origin1"))
     }
 
     "create origin" in {

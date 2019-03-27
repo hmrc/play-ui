@@ -27,15 +27,15 @@ class BackwardsCompatibilitySpec extends WordSpec with Matchers {
   import uk.gov.hmrc.play.views.html.layouts._
 
   "It should be possible to access templates without DI" in {
-    article             shouldBe an [Article]
-    attorney_banner     shouldBe an [AttorneyBanner]
-    betaBanner          shouldBe a  [BetaBanner]
-    footer_links        shouldBe a  [FooterLinks]
-    header_nav          shouldBe a  [HeaderNav]
-    loginStatus         shouldBe a  [LoginStatus]
-    main_content        shouldBe a  [MainContent]
-    main_content_header shouldBe a  [MainContentHeader]
-    serviceInfo         shouldBe a  [ServiceInfo]
-    sidebar             shouldBe a  [Sidebar]
+    article             shouldBe an[Article]
+    attorney_banner     shouldBe an[AttorneyBanner]
+    betaBanner          shouldBe a[BetaBanner]
+    footer_links        shouldBe a[FooterLinks]
+    header_nav          shouldBe a[HeaderNav]
+    loginStatus         shouldBe a[LoginStatus]
+    main_content        shouldBe a[MainContent]
+    main_content_header shouldBe a[MainContentHeader]
+    serviceInfo         shouldBe a[ServiceInfo]
+    sidebar             shouldBe a[Sidebar]
   }
 }

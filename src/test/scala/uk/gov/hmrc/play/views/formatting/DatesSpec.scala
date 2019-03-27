@@ -29,7 +29,7 @@ class DatesSpec extends WordSpec with Matchers {
   "Calling formatDate with a LocalDate object" should {
 
     "return the formatted date" in {
-      val date = new LocalDate(2010, 9, 22, UTC)
+      val date     = new LocalDate(2010, 9, 22, UTC)
       val expected = dateFormat.print(date)
       formatDate(date) should equal(expected)
     }
@@ -38,13 +38,13 @@ class DatesSpec extends WordSpec with Matchers {
   "Calling formatDate with an Optional LocalDate object and a default" should {
 
     "format the date if the input is Some date" in {
-      val date = Some(new LocalDate(1984, 3, 31, UTC))
+      val date     = Some(new LocalDate(1984, 3, 31, UTC))
       val expected = dateFormat.print(date.get)
       formatDate(date, "the default value") should equal(expected)
     }
 
     "return the default if the input is None" in {
-      val date = None
+      val date     = None
       val expected = "the default value"
       formatDate(date, "the default value") should equal(expected)
     }
@@ -63,7 +63,7 @@ class DatesSpec extends WordSpec with Matchers {
           (new LocalDate(9999, 12, 31, UTC), "31 December 9999"),
           (new LocalDate(10000, 12, 31, UTC), "31 December 10000")
         )
-      forAll (dateTable) { (date : LocalDate, expectedDateFormat : String) =>
+      forAll(dateTable) { (date: LocalDate, expectedDateFormat: String) =>
         formatDate(date) shouldBe expectedDateFormat
       }
     }
@@ -81,7 +81,7 @@ class DatesSpec extends WordSpec with Matchers {
           (new DateTime(2013, 10, 23, 12, 30, UTC), "1:30pm, Wednesday 23 October 2013"),
           (new DateTime(1899, 7, 3, 12, 30, UTC), "12:30pm, Monday 3 July 1899")
         )
-      forAll (dateTable) { (date : DateTime, expectedDateFormat : String) =>
+      forAll(dateTable) { (date: DateTime, expectedDateFormat: String) =>
         formatEasyReadingTimestamp(Some(date), "") shouldBe expectedDateFormat
       }
     }
@@ -97,7 +97,7 @@ class DatesSpec extends WordSpec with Matchers {
           (new DateTime(2013, 10, 23, 12, 30, UTC), "1:30pm, Dydd Mercher 23 Hydref 2013"),
           (new DateTime(1899, 7, 3, 12, 30, UTC), "12:30pm, Dydd Llun 3 Gorffennaf 1899")
         )
-      forAll (dateTable) { (date : DateTime, expectedDateFormat : String) =>
+      forAll(dateTable) { (date: DateTime, expectedDateFormat: String) =>
         formatEasyReadingTimestamp(Some(date), "") shouldBe expectedDateFormat
       }
     }
@@ -111,7 +111,7 @@ class DatesSpec extends WordSpec with Matchers {
           (new LocalDate(1899, 5, 5, UTC), "1899-05-05"),
           (new LocalDate(2013, 10, 23, UTC), "2013-10-23")
         )
-      forAll (dateTable) { (date : LocalDate, expectedDateFormat : String) =>
+      forAll(dateTable) { (date: LocalDate, expectedDateFormat: String) =>
         shortDate(date) shouldBe expectedDateFormat
       }
     }

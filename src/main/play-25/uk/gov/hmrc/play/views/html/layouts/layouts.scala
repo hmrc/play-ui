@@ -29,19 +29,19 @@ package object layouts {
 
   private lazy val optimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
 
-  lazy val article = new Article()
-  lazy val attorney_banner = new AttorneyBanner()
-  lazy val betaBanner = new BetaBanner()
-  lazy val footer = new Footer(assetsConfig)
-  lazy val eu_exit_links = new EuExitLinks()
-  lazy val footer_links = new FooterLinks()
-  lazy val head = new Head(optimizely_snippet, assetsConfig)
-  lazy val header_nav = new HeaderNav()
-  lazy val loginStatus = new LoginStatus()
-  lazy val main_content = new MainContent()
+  lazy val article             = new Article()
+  lazy val attorney_banner     = new AttorneyBanner()
+  lazy val betaBanner          = new BetaBanner()
+  lazy val footer              = new Footer(assetsConfig)
+  lazy val eu_exit_links       = new EuExitLinks()
+  lazy val footer_links        = new FooterLinks()
+  lazy val head                = new Head(optimizely_snippet, assetsConfig)
+  lazy val header_nav          = new HeaderNav()
+  lazy val loginStatus         = new LoginStatus()
+  lazy val main_content        = new MainContent()
   lazy val main_content_header = new MainContentHeader()
-  lazy val optimizely_snippet = new OptimizelySnippet(optimizelyConfig)
-  lazy val serviceInfo = new ServiceInfo()
-  lazy val sidebar = new Sidebar()
+  lazy val optimizely_snippet  = new OptimizelySnippet(optimizelyConfig)
+  lazy val serviceInfo         = new ServiceInfo()
+  lazy val sidebar             = new Sidebar()
 
 }

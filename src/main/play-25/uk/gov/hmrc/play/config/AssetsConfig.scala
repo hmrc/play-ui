@@ -19,7 +19,7 @@ package uk.gov.hmrc.play.config
 import javax.inject.Inject
 import play.api.Configuration
 
-class AssetsConfig @Inject() (configuration: Configuration) {
+class AssetsConfig @Inject()(configuration: Configuration) {
   private val assetsUrl     = configuration.underlying.getString("assets.url")
   private val assetsVersion = configuration.underlying.getString("assets.version")
   val assetsPrefix: String  = assetsUrl + assetsVersion

@@ -19,7 +19,7 @@ package uk.gov.hmrc.play.config
 import javax.inject.Inject
 import play.api.Configuration
 
-class OptimizelyConfig @Inject() (configuration: Configuration) {
+class OptimizelyConfig @Inject()(configuration: Configuration) {
 
   val url: Option[String] =
     for {

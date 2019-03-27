@@ -22,11 +22,11 @@ class PositiveIntegerSpec extends WordSpecLike with Matchers {
 
   "Creating a PositiveInteger" should {
     "throw an exception for a negative number" in {
-      an [IllegalArgumentException] should be thrownBy PositiveInteger(-1)
+      an[IllegalArgumentException] should be thrownBy PositiveInteger(-1)
     }
 
     "throw an exception for zero" in {
-      an [IllegalArgumentException] should be thrownBy PositiveInteger(0)
+      an[IllegalArgumentException] should be thrownBy PositiveInteger(0)
     }
 
     "give a success for a positive number" in {
