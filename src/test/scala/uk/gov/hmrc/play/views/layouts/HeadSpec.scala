@@ -20,7 +20,7 @@ import org.scalatest.{Matchers, WordSpec}
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
 import uk.gov.hmrc.play.test.NoStartedPlayApp
-import uk.gov.hmrc.play.views.html.layouts.{Head, OptimizelySnippet}
+import uk.gov.hmrc.play.views.html.layouts.{GTMSnippet, Head, OptimizelySnippet}
 import uk.gov.hmrc.play.views.layouts.test.TestConfigs._
 
 class HeadSpec extends WordSpec with Matchers with NoStartedPlayApp {
@@ -30,7 +30,8 @@ class HeadSpec extends WordSpec with Matchers with NoStartedPlayApp {
 
       val head = new Head(
         new OptimizelySnippet(testOptimizelyConfig),
-        testAssetsConfig
+        testAssetsConfig,
+        new GTMSnippet(testGTMConfig)
       )
 
       val rendered = contentAsString(head(linkElem = None, headScripts = Some(Html("head was rendered"))))

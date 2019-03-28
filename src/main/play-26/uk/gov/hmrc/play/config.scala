@@ -26,4 +26,7 @@ package object config {
   @deprecated("Use DI", "7.26.0")
   lazy val OptimizelyConfig: OptimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
 
+  @deprecated("Use DI", "7.26.0")
+  lazy val GTMConfig: GTMConfig = Play.current.injector.instanceOf[GTMConfig]
+
 }

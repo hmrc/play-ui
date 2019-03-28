@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.play
+package uk.gov.hmrc.play.config
 
-import play.api.Play
+import javax.inject.Inject
+import play.api.Configuration
 
-package object config {
-
-  // for backwards compatibility with previous versions where AssetsConfig was an object
-  lazy val AssetsConfig: AssetsConfig = Play.current.injector.instanceOf[AssetsConfig]
-
-  // for backwards compatibility with previous versions where OptimizelyConfig was an object
-  lazy val OptimizelyConfig: OptimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
-
-  lazy val GTMConfig: GTMConfig = Play.current.injector.instanceOf[GTMConfig]
-
+class GTMConfig @Inject()(configuration: Configuration) {
+  val url: Option[String] =
+    configuration.getString("gtm.container") match {
+      case None => None
+      case Some(container @ ("transitional" | "main")) =>
+        configuration
+          .getString(s"gtm.$container.url")
+          .orElse(throw new RuntimeException(s"Missing configuration gtm.$container.url"))
+      case _ => throw new IllegalArgumentException("gtm.container should be one of: { transitional, main }")
+    }
 }

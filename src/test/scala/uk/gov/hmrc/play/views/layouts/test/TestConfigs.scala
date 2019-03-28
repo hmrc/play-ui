@@ -17,7 +17,7 @@
 package uk.gov.hmrc.play.views.layouts.test
 
 import play.api.Configuration
-import uk.gov.hmrc.play.config.{AssetsConfig, OptimizelyConfig}
+import uk.gov.hmrc.play.config.{AssetsConfig, GTMConfig, OptimizelyConfig}
 
 object TestConfigs {
 
@@ -33,6 +33,15 @@ object TestConfigs {
       Configuration(
         "optimizely.url"       -> "doesnt-matter",
         "optimizely.projectId" -> "doesnt-matter"
+      )
+    )
+
+  val testGTMConfig =
+    new GTMConfig(
+      Configuration(
+        "gtm.container"        -> "transitional",
+        "gtm.transitional.url" -> "some transitional url",
+        "gtm.main.url"         -> "some main url"
       )
     )
 

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.play.views.html
 
 import play.api.Play
-import uk.gov.hmrc.play.config.{AssetsConfig, OptimizelyConfig}
+import uk.gov.hmrc.play.config.{AssetsConfig, GTMConfig, OptimizelyConfig}
 
 package object layouts {
 
@@ -28,6 +28,8 @@ package object layouts {
   private lazy val assetsConfig = Play.current.injector.instanceOf[AssetsConfig]
 
   private lazy val optimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
+
+  private lazy val gtmConfig = Play.current.injector.instanceOf[GTMConfig]
 
   @deprecated("Use DI")
   lazy val article = new Article()
@@ -48,7 +50,7 @@ package object layouts {
   lazy val footer_links = new FooterLinks()
 
   @deprecated("Use DI")
-  lazy val head = new Head(optimizely_snippet, assetsConfig)
+  lazy val head = new Head(optimizely_snippet, assetsConfig, gtmSnippet)
 
   @deprecated("Use DI")
   lazy val header_nav = new HeaderNav()
@@ -64,6 +66,9 @@ package object layouts {
 
   @deprecated("Use DI")
   lazy val optimizely_snippet = new OptimizelySnippet(optimizelyConfig)
+
+  @deprecated("Use DI")
+  lazy val gtmSnippet = new GTMSnippet(gtmConfig)
 
   @deprecated("Use DI")
   lazy val serviceInfo = new ServiceInfo()
