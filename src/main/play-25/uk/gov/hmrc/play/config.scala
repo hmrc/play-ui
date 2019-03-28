@@ -26,4 +26,6 @@ package object config {
   // for backwards compatibility with previous versions where OptimizelyConfig was an object
   lazy val OptimizelyConfig: OptimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
 
+  lazy val GTMConfig: GTMConfig = Play.current.injector.instanceOf[GTMConfig]
+
 }

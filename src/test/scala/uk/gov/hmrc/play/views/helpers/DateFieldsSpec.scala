@@ -28,23 +28,37 @@ import uk.gov.hmrc.play.views.html.helpers._
 
 class DateFieldsSpec extends WordSpec with Matchers with MessagesSupport {
 
-  val months = Seq("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+  val months = Seq(
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December")
 
   case class DummyFormData(day: Int, month: Int, year: Int)
 
-  def dummyForm = Form(
-    mapping(
-      "dummyField.day" -> fieldOf[Int],
-      "dummyField.month" -> fieldOf[Int],
-      "dummyField.year" -> fieldOf[Int]
-  )(DummyFormData.apply)(DummyFormData.unapply))
+  def dummyForm =
+    Form(
+      mapping(
+        "dummyField.day"   -> fieldOf[Int],
+        "dummyField.month" -> fieldOf[Int],
+        "dummyField.year"  -> fieldOf[Int]
+      )(DummyFormData.apply)(DummyFormData.unapply))
 
   "The Date Fields with a freeform year input box" should {
     "Display months using long nouns" in {
       val dateFieldsFreeYearInline = new DateFieldsFreeYearInline(new Input(), new Dropdown())
-      val doc = jsoupDocument(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label")))
-      months.zipWithIndex.foreach { case (month: String, i: Int) =>
-        doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
+      val doc                      = jsoupDocument(dateFieldsFreeYearInline(dummyForm, "dummyField", Html("label")))
+      months.zipWithIndex.foreach {
+        case (month: String, i: Int) =>
+          doc.getElementById(s"dummyField.month-${i + 1}").text shouldBe month
       }
     }
   }
@@ -52,9 +66,10 @@ class DateFieldsSpec extends WordSpec with Matchers with MessagesSupport {
   "The Date Fields with a limited year input box" should {
     "Display months using long nouns" in {
       val dateFieldsInline = new DateFieldsInline(new Dropdown())
-      val doc = jsoupDocument(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None))
-      months.zipWithIndex.foreach { case (month: String, i: Int) =>
-        doc.getElementById(s"dummyField.month-${i+1}").text shouldBe month
+      val doc              = jsoupDocument(dateFieldsInline(dummyForm, "dummyField", Html("label"), 1 to 2, None))
+      months.zipWithIndex.foreach {
+        case (month: String, i: Int) =>
+          doc.getElementById(s"dummyField.month-${i + 1}").text shouldBe month
       }
     }
   }

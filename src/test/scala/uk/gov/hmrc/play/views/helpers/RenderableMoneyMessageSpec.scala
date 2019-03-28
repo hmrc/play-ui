@@ -18,7 +18,7 @@ package uk.gov.hmrc.play.views.helpers
 
 import org.scalatest.{Matchers, WordSpec}
 
-class RenderableMoneyMessageSpec extends WordSpec with Matchers{
+class RenderableMoneyMessageSpec extends WordSpec with Matchers {
 
   "Money" should {
     "include pound (£) sign before a number" in {

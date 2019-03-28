@@ -28,10 +28,11 @@ class DropDownSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(country: String)
 
-  def dummyForm = Form(
-    mapping(
-      "country" -> text
-    )(DummyFormData.apply)(DummyFormData.unapply))
+  def dummyForm =
+    Form(
+      mapping(
+        "country" -> text
+      )(DummyFormData.apply)(DummyFormData.unapply))
 
   val dropdown = new Dropdown()
 

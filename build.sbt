@@ -6,12 +6,12 @@ val appName = "play-ui"
 lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
   .settings(
-    majorVersion        := 7,
-    scalaVersion        := "2.11.12",
-    crossScalaVersions  := List("2.11.12", "2.12.8"),
+    majorVersion := 7,
+    scalaVersion := "2.11.12",
+    crossScalaVersions := List("2.11.12", "2.12.8"),
     libraryDependencies ++= appDependencies,
     dependencyOverrides ++= overrides,
-    resolvers           :=
+    resolvers :=
       Seq(
         "HMRC Releases" at "https://dl.bintray.com/hmrc/releases",
         "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/"
@@ -37,14 +37,15 @@ lazy val appDependencies: Seq[ModuleID] = dependencies(
     val compile = Seq(
       "com.typesafe.play" %% "play"            % playVersion,
       "com.typesafe.play" %% "filters-helpers" % playVersion,
-      "org.joda"          %  "joda-convert"    % "2.0.2"
+      "org.joda"          % "joda-convert"     % "2.0.2"
     )
 
     val test = Seq(
-      "org.scalatest"     %% "scalatest" % "3.0.5",
-      "org.pegdown"       %  "pegdown"   % "1.6.0",
-      "org.jsoup"         %  "jsoup"     % "1.11.3",
-      "com.typesafe.play" %% "play-test" % playVersion
+      "org.scalatest"     %% "scalatest"  % "3.0.5",
+      "org.pegdown"       % "pegdown"     % "1.6.0",
+      "org.jsoup"         % "jsoup"       % "1.11.3",
+      "com.typesafe.play" %% "play-test"  % playVersion,
+      "org.scalacheck"    %% "scalacheck" % "1.14.0"
     ).map(_ % Test)
 
     compile ++ test
@@ -71,13 +72,15 @@ lazy val templateImports: Seq[String] = {
   )
 
   val specificImports = PlayCrossCompilation.playVersion match {
-    case Play25 => Seq(
-      "_root_.play.twirl.api.TemplateMagic._"
-    )
-    case Play26 => Seq(
-      "_root_.play.twirl.api.TwirlFeatureImports._",
-      "_root_.play.twirl.api.TwirlHelperImports._"
-    )
+    case Play25 =>
+      Seq(
+        "_root_.play.twirl.api.TemplateMagic._"
+      )
+    case Play26 =>
+      Seq(
+        "_root_.play.twirl.api.TwirlFeatureImports._",
+        "_root_.play.twirl.api.TwirlHelperImports._"
+      )
   }
 
   allImports ++ specificImports

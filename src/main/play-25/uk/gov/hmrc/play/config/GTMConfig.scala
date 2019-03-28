@@ -19,8 +19,14 @@ package uk.gov.hmrc.play.config
 import javax.inject.Inject
 import play.api.Configuration
 
-class AssetsConfig @Inject()(configuration: Configuration) {
-  private val assetsUrl     = configuration.underlying.getString("assets.url")
-  private val assetsVersion = configuration.underlying.getString("assets.version")
-  val assetsPrefix: String  = assetsUrl + assetsVersion
+class GTMConfig @Inject()(configuration: Configuration) {
+  val url: Option[String] =
+    configuration.getString("gtm.container") match {
+      case None => None
+      case Some(container @ ("transitional" | "main")) =>
+        configuration
+          .getString(s"gtm.$container.url")
+          .orElse(throw new RuntimeException(s"Missing configuration gtm.$container.url"))
+      case _ => throw new IllegalArgumentException("gtm.container should be one of: { transitional, main }")
+    }
 }

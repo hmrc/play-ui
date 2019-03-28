@@ -45,10 +45,11 @@ object ContinueUrl {
   implicit def queryBinder(implicit stringBinder: QueryStringBindable[String]) = new QueryStringBindable[ContinueUrl] {
     def bind(key: String, params: Map[String, Seq[String]]) =
       stringBinder.bind(key, params).map {
-        case Right(s) => Try(ContinueUrl(s)) match {
-          case Success(url) => Right(url)
-          case Failure(_) => Left(errorFor(s))
-        }
+        case Right(s) =>
+          Try(ContinueUrl(s)) match {
+            case Success(url) => Right(url)
+            case Failure(_)   => Left(errorFor(s))
+          }
         case Left(message) => Left(message)
       }
 

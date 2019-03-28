@@ -31,35 +31,38 @@ class FooterSpec extends WordSpec with Matchers with NoStartedPlayApp {
     "be renderable without a started Play application" in {
       thereShouldBeNoStartedPlayApp()
 
-      val rendered = contentAsString(footer(
-        analyticsToken = None,
-        analyticsHost = "",
-        ssoUrl = None,
-        scriptElem = Some(Html("footer was rendered")),
-        gaCalls = None))
+      val rendered = contentAsString(
+        footer(
+          analyticsToken = None,
+          analyticsHost  = "",
+          ssoUrl         = None,
+          scriptElem     = Some(Html("footer was rendered")),
+          gaCalls        = None))
 
       rendered should include("footer was rendered")
     }
 
     "remove the query string by default from the page data item" in {
-      val rendered = contentAsString(footer(
-        analyticsToken = Some("TESTTOKEN"),
-        analyticsHost = "localhost",
-        ssoUrl = Some("localhost"),
-        scriptElem = None,
-        gaCalls = None))
+      val rendered = contentAsString(
+        footer(
+          analyticsToken = Some("TESTTOKEN"),
+          analyticsHost  = "localhost",
+          ssoUrl         = Some("localhost"),
+          scriptElem     = None,
+          gaCalls        = None))
 
       rendered should include("ga('set',  'page', location.pathname);")
     }
 
     "allow the query string by exception in the page data item" in {
-      val rendered = contentAsString(footer(
-        analyticsToken = Some("TESTTOKEN"),
-        analyticsHost = "localhost",
-        ssoUrl = Some("localhost"),
-        scriptElem = None,
-        allowQueryStringInAnalytics = true,
-        gaCalls = None))
+      val rendered = contentAsString(
+        footer(
+          analyticsToken              = Some("TESTTOKEN"),
+          analyticsHost               = "localhost",
+          ssoUrl                      = Some("localhost"),
+          scriptElem                  = None,
+          allowQueryStringInAnalytics = true,
+          gaCalls                     = None))
 
       rendered should not include "ga('set',  'page', location.pathname);"
     }

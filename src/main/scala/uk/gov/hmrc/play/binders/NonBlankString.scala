@@ -27,7 +27,7 @@ object NonBlankString {
   implicit val reads = new Reads[NonBlankString] {
     def reads(js: JsValue): JsResult[NonBlankString] = js.validate[String].flatMap {
       case "" | null => JsError("string was blank")
-      case s => JsSuccess(NonBlankString(s))
+      case s         => JsSuccess(NonBlankString(s))
     }
   }
 
@@ -35,15 +35,15 @@ object NonBlankString {
     def writes(nbs: NonBlankString) = JsString(nbs.value)
   }
 
-  implicit def stringToNonBlankString(implicit stringBinder: QueryStringBindable[String]) = new QueryStringBindable[NonBlankString] {
-    def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, NonBlankString]] = {
-      stringBinder.bind(key, params).map {
-        case Right(null | "") => Left("String was blank")
-        case Right(nonBlankValue) => Right(NonBlankString(nonBlankValue))
-        case Left(error) => Left(error)
-      }
-    }
+  implicit def stringToNonBlankString(implicit stringBinder: QueryStringBindable[String]) =
+    new QueryStringBindable[NonBlankString] {
+      def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, NonBlankString]] =
+        stringBinder.bind(key, params).map {
+          case Right(null | "")     => Left("String was blank")
+          case Right(nonBlankValue) => Right(NonBlankString(nonBlankValue))
+          case Left(error)          => Left(error)
+        }
 
-    def unbind(key: String, nbs: NonBlankString): String = nbs.value
-  }
+      def unbind(key: String, nbs: NonBlankString): String = nbs.value
+    }
 }

@@ -23,11 +23,11 @@ class NonBlankStringSpec extends WordSpecLike with Matchers {
 
   "Creating a NonBlankString" should {
     "throw an exception for a blank string" in {
-      an [IllegalArgumentException] should be thrownBy NonBlankString("")
+      an[IllegalArgumentException] should be thrownBy NonBlankString("")
     }
 
     "give an error for a null string" in {
-      an [IllegalArgumentException] should be thrownBy NonBlankString(null)
+      an[IllegalArgumentException] should be thrownBy NonBlankString(null)
     }
 
     "give a success for a non-blank string" in {
@@ -37,15 +37,15 @@ class NonBlankStringSpec extends WordSpecLike with Matchers {
 
   "Reading a NonBlankString" should {
     "give an error for a blank string" in {
-      validating("") shouldBe a [JsError]
+      validating("") shouldBe a[JsError]
     }
 
     "give an error for a null string" in {
-      validating(null) shouldBe a [JsError]
+      validating(null) shouldBe a[JsError]
     }
 
     "give a success for a non-blank string" in {
-      validating("x") should be (JsSuccess(NonBlankString("x")))
+      validating("x") should be(JsSuccess(NonBlankString("x")))
     }
 
     def validating(s: String) = JsString(s).validate[NonBlankString]
@@ -53,7 +53,7 @@ class NonBlankStringSpec extends WordSpecLike with Matchers {
 
   "Writing a NonBlankString" should {
     "just include the value" in {
-      Json.toJson(NonBlankString("x")) should be (JsString("x"))
+      Json.toJson(NonBlankString("x")) should be(JsString("x"))
     }
   }
 

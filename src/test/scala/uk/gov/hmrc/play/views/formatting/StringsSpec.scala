@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.play.views.formatting
 
-import org.scalatest.{ Matchers, WordSpec }
+import org.scalatest.{Matchers, WordSpec}
 
 class StringsSpec extends WordSpec with Matchers {
 

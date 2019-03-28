@@ -25,18 +25,18 @@ class ValidatorsSpec extends WordSpec with Matchers {
 
   " Valid character checker " should {
     " return false if an invalid character is present in an input " in {
-      var digits = for (i <- 48 to 57) yield i
-      var lowerCaseLetters = for (i <- 97 to 122) yield i
-      var upperCaseLetters = for (i <- 65 to 90) yield i
+      var digits            = for (i <- 48 to 57) yield i
+      var lowerCaseLetters  = for (i <- 97 to 122) yield i
+      var upperCaseLetters  = for (i <- 65 to 90) yield i
       val specialCharacters = List(32, 38, 39, 44, 45, 47)
 
       val validCharacters = digits ++ lowerCaseLetters ++ upperCaseLetters ++ specialCharacters
 
       for (chr <- 0 to 1000) {
-        val c = chr.toChar
+        val c   = chr.toChar
         val str = s"this $chr contains $c"
         characterValidator.containsValidAddressCharacters(str) match {
-          case true => validCharacters.contains(chr) should be(true)
+          case true  => validCharacters.contains(chr) should be(true)
           case false => validCharacters.contains(chr) should be(false)
         }
       }

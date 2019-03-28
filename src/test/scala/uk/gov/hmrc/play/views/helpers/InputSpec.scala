@@ -30,44 +30,50 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
 
   case class DummyFormData(inputBoxValue: String)
 
-  def dummyForm = Form(
-    mapping(
-      "inputBoxValue" -> text
-
-    )(DummyFormData.apply)(DummyFormData.unapply))
+  def dummyForm =
+    Form(
+      mapping(
+        "inputBoxValue" -> text
+      )(DummyFormData.apply)(DummyFormData.unapply))
 
   val input = new Input()
 
   "@helpers.input" should {
     "render an input box" in {
-      val doc = jsoupDocument(input(field = dummyForm("inputValue"),'_inputClass -> "myInputClass", '_label -> "myLabel"))
+      val doc =
+        jsoupDocument(input(field = dummyForm("inputValue"), '_inputClass -> "myInputClass", '_label -> "myLabel"))
       val inputBox = doc.getElementById("inputValue")
 
-      inputBox.attr("type") shouldBe "text"
-      inputBox.attr("name") shouldBe "inputValue"
-      inputBox.attr("value") shouldBe ""
-      inputBox.attr("class") shouldBe "myInputClass"
+      inputBox.attr("type")    shouldBe "text"
+      inputBox.attr("name")    shouldBe "inputValue"
+      inputBox.attr("value")   shouldBe ""
+      inputBox.attr("class")   shouldBe "myInputClass"
       inputBox.parent().text() shouldBe "myLabel"
     }
 
     "render error notification when errors are present" in {
-      val doc = jsoupDocument(input(
-        field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Enter a value")), Some("")),
-        '_inputClass -> "myInputClass", '_label -> "myLabel", '_error_id -> "myError"))
+      val doc = jsoupDocument(
+        input(
+          field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Enter a value")), Some("")),
+          '_inputClass -> "myInputClass",
+          '_label      -> "myLabel",
+          '_error_id   -> "myError"
+        ))
       val errorMessage = doc.getElementById("myError").text
       errorMessage shouldBe "Enter a value"
     }
 
     "render input box with errors in the right order" in {
-      val doc = jsoupDocument(input(
-        field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Form Error Text")), Some("")),
-        '_inputClass -> "inputClass",
-        '_label -> "Label Text",
-        '_error_id -> "errorId",
-        '_inputHint -> "Input Hint Text",
-        '_labelClass -> "myLabelClass")
-      )
-      val inputBox = doc.getElementsByClass("myLabelClass").first
+      val doc = jsoupDocument(
+        input(
+          field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Form Error Text")), Some("")),
+          '_inputClass -> "inputClass",
+          '_label      -> "Label Text",
+          '_error_id   -> "errorId",
+          '_inputHint  -> "Input Hint Text",
+          '_labelClass -> "myLabelClass"
+        ))
+      val inputBox                  = doc.getElementsByClass("myLabelClass").first
       val listOfInputBoxTextInOrder = inputBox.getElementsByTag("span").asScala.toList.map(_.text)
 
       listOfInputBoxTextInOrder shouldBe List("Label Text", "Input Hint Text", "Form Error Text")

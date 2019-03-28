@@ -21,10 +21,9 @@ import play.api.Play
 
 trait NoStartedPlayApp { this: Matchers =>
 
-  def thereShouldBeNoStartedPlayApp(): Unit = {
+  def thereShouldBeNoStartedPlayApp(): Unit =
     intercept[RuntimeException] {
       Play.current
     }.getMessage should include("no started application")
-  }
 
 }

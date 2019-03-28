@@ -1,4 +1,4 @@
-/*
+@*
  * Copyright 2019 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *@
 
-package uk.gov.hmrc.play.config
+@import uk.gov.hmrc.play.config.GTMConfig
 
-import javax.inject.Inject
-import play.api.Configuration
+@this(gtmConfig: GTMConfig)
 
-class AssetsConfig @Inject()(configuration: Configuration) {
-  private val assetsUrl     = configuration.underlying.getString("assets.url")
-  private val assetsVersion = configuration.underlying.getString("assets.version")
-  val assetsPrefix: String  = assetsUrl + assetsVersion
+@()
+
+@gtmConfig.url.map { url =>
+    <script src='@url' type='text/javascript'></script>
 }

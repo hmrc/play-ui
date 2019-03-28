@@ -37,6 +37,17 @@ correctly adds labels, error messages and CSS classes.
 ### Layout Templates
 Contains templates for components used across frontend applications such as: header, footer, sidebar, betaBanner.
 
+### Google Tag Manager
+To add support for tracking and analytics for your frontend, please provide the following configuration in your application.conf:
+
+```
+// <CONTAINER> can be one of: { main, transitional }
+// main: This is the main container that contains all the environments in GA
+// transitional: This is the transitional container which will eventually be dumped 
+gtm.container = <CONTAINER>
+
+``` 
+
 ## Adding to your service
 
 Include the following dependency in your SBT build
