@@ -21,9 +21,8 @@ import play.api.Configuration
 
 class GTMConfig @Inject()(configuration: Configuration) {
   val url: Option[String] =
-    configuration.getString("gtm.container") match {
-      case None => None
-      case Some(container @ ("transitional" | "main")) =>
+    configuration.getString("gtm.container").flatMap {
+      case container @ ("transitional" | "main") =>
         configuration
           .getString(s"gtm.$container.url")
           .orElse(throw new RuntimeException(s"Missing configuration gtm.$container.url"))
