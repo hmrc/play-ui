@@ -38,7 +38,7 @@ correctly adds labels, error messages and CSS classes.
 Contains templates for components used across frontend applications such as: header, footer, sidebar, betaBanner.
 
 ### Google Tag Manager
-To add support for tracking and analytics for your frontend, please provide the following configuration in your application.conf:
+To add support for tracking and analytics for your frontend, please provide the following configuration in your environment-specific configuration (ex: app-config-development):
 
 ```
 // <CONTAINER> can be one of: { main, transitional }
