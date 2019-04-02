@@ -21,6 +21,8 @@ eu-exit.links.individual-prepare.text=Paratoi ar gyfer Ymadael â’r UE os ydyc
 eu-exit.links.live-in-europe.text=Byw yn Ewrop ar ôl i’r DU adael yr UE (Saesneg yn unig)
 eu-exit.links.live-in-uk.text=Parhau i fyw yn y DU ar ôl iddi adael yr UE (Saesneg yn unig)
 
+footer.links.support_links.text=Cysylltiadau cymorth
+
 footer.links.cookies.text=Cwcis
 footer.links.privacy_policy.text=Polisi preifatrwydd
 footer.links.terms_and_conditions.text=Telerau ac Amodau
