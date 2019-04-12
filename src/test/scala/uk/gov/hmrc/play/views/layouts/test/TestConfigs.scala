@@ -41,7 +41,8 @@ object TestConfigs {
       Configuration(
         "gtm.container"        -> "transitional",
         "gtm.transitional.url" -> "some transitional url",
-        "gtm.main.url"         -> "some main url"
+        "gtm.main.url"         -> "some main url",
+        "gtm.data.layer.url"   -> "some data layer url"
       )
     )
 

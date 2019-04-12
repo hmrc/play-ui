@@ -31,6 +31,7 @@ class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
     "include script tag with appropriate URL for container if gtm.container is defined" in {
       val transitionalUrl = "http://s3bucket/transitional/gtm.js"
       val mainUrl         = "http://s3bucket/main/gtm.js"
+      val dataLayerUrl    = "http://s3bucket/include/gtm_dl.js"
       val containersAndUrls =
         Table(
           ("container", "url"),
@@ -39,27 +40,35 @@ class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
         )
 
       forAll(containersAndUrls) { (container: String, url: String) =>
-        val snippet = createSnippet(Some(mainUrl), Some(transitionalUrl), Some(container))
+        val snippet = createSnippet(
+          container       = Some(container),
+          mainUrl         = Some(mainUrl),
+          transitionalUrl = Some(transitionalUrl),
+          dataLayerUrl    = Some(dataLayerUrl))
         script(snippet()) should contain(s"$url")
+        script(snippet()) should contain(s"$dataLayerUrl")
       }
     }
 
     "not include script tag if gtm.container is not defined" in {
-      val snippet = createSnippet(None, None, None)
+      val snippet = createSnippet(None, None, None, None)
       script(snippet()) shouldBe empty
     }
   }
 
   private def createSnippet(
-    mainUrl: Option[String]         = None,
-    transitionalUrl: Option[String] = None,
-    container: Option[String]): GTMSnippet = {
+    container: Option[String],
+    mainUrl: Option[String],
+    transitionalUrl: Option[String],
+    dataLayerUrl: Option[String]): GTMSnippet = {
     val config = new GTMConfig(
       Configuration(
         Seq(
+          container.map("gtm.container"              -> _),
           mainUrl.map("gtm.main.url"                 -> _),
           transitionalUrl.map("gtm.transitional.url" -> _),
-          container.map("gtm.container"              -> _)).flatten: _*))
+          dataLayerUrl.map("gtm.data.layer.url"      -> _)
+        ).flatten: _*))
     new GTMSnippet(config)
   }
 
