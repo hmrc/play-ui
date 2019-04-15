@@ -21,11 +21,17 @@ import play.api.Configuration
 
 class GTMConfig @Inject()(configuration: Configuration) {
   val url: Option[String] =
+    readConfig(container => s"gtm.$container.url")
+
+  val dataLayerUrl: Option[String] =
+    readConfig(_ => "gtm.data.layer.url")
+
+  def readConfig(configKey: String => String): Option[String] =
     configuration.getString("gtm.container").map {
-      case container @ ("transitional" | "main") =>
+      case container@("transitional" | "main") =>
         configuration
-          .getString(s"gtm.$container.url")
-          .getOrElse(throw new RuntimeException(s"Missing configuration gtm.$container.url"))
+          .getString(configKey(container))
+          .getOrElse(throw new RuntimeException(s"Missing configuration ${configKey(container)}"))
       case _ => throw new IllegalArgumentException("gtm.container should be one of: { transitional, main }")
     }
 }
