@@ -39,6 +39,7 @@ case class ContinueUrl(url: String) {
 
 }
 
+@deprecated("Please use Bootstrap Play's RedirectUrl instead.", "7.40.0-play-25, 7.40.0-play-26")
 object ContinueUrl {
   private def errorFor(invalidUrl: String) = s"'$invalidUrl' is not a valid continue URL"
 
