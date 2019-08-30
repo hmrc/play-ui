@@ -16,7 +16,7 @@
 
 @this()
 
-@(additionalLinks: Option[Html] = None, euExitLinks: Option[Html] = None)(implicit messages: Messages)
+@(additionalLinks: Option[Html] = None, euExitLinks: Option[Html] = None, accessibilityFooterUrl: Option[String] = None)(implicit messages: Messages)
 
 @euExitLinks
 
@@ -31,6 +31,15 @@
             @Messages("footer.links.cookies.text")
         </a>
     </li>
+    @accessibilityFooterUrl.map { url =>
+        <li>
+            <a href='@url'
+            data-sso="false"
+            data-journey-click="footer:Click:Accessibility">
+                @Messages("footer.links.accessibility.text")
+            </a>
+        </li>
+    }
     <li>
         <a href='@Messages("footer.links.privacy_policy.url")'
            target="_blank"
