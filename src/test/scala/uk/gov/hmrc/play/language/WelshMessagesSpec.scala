@@ -113,7 +113,8 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
       "attorney.banner.user",
       "pertax.attorney.banner.link",
       "pertax.attorney.banner.user",
-      "attorney.banner.nan"
+      "attorney.banner.nan",
+      "footer.links.accessibility.text"
     )
 
     val keyIgnoreRule: String => Boolean = keysPendingTranslation.contains
