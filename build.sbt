@@ -6,9 +6,9 @@ val appName = "play-ui"
 lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
   .settings(
-    majorVersion := 14,
+    majorVersion := 8,
     scalaVersion := "2.11.12",
-    crossScalaVersions := List("2.11.12", "2.12.8"),
+    crossScalaVersions := List("2.11.12", "2.12.9"),
     libraryDependencies ++= appDependencies,
     dependencyOverrides ++= overrides,
     resolvers :=
