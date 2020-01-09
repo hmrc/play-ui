@@ -59,6 +59,7 @@
             }
             role="tooltip"
             data-journey="search-page:error:@elements.field.name">
+            @if(elements.args.contains('_errorPrefix) ){<span class="visually-hidden">@elements.args.get('_errorPrefix) </span>}
             @Messages(error)
         </span>
         }

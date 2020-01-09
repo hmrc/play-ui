@@ -37,7 +37,7 @@
             @elements.args.get('_legend)
         </legend>
     }
-    @elements.errors.map{error => <span class="error-notification">@Messages(error)</span>}
+    @elements.errors.map{error => <span class="error-notification">@if(elements.args.contains('_errorPrefix) ){<span class="visually-hidden">@elements.args.get('_errorPrefix) </span>}@Messages(error)</span>}
 
     @radioOptions.map { case (value, label) =>
         @defining(s"${elements.field.name}-${value.toLowerCase.replace(" ","_")}")  { inputId =>
