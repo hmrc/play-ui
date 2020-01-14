@@ -1,5 +1,5 @@
 @*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,10 @@
         <input type="checkbox" id="@elements.id" name="@elements.field.name" value="true" @if(value == "true"){ checked="checked" } @if( elements.args.get('_inputClass) ){ class="@elements.args.get('_inputClass)" }>
         <label class="form-field-single @if(value == "true"){ selected } @if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass) }" for="@elements.id">
             @elements.errors.map { error =>
-                <span id="@{elements.field.id}--error" class="error-notification">@Messages(error)</span>
+                <span id="@{elements.field.id}--error" class="error-notification">
+                    @if(elements.args.get('_errorPrefix) ){<span class="visually-hidden">@elements.args.get('_errorPrefix) </span>}
+                    @Messages(error)
+                </span>
             }
             @elements.label
         </label>
