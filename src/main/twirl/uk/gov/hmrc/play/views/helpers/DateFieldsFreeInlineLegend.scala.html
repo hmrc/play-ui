@@ -39,7 +39,9 @@
                 <span class="form-hint">@hint</span>
             }
             @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">
-                @if(args.toMap.get('_errorPrefix).isDefined ){<span class="visually-hidden">@args.toMap.get('_errorPrefix) </span>}
+                @args.toMap.get('_errorPrefix).map { errorPrefix =>
+                    <span class="visually-hidden">@errorPrefix </span>
+                }
                 @Messages(error.message)
             </span>}
         </legend>
