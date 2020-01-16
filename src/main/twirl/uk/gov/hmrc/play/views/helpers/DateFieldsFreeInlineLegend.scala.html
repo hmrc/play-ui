@@ -1,5 +1,5 @@
 @*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,12 @@
             @args.toMap.get('_inputHint).map { hint =>
                 <span class="form-hint">@hint</span>
             }
-            @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">@Messages(error.message)</span>}
+            @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">
+                @args.toMap.get('_errorPrefix).map { errorPrefix =>
+                    <span class="visually-hidden">@errorPrefix </span>
+                }
+                @Messages(error.message)
+            </span>}
         </legend>
 
         @input(
