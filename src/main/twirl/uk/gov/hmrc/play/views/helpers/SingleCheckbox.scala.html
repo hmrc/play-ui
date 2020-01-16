@@ -29,7 +29,9 @@
         <label class="form-field-single @if(value == "true"){ selected } @if(elements.args.get('_labelClass)){ @elements.args.get('_labelClass) }" for="@elements.id">
             @elements.errors.map { error =>
                 <span id="@{elements.field.id}--error" class="error-notification">
-                    @if(elements.args.get('_errorPrefix) ){<span class="visually-hidden">@elements.args.get('_errorPrefix) </span>}
+                    @elements.args.get('_errorPrefix).map { errorPrefix =>
+                        <span class="visually-hidden">@errorPrefix </span>
+                    }
                     @Messages(error)
                 </span>
             }
