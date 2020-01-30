@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ class LoginStatusSpec extends WordSpec with Matchers {
     "show the first login message in Welsh" in {
       implicit val lang = Lang("cy")
       val content       = contentAsString(loginStatus(userName, None, "logoutUrl"))
-      content should include("Ivor, dyma&#x27;r tro cyntaf i chi fewngofnodi")
+      content should include("Ivor, dyma’r tro cyntaf i chi fewngofnodi")
     }
 
     "show the previous login message in English" in {

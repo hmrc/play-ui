@@ -9,11 +9,11 @@ error.invalid.date.format=Rhaid i chi nodi dyddiad dilys
 # BETA header
 label.beta=BETA
 label.beta.newservice=Mae hwn yn wasanaeth newydd
-label.beta.improve=yn ein helpu i''w wella.
+label.beta.improve=yn ein helpu i’w wella.
 label.beta.feedback=adborth
 label.beta.yours=– bydd eich
 
-report.a.problem.link=Help gyda''r dudalen hon.
+report.a.problem.link=Help gyda’r dudalen hon.
 
 eu-exit.links.heading.text=Paratoi ar gyfer Ymadael â’r UE (Saesneg yn unig)
 eu-exit.links.business-prepare.text=Paratoi eich busnes ar gyfer y DU yn gadael yr UE (Saesneg yn unig)
@@ -34,7 +34,7 @@ footer.links.cookies.url=/help/cookies
 footer.links.privacy_policy.url=/help/privacy
 footer.links.terms_and_conditions.url=/help/terms-and-conditions
 
-common.firstlogin={0}, dyma''r tro cyntaf i chi fewngofnodi
+common.firstlogin={0}, dyma’r tro cyntaf i chi fewngofnodi
 common.previousLoginTime={0}, y tro diwethaf i chi fewngofnodi oedd {1}
 
 ######################################################
@@ -63,7 +63,7 @@ common.signOut=Sign out
 # Attorney Banner
 
 attorney.banner.link=Return to your account
-attorney.banner.user=You''re using this service for <span class="heading-small">{0}</span>.
+attorney.banner.user=You’re using this service for <span class="heading-small">{0}</span>.
 pertax.attorney.banner.link=Return to your own account
-pertax.attorney.banner.user=You''re in <span class="heading-small">{0}''s</span> account.
+pertax.attorney.banner.user=You’re in <span class="heading-small">{0}’s</span> account.
 attorney.banner.nan=name not defined

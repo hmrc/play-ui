@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,10 +58,10 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
       "error.invalid.date.format"              -> "Rhaid i chi nodi dyddiad dilys",
       "label.beta"                             -> "BETA",
       "label.beta.newservice"                  -> "Mae hwn yn wasanaeth newydd",
-      "label.beta.improve"                     -> "yn ein helpu i'w wella.",
+      "label.beta.improve"                     -> "yn ein helpu i’w wella.",
       "label.beta.feedback"                    -> "adborth",
       "label.beta.yours"                       -> "– bydd eich",
-      "report.a.problem.link"                  -> "Help gyda'r dudalen hon.",
+      "report.a.problem.link"                  -> "Help gyda’r dudalen hon.",
       "footer.links.cookies.text"              -> "Cwcis",
       "footer.links.privacy_policy.text"       -> "Polisi preifatrwydd",
       "footer.links.terms_and_conditions.text" -> "Telerau ac Amodau",
