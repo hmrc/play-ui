@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,5 @@ trait MessagesSupport {
     ).get
   }
 
-  implicit val messagesRequest: MessagesRequest[_] =
-    new MessagesRequest(FakeRequest(), messagesApi)
-
-  implicit val messages: Messages = messagesRequest.messages
+  implicit val messages: Messages = new MessagesRequest(FakeRequest(), messagesApi).messages
 }
