@@ -49,6 +49,18 @@ lazy val appDependencies: Seq[ModuleID] = dependencies(
     ).map(_ % Test)
 
     compile ++ test
+  },
+  play25 = {
+    val test = Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1"
+    ).map(_ % Test)
+    test
+  },
+  play26 = {
+    val test = Seq(
+      "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2"
+    ).map(_ % Test)
+    test
   }
 )
 

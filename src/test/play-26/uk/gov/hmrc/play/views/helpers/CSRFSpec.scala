@@ -1,4 +1,4 @@
-@*
+/*
  * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,21 +12,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *@
+ */
 
-@this()
+package uk.gov.hmrc.play.views.helpers
 
-@(action: play.api.mvc.Call,
-  args: (Symbol,String)*
-)(body: => Html
-)(implicit request: RequestHeader, messages: Messages)
+import play.api.test.CSRFTokenHelper._
+import play.api.test.FakeRequest
 
-@import views.html.helper._
-@import views.html.helper.CSRF
-
-<form action="@action.path" method="@action.method" @toHtmlArgs(args.toMap)>
-    @{
-        play.filters.csrf.CSRF.getToken(request).map {token => CSRF.formField(request)}
-    }
-    @body
-</form>
+trait CSRFSpec {
+  implicit val request = FakeRequest().withCSRFToken
+}
