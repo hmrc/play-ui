@@ -1,22 +1,20 @@
 sudo: false
-
 language: scala
+jdk: openjdk8
+script:
+  - sbt -J-XX:ReservedCodeCacheSize=256M +test
+  # Tricks to avoid unnecessary cache updates
+  - find $HOME/.sbt -name "*.lock" | xargs rm
+  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+matrix:
+  include:
+    - env: PLAY_VERSION=2.5
+    - env: PLAY_VERSION=2.6
+    - env: PLAY_VERSION=2.7
 cache:
   directories:
     - $HOME/.ivy2/cache
     - $HOME/.sbt/boot/
-
-jdk:
-- openjdk8
-
-script:
-  - PLAY_VERSION=2.5 sbt -J-XX:ReservedCodeCacheSize=256M +test
-  - PLAY_VERSION=2.6 sbt -J-XX:ReservedCodeCacheSize=256M +test
-
-  # Tricks to avoid unnecessary cache updates
-  - find $HOME/.sbt -name "*.lock" | xargs rm
-  - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
-
 notifications:
   webhooks:
     urls:
