@@ -1,6 +1,7 @@
-import uk.gov.hmrc.playcrosscompilation.PlayVersion.{Play25, Play26}
+import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
 
 val appName = "play-ui"
+val silencerVersion = "1.4.4"
 
 lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
@@ -19,7 +20,15 @@ lazy val root = Project(appName, file("."))
   .settings(
     TwirlKeys.templateImports := templateImports,
     PlayCrossCompilation.playCrossCompilationSettings,
-    makePublicallyAvailableOnBintray := true
+    makePublicallyAvailableOnBintray := true,
+    // ***************
+    // Use the silencer plugin to suppress warnings from unused imports in compiled twirl templates
+    scalacOptions += "-P:silencer:pathFilters=views;routes",
+    libraryDependencies ++= Seq(
+      compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
+      "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
+    )
+    // ***************
   )
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")
   .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
@@ -43,7 +52,7 @@ lazy val templateImports: Seq[String] = {
       Seq(
         "_root_.play.twirl.api.TemplateMagic._"
       )
-    case Play26 =>
+    case _ =>
       Seq(
         "_root_.play.twirl.api.TwirlFeatureImports._",
         "_root_.play.twirl.api.TwirlHelperImports._"

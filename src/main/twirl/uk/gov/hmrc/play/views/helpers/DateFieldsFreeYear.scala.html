@@ -32,7 +32,7 @@
     @if(elements.args.get('_hintText).isDefined) {
         <p class="form-hint">@elements.args.get('_hintText)</p>
     }
-    @elements.errors.map { error => <span class="error-notification">@Messages(error)</span>}
+    @elements.errors.map { error => <span class="error-notification">@Messages(error.toString)</span>}
 
     @dateFieldsFreeYearInline(formItem, fieldName, label, args : _*)
 </fieldset>

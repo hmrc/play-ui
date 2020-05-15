@@ -28,9 +28,9 @@
 @labelAfter = @{ elements.args.get('_labelAfter).getOrElse(false).asInstanceOf[Boolean] }
 
 <label for="@elements.field.name" class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) } @if(elements.hasErrors || (parentElements.isDefined && parentElements.get.hasErrors)) {form-field--error}" @if( elements.args.get('_dataCharCounter) ){ data-char-counter="@elements.args.get('_dataCharCounter)" }>
-    @elements.errors.map { error => <span class="error-notification">@Messages(error)</span>}
+    @elements.errors.map { error => <span class="error-notification">@Messages(error.toString)</span>}
     @if(parentElements.isDefined) {
-    @parentElements.get.errors.map { error => <span class="error-notification">@Messages(error)</span>}
+    @parentElements.get.errors.map { error => <span class="error-notification">@Messages(error.toString)</span>}
     }
 
     @if(!labelAfter && elements.args.contains('_label)) { @elements.label }

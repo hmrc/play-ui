@@ -31,7 +31,7 @@
 <label for="@elements.field.name" class="@elements.args.get('_divClass) @if( elements.args.get('_labelClass) ){ @elements.args.get('_labelClass) } @if((elements.hasErrors || (parentElements.isDefined && parentElements.get.hasErrors)) && !elements.args.contains('_hideBar)) {form-field--error}" @if(elements.args.contains('_labelDataAttributes)){@elements.args.get('_labelDataAttributes)}>
 
     @if(parentElements.isDefined) {
-        @parentElements.get.errors.map { error => <span class="error-notification">@Messages(error)</span>}
+        @parentElements.get.errors.map { error => <span class="error-notification">@Messages(error.toString)</span>}
     }
 
     @if(!labelAfter && elements.args.contains('_label)) {
@@ -60,7 +60,7 @@
             role="tooltip"
             data-journey="search-page:error:@elements.field.name">
             @if(elements.args.contains('_errorPrefix) ){<span class="visually-hidden">@elements.args.get('_errorPrefix) </span>}
-            @Messages(error)
+            @Messages(error.toString)
         </span>
         }
     }
