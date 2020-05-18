@@ -37,7 +37,7 @@
     }
     @if(argsMap.contains('_additionalTitleText)){<p>@argsMap.get('_additionalTitleText)</p>}
     @for(elements <- allFieldElements) {
-        @elements.errors.map { error => <span class="error-notification">@Messages(error)</span> }
+        @elements.errors.map { error => <span class="error-notification">@Messages(error.toString)</span> }
     }
     @for(field <- fields) {
         @for(input <- field.inputs) {

@@ -25,9 +25,9 @@ class ValidatorsSpec extends WordSpec with Matchers {
 
   " Valid character checker " should {
     " return false if an invalid character is present in an input " in {
-      var digits            = for (i <- 48 to 57) yield i
-      var lowerCaseLetters  = for (i <- 97 to 122) yield i
-      var upperCaseLetters  = for (i <- 65 to 90) yield i
+      val digits = for (i <- 48 to 57) yield i
+      val lowerCaseLetters = for (i <- 97 to 122) yield i
+      val upperCaseLetters = for (i <- 65 to 90) yield i
       val specialCharacters = List(32, 38, 39, 44, 45, 47)
 
       val validCharacters = digits ++ lowerCaseLetters ++ upperCaseLetters ++ specialCharacters

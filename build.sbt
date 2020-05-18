@@ -1,74 +1,38 @@
-import uk.gov.hmrc.playcrosscompilation.PlayVersion.{Play25, Play26}
-import PlayCrossCompilation.dependencies
+import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
 
 val appName = "play-ui"
+val silencerVersion = "1.4.4"
 
 lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
   .settings(
     majorVersion := 8,
-    scalaVersion := "2.11.12",
-    crossScalaVersions := List("2.11.12", "2.12.8"),
-    libraryDependencies ++= appDependencies,
-    dependencyOverrides ++= overrides,
+    scalaVersion := "2.12.10",
+    crossScalaVersions := List("2.11.12", "2.12.10"),
+    libraryDependencies ++= LibDependencies.libDependencies,
+    dependencyOverrides ++= LibDependencies.overrides,
     resolvers :=
       Seq(
         "HMRC Releases" at "https://dl.bintray.com/hmrc/releases",
-        "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/"
+        "typesafe-releases" at "https://repo.typesafe.com/typesafe/releases/"
       )
   )
   .settings(
     TwirlKeys.templateImports := templateImports,
     PlayCrossCompilation.playCrossCompilationSettings,
-    makePublicallyAvailableOnBintray := true
+    makePublicallyAvailableOnBintray := true,
+    // ***************
+    // Use the silencer plugin to suppress warnings from unused imports in compiled twirl templates
+    scalacOptions += "-P:silencer:pathFilters=views;routes",
+    libraryDependencies ++= Seq(
+      compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
+      "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
+    )
+    // ***************
   )
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")
   .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
   .settings(parallelExecution in sbt.Test := false)
-
-lazy val appDependencies: Seq[ModuleID] = dependencies(
-  shared = {
-
-    val playVersion = PlayCrossCompilation.playVersion match {
-      case Play25 => "2.5.19"
-      case Play26 => "2.6.20"
-    }
-
-    val compile = Seq(
-      "com.typesafe.play" %% "play"            % playVersion,
-      "com.typesafe.play" %% "filters-helpers" % playVersion,
-      "org.joda"          % "joda-convert"     % "2.0.2"
-    )
-
-    val test = Seq(
-      "org.scalatest"     %% "scalatest"  % "3.0.5",
-      "org.pegdown"       % "pegdown"     % "1.6.0",
-      "org.jsoup"         % "jsoup"       % "1.11.3",
-      "com.typesafe.play" %% "play-test"  % playVersion,
-      "org.scalacheck"    %% "scalacheck" % "1.14.0"
-    ).map(_ % Test)
-
-    compile ++ test
-  },
-  play25 = {
-    val test = Seq(
-      "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1"
-    ).map(_ % Test)
-    test
-  },
-  play26 = {
-    val test = Seq(
-      "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2"
-    ).map(_ % Test)
-    test
-  }
-)
-
-lazy val overrides: Set[ModuleID] = dependencies(
-  play25 = Seq(
-    "com.typesafe.play" %% "twirl-api" % "1.1.1"
-  )
-).toSet
 
 lazy val templateImports: Seq[String] = {
 
@@ -88,7 +52,7 @@ lazy val templateImports: Seq[String] = {
       Seq(
         "_root_.play.twirl.api.TemplateMagic._"
       )
-    case Play26 =>
+    case _ =>
       Seq(
         "_root_.play.twirl.api.TwirlFeatureImports._",
         "_root_.play.twirl.api.TwirlHelperImports._"
