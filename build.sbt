@@ -5,6 +5,7 @@ val silencerVersion = "1.4.4"
 
 lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
+  .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
     majorVersion := 8,
     scalaVersion := "2.12.10",
