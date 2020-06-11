@@ -42,7 +42,7 @@
                 @args.toMap.get('_errorPrefix).map { errorPrefix =>
                     <span class="visually-hidden">@errorPrefix </span>
                 }
-                @Messages(error.message)
+                @Messages(error.message, error.args: _*)
             </span>}
         </legend>
 
