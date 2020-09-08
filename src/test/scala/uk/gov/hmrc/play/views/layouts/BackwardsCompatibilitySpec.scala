@@ -17,14 +17,19 @@
 package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
+import org.scalatestplus.play.guice.GuiceOneAppPerSuite
+import play.api.Application
+import play.api.inject.guice.GuiceApplicationBuilder
 
 /*
  * Verifies that old pre play 2.6 way of accessing templates
  * continues to work after we've made them injectable.
  */
-class BackwardsCompatibilitySpec extends WordSpec with Matchers {
-
+class BackwardsCompatibilitySpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
   import uk.gov.hmrc.play.views.html.layouts._
+
+  override def fakeApplication(): Application =
+    new GuiceApplicationBuilder().configure(Map("play.allowGlobalApplication" -> "true")).build()
 
   "It should be possible to access templates without DI" in {
     article             shouldBe an[Article]

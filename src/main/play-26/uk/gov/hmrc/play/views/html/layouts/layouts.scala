@@ -17,7 +17,7 @@
 package uk.gov.hmrc.play.views.html
 
 import play.api.Play
-import uk.gov.hmrc.play.config.{AssetsConfig, GTMConfig, OptimizelyConfig}
+import uk.gov.hmrc.play.config.{AccessibilityStatementConfig, AssetsConfig, GTMConfig, OptimizelyConfig}
 
 package object layouts {
 
@@ -30,6 +30,8 @@ package object layouts {
   private lazy val optimizelyConfig = Play.current.injector.instanceOf[OptimizelyConfig]
 
   private lazy val gtmConfig = Play.current.injector.instanceOf[GTMConfig]
+
+  private lazy val accessibilityStatementConfig = Play.current.injector.instanceOf[AccessibilityStatementConfig]
 
   @deprecated("Use DI")
   lazy val article = new Article()
@@ -47,7 +49,7 @@ package object layouts {
   lazy val eu_exit_links = new EuExitLinks()
 
   @deprecated("Use DI")
-  lazy val footer_links = new FooterLinks()
+  lazy val footer_links = new FooterLinks(accessibilityStatementConfig)
 
   @deprecated("Use DI")
   lazy val head = new Head(optimizely_snippet, assetsConfig, gtmSnippet)

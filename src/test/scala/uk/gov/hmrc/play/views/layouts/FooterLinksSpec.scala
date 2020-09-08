@@ -20,14 +20,15 @@ import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.i18n.Lang
 import play.api.test.Helpers._
-import play.twirl.api.Html
 import uk.gov.hmrc.play.views.html.layouts.FooterLinks
 import play.api.i18n.Messages.Implicits._
 import play.api.inject.guice.GuiceApplicationBuilder
 import java.util.{List => JavaList}
+
+import play.api.test.FakeRequest
+
 import scala.collection.JavaConverters._
 import scala.collection.immutable.List
-
 
 class FooterLinksSpec extends WordSpec with Matchers {
 
@@ -35,6 +36,8 @@ class FooterLinksSpec extends WordSpec with Matchers {
     new GuiceApplicationBuilder()
       .configure(Map("play.i18n.langs" -> List("en", "cy")))
       .build()
+
+  implicit val fakeRequest = FakeRequest("GET", "/foo")
 
   val englishLinkTextEntries: JavaList[String] = List(
     "Cookies",
@@ -52,16 +55,16 @@ class FooterLinksSpec extends WordSpec with Matchers {
 
   "The footerLinks in English" should {
 
-    val footerLinks = new FooterLinks()
+    val footerLinks = application.injector.instanceOf[FooterLinks]
 
     implicit val lang = Lang("en")
-    val content  = contentAsString(footerLinks())
-    val document = Jsoup.parse(content)
-    val links    = document.getElementsByTag("a")
+    val content       = contentAsString(footerLinks())
+    val document      = Jsoup.parse(content)
+    val links         = document.getElementsByTag("a")
 
     "include visually hidden h2 text in English" in {
       implicit val lang = Lang("en")
-      val content  = contentAsString(footerLinks())
+      val content       = contentAsString(footerLinks())
       content should include("<h2 class=\"visually-hidden\">Support links</h2>")
     }
 
@@ -73,13 +76,12 @@ class FooterLinksSpec extends WordSpec with Matchers {
 
   "The footerLinks in Welsh" should {
 
-    val footerLinks = new FooterLinks()
+    val footerLinks = application.injector.instanceOf[FooterLinks]
 
     implicit val lang = Lang("cy")
-    val content  = contentAsString(footerLinks())
-    val document = Jsoup.parse(content)
-    val links    = document.getElementsByTag("a")
-
+    val content       = contentAsString(footerLinks())
+    val document      = Jsoup.parse(content)
+    val links         = document.getElementsByTag("a")
 
     "include visually hidden h2 text in Welsh" in {
       content should include("<h2 class=\"visually-hidden\">Cysylltiadau cymorth</h2>")

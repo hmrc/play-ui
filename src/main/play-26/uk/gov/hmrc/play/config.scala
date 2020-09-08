@@ -29,4 +29,7 @@ package object config {
   @deprecated("Use DI", "7.26.0")
   lazy val GTMConfig: GTMConfig = Play.current.injector.instanceOf[GTMConfig]
 
+  @deprecated("Use DI", "7.26.0")
+  lazy val AccessibilityStatementConfig: AccessibilityStatementConfig =
+    Play.current.injector.instanceOf[AccessibilityStatementConfig]
 }

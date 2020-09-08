@@ -65,7 +65,7 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
       "footer.links.cookies.text"              -> "Cwcis",
       "footer.links.privacy_policy.text"       -> "Polisi preifatrwydd",
       "footer.links.terms_and_conditions.text" -> "Telerau ac Amodau",
-      "footer.links.accessibility.text"        -> "Hygyrchedd",
+      "footer.links.accessibility.text"        -> "Datganiad hygyrchedd",
       "footer.links.help_page.text"            -> "Help wrth ddefnyddio GOV.UK",
       "footer.links.help_page.url"             -> "https://www.gov.uk/help",
       "footer.links.cookies.url"               -> "/help/cookies",
