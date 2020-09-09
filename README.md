@@ -48,6 +48,22 @@ gtm.container: <CONTAINER>
 
 ``` 
 
+### Accessibility Statements
+
+The [FooterLinks](src/main/twirl/uk/gov/hmrc/play/views/layouts/FooterLinks.scala.html) component generates the standard list of links for passing into Gov.UK template.
+
+To configure this component to link to the new 
+[Accessibility Statement service](https://www.github.com/hmrc/accessibility-statement-frontend), provide the key 
+`accessibility-statement.service-path` in your `application.conf`. This key is the path to your 
+accessibility statement under https://www.tax.service.gov.uk/accessibility-statement.
+ 
+For example, if your accessibility statement is https://www.tax.service.gov.uk/accessibility-statement/discounted-icecreams, 
+this property must be set to `/discounted-icecreams` as follows:
+
+```
+accessibility-statement.service-path = "/discounted-icecreams"
+```
+
 ## Adding to your service
 
 Include the following dependency in your SBT build
