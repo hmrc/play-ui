@@ -14,9 +14,11 @@
  * limitations under the License.
  *@
 
-@this()
+@import uk.gov.hmrc.play.config.AccessibilityStatementConfig
 
-@(additionalLinks: Option[Html] = None, euExitLinks: Option[Html] = None, accessibilityFooterUrl: Option[String] = None)(implicit messages: Messages)
+@this(accessibilityStatementConfig: AccessibilityStatementConfig)
+
+@(additionalLinks: Option[Html] = None, euExitLinks: Option[Html] = None, accessibilityFooterUrl: Option[String] = None)(implicit messages: Messages, request: RequestHeader)
 
 @euExitLinks
 
@@ -30,7 +32,7 @@
             @Messages("footer.links.cookies.text")
         </a>
     </li>
-    @accessibilityFooterUrl.map { url =>
+    @accessibilityFooterUrl.orElse(accessibilityStatementConfig.url).map { url =>
         <li>
             <a href='@url'
             data-sso="false"

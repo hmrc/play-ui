@@ -28,4 +28,6 @@ package object config {
 
   lazy val GTMConfig: GTMConfig = Play.current.injector.instanceOf[GTMConfig]
 
+  lazy val AccessibilityStatementConfig: AccessibilityStatementConfig =
+    Play.current.injector.instanceOf[AccessibilityStatementConfig]
 }
