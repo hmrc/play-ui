@@ -17,7 +17,7 @@
 package uk.gov.hmrc.play.views.html
 
 import play.api.Play
-import uk.gov.hmrc.play.config.{AccessibilityStatementConfig, AssetsConfig, GTMConfig, OptimizelyConfig}
+import uk.gov.hmrc.play.config.{AccessibilityStatementConfig, AssetsConfig, GTMConfig, OptimizelyConfig, TrackingConsentConfig}
 
 package object layouts {
 
@@ -32,6 +32,8 @@ package object layouts {
   private lazy val gtmConfig = Play.current.injector.instanceOf[GTMConfig]
 
   private lazy val accessibilityStatementConfig = Play.current.injector.instanceOf[AccessibilityStatementConfig]
+
+  private lazy val trackingConsentConfig = Play.current.injector.instanceOf[TrackingConsentConfig]
 
   @deprecated("Use DI")
   lazy val article = new Article()
@@ -55,6 +57,9 @@ package object layouts {
   lazy val head = new Head(optimizely_snippet, assetsConfig, gtmSnippet)
 
   @deprecated("Use DI")
+  lazy val headWithTrackingConsent = new HeadWithTrackingConsent(trackingConsentSnippet, assetsConfig)
+
+  @deprecated("Use DI")
   lazy val header_nav = new HeaderNav()
 
   @deprecated("Use DI")
@@ -71,6 +76,9 @@ package object layouts {
 
   @deprecated("Use DI")
   lazy val gtmSnippet = new GTMSnippet(gtmConfig)
+
+  @deprecated("Use DI")
+  lazy val trackingConsentSnippet = new TrackingConsentSnippet(trackingConsentConfig, optimizelyConfig)
 
   @deprecated("Use DI")
   lazy val serviceInfo = new ServiceInfo()
