@@ -30,4 +30,7 @@ package object config {
 
   lazy val AccessibilityStatementConfig: AccessibilityStatementConfig =
     Play.current.injector.instanceOf[AccessibilityStatementConfig]
+
+  lazy val TrackingConsentConfig: TrackingConsentConfig =
+    Play.current.injector.instanceOf[TrackingConsentConfig]
 }

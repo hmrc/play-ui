@@ -17,7 +17,7 @@
 package uk.gov.hmrc.play.views.html
 
 import play.api.Play
-import uk.gov.hmrc.play.config.{AccessibilityStatementConfig, AssetsConfig, GTMConfig, OptimizelyConfig}
+import uk.gov.hmrc.play.config.{AccessibilityStatementConfig, AssetsConfig, GTMConfig, OptimizelyConfig, TrackingConsentConfig}
 
 package object layouts {
 
@@ -33,19 +33,22 @@ package object layouts {
 
   private lazy val accessibilityStatementConfig = Play.current.injector.instanceOf[AccessibilityStatementConfig]
 
-  lazy val article             = new Article()
-  lazy val attorney_banner     = new AttorneyBanner()
-  lazy val betaBanner          = new BetaBanner()
-  lazy val footer              = new Footer(assetsConfig)
-  lazy val eu_exit_links       = new EuExitLinks()
-  lazy val footer_links        = new FooterLinks(accessibilityStatementConfig)
-  lazy val head                = new Head(optimizely_snippet, assetsConfig, gtmSnippet)
-  lazy val header_nav          = new HeaderNav()
-  lazy val loginStatus         = new LoginStatus()
-  lazy val main_content        = new MainContent()
-  lazy val main_content_header = new MainContentHeader()
-  lazy val optimizely_snippet  = new OptimizelySnippet(optimizelyConfig)
-  lazy val gtmSnippet          = new GTMSnippet(gtmConfig)
-  lazy val serviceInfo         = new ServiceInfo()
-  lazy val sidebar             = new Sidebar()
+  private lazy val trackingConsentConfig = Play.current.injector.instanceOf[TrackingConsentConfig]
+
+  lazy val article                = new Article()
+  lazy val attorney_banner        = new AttorneyBanner()
+  lazy val betaBanner             = new BetaBanner()
+  lazy val footer                 = new Footer(assetsConfig)
+  lazy val eu_exit_links          = new EuExitLinks()
+  lazy val footer_links           = new FooterLinks(accessibilityStatementConfig)
+  lazy val head                   = new Head(optimizely_snippet, assetsConfig, gtmSnippet)
+  lazy val header_nav             = new HeaderNav()
+  lazy val loginStatus            = new LoginStatus()
+  lazy val main_content           = new MainContent()
+  lazy val main_content_header    = new MainContentHeader()
+  lazy val optimizely_snippet     = new OptimizelySnippet(optimizelyConfig)
+  lazy val gtmSnippet             = new GTMSnippet(gtmConfig)
+  lazy val serviceInfo            = new ServiceInfo()
+  lazy val sidebar                = new Sidebar()
+  lazy val trackingConsentSnippet = new TrackingConsentSnippet(trackingConsentConfig, optimizelyConfig)
 }

@@ -32,4 +32,8 @@ package object config {
   @deprecated("Use DI", "7.26.0")
   lazy val AccessibilityStatementConfig: AccessibilityStatementConfig =
     Play.current.injector.instanceOf[AccessibilityStatementConfig]
+
+  @deprecated("Use DI", "7.26.0")
+  lazy val TrackingConsentConfig: TrackingConsentConfig =
+    Play.current.injector.instanceOf[TrackingConsentConfig]
 }

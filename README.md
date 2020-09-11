@@ -67,6 +67,50 @@ this property must be set to `/discounted-icecreams` as follows:
 accessibility-statement.service-path = "/discounted-icecreams"
 ```
 
+### Integrating with Tracking Consent
+
+The [TrackingConsentSnippet](src/main/twirl/uk/gov/hmrc/play/views/layouts/TrackingConsentSnippet.scala.html)
+component generates the HTML SCRIPT tags necessary to integrate with [tracking-consent-frontend](https//www.github.com/hmrc/tracking-consent-frontend)
+
+Before integrating, it is important to remove any hardcoded snippets relating to GTM, GA or Optimizely. Tracking consent
+manages the enabling of these third-party solutions based on the user's tracking preferences. If they are not removed
+there is a risk the user's tracking preferences will not be honoured.
+
+Configure your service's GTM container in `conf/application.conf`. For example, if you have been
+instructed to use GTM container `a`, the configuration would appear as:
+
+```
+tracking-consent-frontend {
+  gtm.container = "a"
+}
+```
+
+If you are already using the [Head](src/main/twirl/uk/gov/hmrc/play/views/layouts/Head.scala.html) template, simply replace with
+[HeadWithTrackingConsent](src/main/twirl/uk/gov/hmrc/play/views/layouts/HeadWithTrackingConsent.scala.html).
+
+If you are not using Head, locate in your frontend code the location where common Javascripts and stylesheets are 
+added to the HTML HEAD element. Add TrackingConsentSnippet above the other assets in the HEAD tag. For example,
+
+```
+@this(trackingConsentSnippet: TrackingConsentSnippet)
+
+...
+
+@trackingConsentSnippet()
+
+<link href='path-to-asset.css' media="all" rel="stylesheet" type="text/css" />
+...
+```
+
+If using Play 2.7 and CSPFilter, the nonce can be passed to tracking consent as follows:
+
+```
+@import views.html.helper.CSPNonce
+...
+@trackingConsentSnippet(nonce = CSPNonce.get)
+...
+```
+
 ## Adding to your service
 
 Include the following dependency in your SBT build
