@@ -41,9 +41,9 @@ Contains templates for components used across frontend applications such as: hea
 To add support for tracking and analytics for your frontend, please provide the following in your environment-specific configuration (ex: app-config-development):
 
 ```
-// <CONTAINER> can be one of: { main, transitional }
-// main: This is the main container that contains all the environments in GA
-// transitional: This is the transitional container which will eventually be dumped 
+// <CONTAINER> can be one of: { transitional, a, b, c, d, e, f, sdes }
+// a, b, c, d, e, f, sdes: These are the containers that contain all the environments in GA
+// transitional: This is the transitional container that will eventually be dumped 
 gtm.container: <CONTAINER>
 
 ``` 
