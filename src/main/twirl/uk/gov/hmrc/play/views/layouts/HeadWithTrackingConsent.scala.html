@@ -23,19 +23,19 @@
   nonce: Option[String]
 )
 
-	<!--[if lt IE 8 ]>
-	<link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application-ie7.min.css' />
-	<![endif]-->
-	<!--[if IE 8 ]>
-	<link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application-ie.min.css' />
-	<![endif]-->
-	<!--[if gt IE 8]><!-->
-	<link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application.min.css' />
-	<!--<![endif]-->
+  <!--[if lt IE 8 ]>
+  <link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application-ie7.min.css' />
+  <![endif]-->
+  <!--[if IE 8 ]>
+  <link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application-ie.min.css' />
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application.min.css' />
+  <!--<![endif]-->
 
-    @trackingConsentSnippet(nonce = nonce)
+  @trackingConsentSnippet(nonce = nonce)
 
-	<script src='@{assetsConfig.assetsPrefix}/javascripts/vendor/modernizr.js' type='text/javascript'></script>
+  <script src='@{assetsConfig.assetsPrefix}/javascripts/vendor/modernizr.js'></script>
 
 @headScripts
 @linkElem

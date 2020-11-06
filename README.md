@@ -72,7 +72,8 @@ accessibility-statement.service-path = "/discounted-icecreams"
 The [TrackingConsentSnippet](src/main/twirl/uk/gov/hmrc/play/views/layouts/TrackingConsentSnippet.scala.html)
 component generates the HTML SCRIPT tags necessary to integrate with [tracking-consent-frontend](https//www.github.com/hmrc/tracking-consent-frontend)
 
-Before integrating, it is important to remove any hardcoded snippets relating to GTM, GA or Optimizely. Tracking consent
+Before integrating, it is important to remove any hardcoded snippets relating to GTM, GA or Optimizely, for example,
+through use of the GTMSnippet or OptimizelySnippet components. Tracking consent
 manages the enabling of these third-party solutions based on the user's tracking preferences. If they are not removed
 there is a risk the user's tracking preferences will not be honoured.
 

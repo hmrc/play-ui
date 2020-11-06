@@ -24,12 +24,11 @@
   <!--[if !IE]>-->
   <script
     @nonceAttribute
-    type="text/javascript"
     src="@url" id="tracking-consent-script-tag"
     data-gtm-container="@TrackingConsentConfig.gtmContainer"
   ></script>
   @OptimizelyConfig.url.map { optimizelyUrl =>
-    <script @nonceAttribute src='@optimizelyUrl' type='text/javascript'></script>
+    <script @nonceAttribute src='@optimizelyUrl'></script>
     <script @nonceAttribute src="@TrackingConsentConfig.optimizelyGtmUrl"></script>
   }
   <!--<![endif]-->
