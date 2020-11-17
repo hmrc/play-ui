@@ -18,6 +18,7 @@ package uk.gov.hmrc.play
 
 import play.api.{Configuration, Environment}
 import play.api.i18n._
+import scala.collection.immutable.List
 
 trait MessagesSupport {
 
@@ -27,7 +28,11 @@ trait MessagesSupport {
 
     val configuration = Configuration.load(environment)
 
-    val langs = new DefaultLangs(configuration)
+    val langs = new DefaultLangs(
+      Configuration.from(
+        Map(
+          "play.i18n.langs" -> List("en", "cy")
+        )))
 
     new DefaultMessagesApi(
       environment   = environment,

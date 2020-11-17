@@ -18,14 +18,16 @@
 
 @this(TrackingConsentConfig: TrackingConsentConfig, OptimizelyConfig: OptimizelyConfig)
 
-@(nonce: Option[String] = None)
+@(nonce: Option[String] = None)(implicit messages: Messages)
 @nonceAttribute = { @nonce.map {n => nonce="@n"} }
 @TrackingConsentConfig.url.map { url =>
   <!--[if !IE]>-->
   <script
     @nonceAttribute
-    src="@url" id="tracking-consent-script-tag"
+    src="@url"
+    id="tracking-consent-script-tag"
     data-gtm-container="@TrackingConsentConfig.gtmContainer"
+    data-language="@messages.lang.code"
   ></script>
   @OptimizelyConfig.url.map { optimizelyUrl =>
     <script @nonceAttribute src='@optimizelyUrl'></script>

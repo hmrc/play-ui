@@ -20,10 +20,16 @@ import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.Application
-import uk.gov.hmrc.play.JsoupHelpers
+import play.api.i18n.{Lang, Messages}
+import uk.gov.hmrc.play.{JsoupHelpers, MessagesSupport}
 import uk.gov.hmrc.play.views.html.layouts.trackingConsentSnippet
 
-class TrackingConsentSnippetSpec extends WordSpec with Matchers with GuiceOneAppPerSuite with JsoupHelpers {
+class TrackingConsentSnippetSpec
+    extends WordSpec
+    with Matchers
+    with GuiceOneAppPerSuite
+    with JsoupHelpers
+    with MessagesSupport {
   override def fakeApplication(): Application =
     new GuiceApplicationBuilder()
       .configure(Map(
@@ -35,7 +41,6 @@ class TrackingConsentSnippetSpec extends WordSpec with Matchers with GuiceOneApp
       .build()
 
   "TrackingConsentSnippet" should {
-
     "include the tracking consent script tag" in {
       val content = trackingConsentSnippet()
       val scripts = content.select("script#tracking-consent-script-tag")
@@ -46,6 +51,20 @@ class TrackingConsentSnippetSpec extends WordSpec with Matchers with GuiceOneApp
       val content = trackingConsentSnippet()
       val scripts = content.select("script#tracking-consent-script-tag")
       scripts.first.attr("data-gtm-container") should be("d")
+    }
+
+    "include the tracking consent script tag with the correct language attribute" in {
+      val content = trackingConsentSnippet()
+      val scripts = content.select("script#tracking-consent-script-tag")
+      scripts.first.attr("data-language") should be("en")
+    }
+
+    "include the tracking consent script tag with the correct language attribute when Welsh" in {
+      val welshMessages: Messages = messagesApi.preferred(Seq(Lang("cy")))
+
+      val content = trackingConsentSnippet()(welshMessages)
+      val scripts = content.select("script#tracking-consent-script-tag")
+      scripts.first.attr("data-language") should be("cy")
     }
 
     "include the tracking script first" in {

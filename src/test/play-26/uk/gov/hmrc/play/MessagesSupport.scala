@@ -30,7 +30,7 @@ trait MessagesSupport {
 
     val configuration = Configuration.load(environment)
 
-    val langs = new DefaultLangs()
+    val langs = new DefaultLangs(Seq(Lang("en"), Lang("cy")))
 
     new DefaultMessagesApiProvider(
       environment       = environment,
