@@ -37,20 +37,6 @@ correctly adds labels, error messages and CSS classes.
 ### Layout Templates
 Contains templates for components used across frontend applications such as: header, footer, sidebar, betaBanner.
 
-### Google Tag Manager
-To add support for tracking and analytics for your frontend, please provide the following in your environment-specific 
-configuration (ex: app-config-development):
-
-```
-// <CONTAINER> can be one of: { transitional, a, b, c, d, e, f, sdes }
-// a, b, c, d, e, f, sdes: These are the containers that contain all the environments in GA
-// transitional: This is the transitional container that will eventually be dumped 
-gtm.container: <CONTAINER>
-
-``` 
-
-**Please consult with the CIPSAGA team before using any of these containers.**
-
 ### Accessibility Statements
 
 The [FooterLinks](src/main/twirl/uk/gov/hmrc/play/views/layouts/FooterLinks.scala.html) component generates the standard list of links for passing into Gov.UK template.
@@ -69,11 +55,13 @@ accessibility-statement.service-path = "/discounted-icecreams"
 
 ### Integrating with Tracking Consent
 
-The [TrackingConsentSnippet](src/main/twirl/uk/gov/hmrc/play/views/layouts/TrackingConsentSnippet.scala.html)
-component generates the HTML SCRIPT tags necessary to integrate with [tracking-consent-frontend](https//www.github.com/hmrc/tracking-consent-frontend)
+If you intend to use Google Analytics to measure usage of your service, you will need to integrate with tracking
+consent. The [HeadWithTrackingConsent](src/main/twirl/uk/gov/hmrc/play/views/layouts/HeadWithTrackingConsent.scala.html)
+component is a replacement to the existing Head component and generates the HTML SCRIPT tags necessary to integrate with
+ [tracking-consent-frontend](https://www.github.com/hmrc/tracking-consent-frontend)
 
-Before integrating, it is important to remove any hardcoded snippets relating to GTM, GA or Optimizely, for example,
-through use of the GTMSnippet or OptimizelySnippet components. Tracking consent
+Before integrating, it is important to remove any existing snippets relating to GTM or Optimizely, for example,
+through use of the Head, GTMSnippet or OptimizelySnippet components. Tracking consent
 manages the enabling of these third-party solutions based on the user's tracking preferences. If they are not removed
 there is a risk the user's tracking preferences will not be honoured.
 
@@ -85,6 +73,9 @@ tracking-consent-frontend {
   gtm.container = "a"
 }
 ```
+
+`gtm.container` can be one of: `transitional`, `a`, `b`, `c`, `d`, `e`, `f` or `sdes`. Consult with the CIPSAGA team 
+to understand which GTM container you should be using in your service.
 
 If you are already using the [Head](src/main/twirl/uk/gov/hmrc/play/views/layouts/Head.scala.html) template, simply replace with
 [HeadWithTrackingConsent](src/main/twirl/uk/gov/hmrc/play/views/layouts/HeadWithTrackingConsent.scala.html).

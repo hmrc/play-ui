@@ -21,7 +21,7 @@
 @(linkElem: Option[Html],
   headScripts: Option[Html],
   nonce: Option[String] = None
-)
+)(implicit messages: Messages)
 
   <!--[if lt IE 8 ]>
   <link rel='stylesheet' href='@{assetsConfig.assetsPrefix}/stylesheets/application-ie7.min.css' />
