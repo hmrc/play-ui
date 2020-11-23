@@ -61,7 +61,7 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
       "label.beta.improve"                     -> "yn ein helpu i’w wella.",
       "label.beta.feedback"                    -> "adborth",
       "label.beta.yours"                       -> "– bydd eich",
-      "report.a.problem.link"                  -> "Help gyda’r dudalen hon.",
+      "report.a.problem.link"                  -> "A yw’r dudalen hon yn gweithio’n iawn?",
       "footer.links.cookies.text"              -> "Cwcis",
       "footer.links.privacy_policy.text"       -> "Polisi preifatrwydd",
       "footer.links.terms_and_conditions.text" -> "Telerau ac Amodau",
