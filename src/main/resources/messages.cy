@@ -13,7 +13,7 @@ label.beta.improve=yn ein helpu i’w wella.
 label.beta.feedback=adborth
 label.beta.yours=– bydd eich
 
-report.a.problem.link=Help gyda’r dudalen hon.
+report.a.problem.link=A yw’r dudalen hon yn gweithio’n iawn?
 
 eu-exit.links.heading.text=Paratoi ar gyfer Ymadael â’r UE (Saesneg yn unig)
 eu-exit.links.business-prepare.text=Paratoi eich busnes ar gyfer y DU yn gadael yr UE (Saesneg yn unig)
