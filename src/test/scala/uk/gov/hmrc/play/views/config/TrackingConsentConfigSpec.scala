@@ -49,7 +49,7 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
           "tracking-consent-frontend.gtm.container" -> "a"
         ))
       val config = application.injector.instanceOf[TrackingConsentConfig]
-      config.url should equal(Some("https://www.tax.service.gov.uk/tracking-consent/tracking.js"))
+      config.url should equal(Some("/tracking-consent/tracking.js"))
     }
 
     "return None if an tracking-consent-frontend.gtm.container does not exist in application.conf" in {
@@ -78,8 +78,7 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
           "tracking-consent-frontend.gtm.container" -> "a"
         ))
       val config = application.injector.instanceOf[TrackingConsentConfig]
-      config.optimizelyGtmUrl should equal(
-        Some("https://www.tax.service.gov.uk/tracking-consent/tracking/optimizely.js"))
+      config.optimizelyGtmUrl should equal(Some("/tracking-consent/tracking/optimizely.js"))
     }
 
     "return None if an tracking-consent-frontend.gtm.container does not exist in application.conf" in {
