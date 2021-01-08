@@ -1,17 +1,16 @@
 import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
 
-val appName = "play-ui"
+val appName         = "play-ui"
 val silencerVersion = "1.4.4"
 
 lazy val root = Project(appName, file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl, SbtArtifactory)
+  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
   .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
     majorVersion := 8,
     scalaVersion := "2.12.10",
     crossScalaVersions := List("2.11.12", "2.12.10"),
     libraryDependencies ++= LibDependencies.libDependencies,
-    dependencyOverrides ++= LibDependencies.overrides,
     resolvers :=
       Seq(
         "HMRC Releases" at "https://dl.bintray.com/hmrc/releases",
@@ -48,17 +47,10 @@ lazy val templateImports: Seq[String] = {
     "play.api.templates.PlayMagic._"
   )
 
-  val specificImports = PlayCrossCompilation.playVersion match {
-    case Play25 =>
-      Seq(
-        "_root_.play.twirl.api.TemplateMagic._"
-      )
-    case _ =>
-      Seq(
-        "_root_.play.twirl.api.TwirlFeatureImports._",
-        "_root_.play.twirl.api.TwirlHelperImports._"
-      )
-  }
+  val specificImports = Seq(
+    "_root_.play.twirl.api.TwirlFeatureImports._",
+    "_root_.play.twirl.api.TwirlHelperImports._"
+  )
 
   allImports ++ specificImports
 }
