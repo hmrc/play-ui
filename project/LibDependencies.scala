@@ -8,7 +8,6 @@ object LibDependencies {
     shared = {
 
       val playVersion = PlayCrossCompilation.playVersion match {
-        case Play25 => "2.5.19"
         case Play26 => "2.6.20"
         case Play27 => "2.7.4"
       }
@@ -29,12 +28,6 @@ object LibDependencies {
 
       compile ++ test
     },
-    play25 = {
-      val test = Seq(
-        "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1"
-      ).map(_ % Test)
-      test
-    },
     play26 = {
       val test = Seq(
         "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2"
@@ -52,11 +45,4 @@ object LibDependencies {
       compile ++ test
     }
   )
-
-  lazy val overrides: Seq[ModuleID] = dependencies(
-    play25 = Seq(
-      "com.typesafe.play" %% "twirl-api" % "1.1.1"
-    )
-  )
-
 }
