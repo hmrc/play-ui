@@ -18,7 +18,18 @@ lazy val root = Project(appName, file("."))
       )
   )
   .settings(
-    TwirlKeys.templateImports := templateImports,
+    TwirlKeys.templateImports := Seq(
+      "_root_.play.twirl.api.Html",
+      "_root_.play.twirl.api.JavaScript",
+      "_root_.play.twirl.api.Txt",
+      "_root_.play.twirl.api.Xml",
+      "play.api.mvc._",
+      "play.api.data._",
+      "play.api.i18n._",
+      "play.api.templates.PlayMagic._",
+      "_root_.play.twirl.api.TwirlFeatureImports._",
+      "_root_.play.twirl.api.TwirlHelperImports._"
+    ),
     PlayCrossCompilation.playCrossCompilationSettings,
     makePublicallyAvailableOnBintray := true,
     // ***************
@@ -33,24 +44,3 @@ lazy val root = Project(appName, file("."))
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")
   .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
   .settings(parallelExecution in sbt.Test := false)
-
-lazy val templateImports: Seq[String] = {
-
-  val allImports = Seq(
-    "_root_.play.twirl.api.Html",
-    "_root_.play.twirl.api.JavaScript",
-    "_root_.play.twirl.api.Txt",
-    "_root_.play.twirl.api.Xml",
-    "play.api.mvc._",
-    "play.api.data._",
-    "play.api.i18n._",
-    "play.api.templates.PlayMagic._"
-  )
-
-  val specificImports = Seq(
-    "_root_.play.twirl.api.TwirlFeatureImports._",
-    "_root_.play.twirl.api.TwirlHelperImports._"
-  )
-
-  allImports ++ specificImports
-}
