@@ -5,12 +5,12 @@ resolvers ++= Seq(
   "Typesafe Releases" at "https://repo.typesafe.com/typesafe/releases/"
 )
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "2.6.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "2.13.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "2.1.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "2.2.0")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-twirl" % "1.3.15")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "0.20.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-play-cross-compilation" % "1.2.0")
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "1.2.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-artifactory" % "1.13.0")
