@@ -54,7 +54,7 @@ package object layouts {
   lazy val footer_links = new FooterLinks(accessibilityStatementConfig)
 
   @deprecated("Use DI")
-  lazy val head = new Head(optimizely_snippet, assetsConfig, gtmSnippet)
+  lazy val head = new Head(assetsConfig, gtmSnippet)
 
   @deprecated("Use DI")
   lazy val headWithTrackingConsent = new HeadWithTrackingConsent(trackingConsentSnippet, assetsConfig)
@@ -70,9 +70,6 @@ package object layouts {
 
   @deprecated("Use DI")
   lazy val main_content_header = new MainContentHeader()
-
-  @deprecated("Use DI")
-  lazy val optimizely_snippet = new OptimizelySnippet(optimizelyConfig)
 
   @deprecated("Use DI")
   lazy val gtmSnippet = new GTMSnippet(gtmConfig)

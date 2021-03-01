@@ -61,7 +61,7 @@ component is a replacement to the existing Head component and generates the HTML
  [tracking-consent-frontend](https://www.github.com/hmrc/tracking-consent-frontend)
 
 Before integrating, it is important to remove any existing snippets relating to GTM or Optimizely, for example,
-through use of the Head, GTMSnippet or OptimizelySnippet components. Tracking consent
+through use of the Head or GTMSnippet components. Tracking consent
 manages the enabling of these third-party solutions based on the user's tracking preferences. If they are not removed
 there is a risk the user's tracking preferences will not be honoured.
 
@@ -74,7 +74,7 @@ tracking-consent-frontend {
 }
 ```
 
-`gtm.container` can be one of: `transitional`, `a`, `b`, `c`, `d`, `e`, `f` or `sdes`. Consult with the CIPSAGA team 
+`gtm.container` can be one of: `a`, `b`, `c`, `d`, `e`, `f` or `sdes`. Consult with the CIPSAGA team 
 to understand which GTM container you should be using in your service.
 
 If you are already using the [Head](src/main/twirl/uk/gov/hmrc/play/views/layouts/Head.scala.html) template, simply replace with
