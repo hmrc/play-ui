@@ -7,7 +7,7 @@ lazy val root = Project(appName, file("."))
   .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
   .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
-    majorVersion := 8,
+    majorVersion := 9,
     scalaVersion := "2.12.10",
     crossScalaVersions := List("2.11.12", "2.12.10"),
     libraryDependencies ++= LibDependencies.libDependencies,
