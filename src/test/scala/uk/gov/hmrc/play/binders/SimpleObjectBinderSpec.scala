@@ -24,7 +24,7 @@ class SimpleObjectBinderSpec extends WordSpecLike with Matchers {
     "return an error for invalid value" in {
 
       val result: Either[String, TestObject] = TestBinder.bind("key", "short")
-      result.isLeft   should be(true)
+      result.isLeft     should be(true)
       result.left.get shouldBe "Cannot parse parameter 'key' with value 'short' as 'TestObject'"
     }
   }

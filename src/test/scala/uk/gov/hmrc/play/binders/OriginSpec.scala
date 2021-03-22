@@ -51,7 +51,8 @@ class OriginSpec extends WordSpecLike with Matchers with EitherValues with Optio
 
     "take the first when two origins supplied" in {
       queryBinder.bind("origin", Map("origin" -> Seq("origin1", "origin2"))).value.right.value should be(
-        Origin("origin1"))
+        Origin("origin1")
+      )
     }
 
     "create origin" in {

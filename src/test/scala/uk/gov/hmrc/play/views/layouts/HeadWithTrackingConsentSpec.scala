@@ -33,14 +33,16 @@ class HeadWithTrackingConsentSpec
     with MessagesSupport {
   override def fakeApplication(): Application =
     new GuiceApplicationBuilder()
-      .configure(Map(
-        "play.allowGlobalApplication"             -> "true",
-        "optimizely.url"                          -> "https://cdn.optimizely.com/",
-        "optimizely.projectId"                    -> "1234567",
-        "tracking-consent-frontend.gtm.container" -> "d",
-        "assets.url"                              -> "doesnt-matter",
-        "assets.version"                          -> "doesnt-matter"
-      ))
+      .configure(
+        Map(
+          "play.allowGlobalApplication"             -> "true",
+          "optimizely.url"                          -> "https://cdn.optimizely.com/",
+          "optimizely.projectId"                    -> "1234567",
+          "tracking-consent-frontend.gtm.container" -> "d",
+          "assets.url"                              -> "doesnt-matter",
+          "assets.version"                          -> "doesnt-matter"
+        )
+      )
       .build()
 
   "HeadWithTrackingConsent" should {

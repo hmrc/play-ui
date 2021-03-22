@@ -81,13 +81,15 @@ class ContinueUrlSpec extends WordSpecLike with Matchers with EitherValues with 
     "not work for path-relative urls" in {
       val url = "some/value?with=query"
       queryBinder.bind("continue", Map("continue" -> Seq(url))).value.left.value should be(
-        s"'$url' is not a valid continue URL")
+        s"'$url' is not a valid continue URL"
+      )
     }
 
     "not work for non-urls" in {
       val url = "::"
       queryBinder.bind("continue", Map("continue" -> Seq(url))).value.left.value should be(
-        s"'$url' is not a valid continue URL")
+        s"'$url' is not a valid continue URL"
+      )
     }
   }
 

@@ -73,22 +73,21 @@ class WelshMessagesSpec extends WordSpecLike with Matchers {
       "footer.links.terms_and_conditions.url"  -> "/help/terms-and-conditions"
     )
 
-    expectedTranslations.foreach {
-      case (key: String, expectedTranslation: String) =>
-        val args = Seq[String]("arg0", "arg1")
+    expectedTranslations.foreach { case (key: String, expectedTranslation: String) =>
+      val args = Seq[String]("arg0", "arg1")
 
-        val welshTranslation   = messagesApi.apply(key, args: _*)(Lang("cy"))
-        val defaultTranslation = messagesApi.apply(key, args: _*)(Lang.defaultLang)
+      val welshTranslation   = messagesApi.apply(key, args: _*)(Lang("cy"))
+      val defaultTranslation = messagesApi.apply(key, args: _*)(Lang.defaultLang)
 
-        s"have expected value for key $key" in {
-          welshTranslation shouldBe expectedTranslation
+      s"have expected value for key $key" in {
+        welshTranslation shouldBe expectedTranslation
+      }
+
+      s"equal number of replacements made for $key" in new SetupStringWithOccurrenceCounting {
+        args.foreach { arg =>
+          welshTranslation.occurrencesOf(arg) shouldBe defaultTranslation.occurrencesOf(arg)
         }
-
-        s"equal number of replacements made for $key" in new SetupStringWithOccurrenceCounting {
-          args.foreach { arg =>
-            welshTranslation.occurrencesOf(arg) shouldBe defaultTranslation.occurrencesOf(arg)
-          }
-        }
+      }
     }
   }
 

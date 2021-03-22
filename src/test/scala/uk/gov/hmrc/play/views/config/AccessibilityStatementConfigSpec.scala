@@ -37,8 +37,9 @@ class AccessibilityStatementConfigSpec extends WordSpec with Matchers with Messa
         Map(
           "accessibility-statement.path"         -> "/accessibility-statement",
           "accessibility-statement.service-path" -> "/bar"
-        ))
-      val config = application.injector.instanceOf[AccessibilityStatementConfig]
+        )
+      )
+      val config               = application.injector.instanceOf[AccessibilityStatementConfig]
       config.url should equal(Some("http://localhost:12346/accessibility-statement/bar?referrerUrl=%2Ffoo"))
     }
 
@@ -55,10 +56,14 @@ class AccessibilityStatementConfigSpec extends WordSpec with Matchers with Messa
             "accessibility-statement.path"         -> "/accessibility-statement",
             "accessibility-statement.service-path" -> "/bar",
             "platform.frontend.host"               -> "https://www.tax.service.gov.uk"
-          ))
-      val config = application.injector.instanceOf[AccessibilityStatementConfig]
-      config.url should equal(Some(
-        "https://www.tax.service.gov.uk/accessibility-statement/bar?referrerUrl=https%3A%2F%2Fwww.tax.service.gov.uk%2Ffoo"))
+          )
+        )
+      val config               = application.injector.instanceOf[AccessibilityStatementConfig]
+      config.url should equal(
+        Some(
+          "https://www.tax.service.gov.uk/accessibility-statement/bar?referrerUrl=https%3A%2F%2Fwww.tax.service.gov.uk%2Ffoo"
+        )
+      )
     }
 
     "return a url including a relative referrerUrl if platform.frontend.host is not defined" in {
@@ -66,8 +71,10 @@ class AccessibilityStatementConfigSpec extends WordSpec with Matchers with Messa
         buildApp(
           Map(
             "accessibility-statement.path"         -> "/accessibility-statement",
-            "accessibility-statement.service-path" -> "/bar"))
-      val config = application.injector.instanceOf[AccessibilityStatementConfig]
+            "accessibility-statement.service-path" -> "/bar"
+          )
+        )
+      val config               = application.injector.instanceOf[AccessibilityStatementConfig]
       config.url should equal(Some("http://localhost:12346/accessibility-statement/bar?referrerUrl=%2Ffoo"))
     }
   }

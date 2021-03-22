@@ -25,8 +25,9 @@ case class PositiveInteger(value: Int) {
 object PositiveInteger {
   implicit def toInt(y: PositiveInteger): Int = y.value
 
-  implicit def stringToPositiveInteger(
-    implicit stringBinder: QueryStringBindable[Int]): QueryStringBindable[PositiveInteger] =
+  implicit def stringToPositiveInteger(implicit
+    stringBinder: QueryStringBindable[Int]
+  ): QueryStringBindable[PositiveInteger] =
     new QueryStringBindable[PositiveInteger] {
       def bind(key: String, params: Map[String, Seq[String]]): Option[Either[String, PositiveInteger]] =
         stringBinder.bind(key, params).map {

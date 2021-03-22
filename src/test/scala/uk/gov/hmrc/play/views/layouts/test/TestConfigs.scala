@@ -26,7 +26,8 @@ object TestConfigs {
       Configuration(
         "assets.url"     -> "doesnt-matter",
         "assets.version" -> "doesnt-matter"
-      ))
+      )
+    )
 
   val testOptimizelyConfig =
     new OptimizelyConfig(

@@ -29,9 +29,9 @@ import scala.collection.JavaConverters._
 class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
   "gtmSnippet" should {
     "include script tag with appropriate URL for container if gtm.container is defined" in {
-      val transitionalUrl = "http://s3bucket/transitional/gtm.js"
-      val mainUrl         = "http://s3bucket/main/gtm.js"
-      val dataLayerUrl    = "http://s3bucket/include/gtm_dl.js"
+      val transitionalUrl   = "http://s3bucket/transitional/gtm.js"
+      val mainUrl           = "http://s3bucket/main/gtm.js"
+      val dataLayerUrl      = "http://s3bucket/include/gtm_dl.js"
       val containersAndUrls =
         Table(
           ("container", "url"),
@@ -41,10 +41,11 @@ class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
 
       forAll(containersAndUrls) { (container: String, url: String) =>
         val snippet = createSnippet(
-          container       = Some(container),
-          mainUrl         = Some(mainUrl),
+          container = Some(container),
+          mainUrl = Some(mainUrl),
           transitionalUrl = Some(transitionalUrl),
-          dataLayerUrl    = Some(dataLayerUrl))
+          dataLayerUrl = Some(dataLayerUrl)
+        )
         script(snippet()) should contain(s"$url")
         script(snippet()) should contain(s"$dataLayerUrl")
       }
@@ -60,7 +61,8 @@ class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
     container: Option[String],
     mainUrl: Option[String],
     transitionalUrl: Option[String],
-    dataLayerUrl: Option[String]): GTMSnippet = {
+    dataLayerUrl: Option[String]
+  ): GTMSnippet = {
     val config = new GTMConfig(
       Configuration(
         Seq(
@@ -68,7 +70,9 @@ class GTMSnippetSpec extends WordSpec with Matchers with PropertyChecks {
           mainUrl.map("gtm.main.url"                 -> _),
           transitionalUrl.map("gtm.transitional.url" -> _),
           dataLayerUrl.map("gtm.data.layer.url"      -> _)
-        ).flatten: _*))
+        ).flatten: _*
+      )
+    )
     new GTMSnippet(config)
   }
 

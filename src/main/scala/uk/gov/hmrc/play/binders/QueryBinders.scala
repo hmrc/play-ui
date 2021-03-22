@@ -19,11 +19,13 @@ package uk.gov.hmrc.play.binders
 import play.api.mvc.QueryStringBindable
 
 trait QueryBinders {
-  implicit def stringToNonBlankString(
-    implicit stringBinder: QueryStringBindable[String]): QueryStringBindable[NonBlankString] =
+  implicit def stringToNonBlankString(implicit
+    stringBinder: QueryStringBindable[String]
+  ): QueryStringBindable[NonBlankString]  =
     NonBlankString.stringToNonBlankString
-  implicit def stringToPositiveInteger(
-    implicit stringBinder: QueryStringBindable[String]): QueryStringBindable[PositiveInteger] =
+  implicit def stringToPositiveInteger(implicit
+    stringBinder: QueryStringBindable[String]
+  ): QueryStringBindable[PositiveInteger] =
     PositiveInteger.stringToPositiveInteger
 }
 

@@ -34,10 +34,12 @@ class FooterSpec extends WordSpec with Matchers with NoStartedPlayApp {
       val rendered = contentAsString(
         footer(
           analyticsToken = None,
-          analyticsHost  = "",
-          ssoUrl         = None,
-          scriptElem     = Some(Html("footer was rendered")),
-          gaCalls        = None))
+          analyticsHost = "",
+          ssoUrl = None,
+          scriptElem = Some(Html("footer was rendered")),
+          gaCalls = None
+        )
+      )
 
       rendered should include("footer was rendered")
     }

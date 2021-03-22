@@ -37,11 +37,12 @@ class GTMConfigSpec extends WordSpec with Matchers with MessagesSupport {
       implicit val application = buildApp(
         Map(
           "gtm.data.layer.url" -> "/foo",
-          "gtm.container" -> "a",
-          "gtm.a.url" -> "/bar"
-        ))
-      val config = application.injector.instanceOf[GTMConfig]
-      config.url should equal(Some("/bar"))
+          "gtm.container"      -> "a",
+          "gtm.a.url"          -> "/bar"
+        )
+      )
+      val config               = application.injector.instanceOf[GTMConfig]
+      config.url          should equal(Some("/bar"))
       config.dataLayerUrl should equal(Some("/foo"))
     }
 
@@ -49,11 +50,12 @@ class GTMConfigSpec extends WordSpec with Matchers with MessagesSupport {
       implicit val application = buildApp(
         Map(
           "gtm.data.layer.url" -> "/foo",
-          "gtm.a.url" -> "/bar"
-        ))
+          "gtm.a.url"          -> "/bar"
+        )
+      )
 
       val config = application.injector.instanceOf[GTMConfig]
-      config.url should equal(None)
+      config.url          should equal(None)
       config.dataLayerUrl should equal(None)
     }
 
@@ -61,8 +63,9 @@ class GTMConfigSpec extends WordSpec with Matchers with MessagesSupport {
       implicit val application = buildApp(
         Map(
           "gtm.data.layer.url" -> "/foo",
-          "gtm.container" -> "z"
-        ))
+          "gtm.container"      -> "z"
+        )
+      )
 
       assertThrows[ProvisionException] {
         application.injector.instanceOf[GTMConfig]

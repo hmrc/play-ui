@@ -34,13 +34,14 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
     Form(
       mapping(
         "inputBoxValue" -> text
-      )(DummyFormData.apply)(DummyFormData.unapply))
+      )(DummyFormData.apply)(DummyFormData.unapply)
+    )
 
   val input = new Input()
 
   "@helpers.input" should {
     "render an input box" in {
-      val doc =
+      val doc      =
         jsoupDocument(input(field = dummyForm("inputValue"), '_inputClass -> "myInputClass", '_label -> "myLabel"))
       val inputBox = doc.getElementById("inputValue")
 
@@ -52,19 +53,20 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
     }
 
     "render error notification when errors are present" in {
-      val doc = jsoupDocument(
+      val doc          = jsoupDocument(
         input(
           field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Enter a value")), Some("")),
           '_inputClass -> "myInputClass",
           '_label      -> "myLabel",
           '_error_id   -> "myError"
-        ))
+        )
+      )
       val errorMessage = doc.getElementById("myError").text
       errorMessage shouldBe "Enter a value"
     }
 
     "render input box with errors in the right order" in {
-      val doc = jsoupDocument(
+      val doc                       = jsoupDocument(
         input(
           field = Field(dummyForm, "", Seq.empty, None, Seq(FormError("inputBoxValue", "Form Error Text")), Some("")),
           '_inputClass -> "inputClass",
@@ -72,7 +74,8 @@ class InputSpec extends WordSpec with Matchers with MessagesSupport {
           '_error_id   -> "errorId",
           '_inputHint  -> "Input Hint Text",
           '_labelClass -> "myLabelClass"
-        ))
+        )
+      )
       val inputBox                  = doc.getElementsByClass("myLabelClass").first
       val listOfInputBoxTextInOrder = inputBox.getElementsByTag("span").asScala.toList.map(_.text)
 

@@ -37,8 +37,9 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
       implicit val application: Application = buildApp(
         Map(
           "tracking-consent-frontend.gtm.container" -> "a"
-        ))
-      val config = application.injector.instanceOf[TrackingConsentConfig]
+        )
+      )
+      val config                            = application.injector.instanceOf[TrackingConsentConfig]
       config.url should equal(Some("http://localhost:12345/tracking-consent/tracking.js"))
     }
 
@@ -47,8 +48,9 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
         Map(
           "platform.frontend.host"                  -> "https://www.tax.service.gov.uk",
           "tracking-consent-frontend.gtm.container" -> "a"
-        ))
-      val config = application.injector.instanceOf[TrackingConsentConfig]
+        )
+      )
+      val config                            = application.injector.instanceOf[TrackingConsentConfig]
       config.url should equal(Some("/tracking-consent/tracking.js"))
     }
 
@@ -66,8 +68,9 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
       implicit val application: Application = buildApp(
         Map(
           "tracking-consent-frontend.gtm.container" -> "a"
-        ))
-      val config = application.injector.instanceOf[TrackingConsentConfig]
+        )
+      )
+      val config                            = application.injector.instanceOf[TrackingConsentConfig]
       config.optimizelyGtmUrl should equal(Some("http://localhost:12345/tracking-consent/tracking/optimizely.js"))
     }
 
@@ -76,8 +79,9 @@ class TrackingConsentConfigSpec extends WordSpec with Matchers {
         Map(
           "platform.frontend.host"                  -> "https://www.tax.service.gov.uk",
           "tracking-consent-frontend.gtm.container" -> "a"
-        ))
-      val config = application.injector.instanceOf[TrackingConsentConfig]
+        )
+      )
+      val config                            = application.injector.instanceOf[TrackingConsentConfig]
       config.optimizelyGtmUrl should equal(Some("/tracking-consent/tracking/optimizely.js"))
     }
 

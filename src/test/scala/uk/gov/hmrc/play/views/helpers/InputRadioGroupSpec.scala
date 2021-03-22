@@ -35,14 +35,16 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
     Form(
       mapping(
         "radioValue" -> text(maxLength = max)
-      )(DummyFormData.apply)(DummyFormData.unapply))
+      )(DummyFormData.apply)(DummyFormData.unapply)
+    )
 
   val inputRadioGroup = new InputRadioGroup()
 
   "@helpers.inputRadioGroup" should {
     "render an option" in {
-      val doc = jsoupDocument(
-        inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
+      val doc   = jsoupDocument(
+        inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass")
+      )
       val input = doc.getElementById("radioValue-myvalue")
 
       input.attr("type")    shouldBe "radio"
@@ -54,7 +56,8 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
 
     "render label for radio button with the correct class" in {
       val doc = jsoupDocument(
-        inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"), '_labelClass -> "labelClass"))
+        inputRadioGroup(dummyForm("radioValue"), Seq("myValue" -> "myLabel"), '_labelClass -> "labelClass")
+      )
       doc.getElementsByAttributeValue("for", "radioValue-myvalue").attr("class") shouldBe "labelClass"
     }
 
@@ -66,8 +69,9 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
     }
 
     "render a selected option" in {
-      val doc = jsoupDocument(
-        inputRadioGroup(dummyForm.fill(DummyFormData("myValue"))("radioValue"), Seq("myValue" -> "myLabel")))
+      val doc   = jsoupDocument(
+        inputRadioGroup(dummyForm.fill(DummyFormData("myValue"))("radioValue"), Seq("myValue" -> "myLabel"))
+      )
       val input = doc.getElementById("radioValue-myvalue")
       input.attr("checked") shouldBe "checked"
     }
@@ -83,7 +87,8 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
           '_groupClass    -> "radioGroupFieldset",
           '_labelClass    -> "myLabelClass",
           '_inputClass    -> "inputClass"
-        ))
+        )
+      )
 
       val radioGroupDiv = doc.getElementsByClass("radioGroupDiv").first()
       radioGroupDiv.attr("class") shouldBe "radioGroupDiv"
@@ -91,10 +96,10 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
       radioGroupFieldset.attr("class")                             shouldBe "radioGroupFieldset"
       radioGroupFieldset.getElementsByTag("legend").first().text() shouldBe "My Radio Group"
       radioGroupFieldset.getElementsByTag("legend").attr("id")     shouldBe "radioGroup legendID"
-      radioGroupFieldset.attr("class")                             should not include "form-field--error"
+      radioGroupFieldset.attr("class")                               should not include "form-field--error"
       val radioGroupField = radioGroupFieldset.getElementsByTag("label").first()
       radioGroupField.attr("class") should include("myLabelClass")
-      radioGroupField.ownText()     shouldBe "myLabel"
+      radioGroupField.ownText()   shouldBe "myLabel"
       val radioGroupFieldInput = radioGroupFieldset.getElementsByTag("input")
       radioGroupFieldInput.attr("class") shouldBe "inputClass"
     }
@@ -104,13 +109,11 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
       val field = dummyForm
         .bindFromRequest()(FakeRequest().withFormUrlEncodedBody("radioValue" -> "Value is too long!"))
         .fold(
-          error => {
-            error("radioValue")
-          },
+          error => error("radioValue"),
           data => throw new Exception
         )
-      val doc = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
-      doc.getElementsByTag("div").first().attr("class")           should include("form-field--error")
+      val doc   = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
+      doc.getElementsByTag("div").first().attr("class")             should include("form-field--error")
       doc.getElementsByClass("error-notification").first().text() shouldBe messages("error.maxLength", max)
     }
   }
