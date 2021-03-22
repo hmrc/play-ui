@@ -38,7 +38,7 @@ object Origin {
             case Success(url) => Right(url)
             case _            => Right(Default)
           }
-        case _ => Right(Default)
+        case _        => Right(Default)
       }
       result.orElse(Some(Right(Default)))
     }

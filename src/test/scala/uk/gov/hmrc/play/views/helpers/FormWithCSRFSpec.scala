@@ -74,7 +74,7 @@ class FormWithCSRFSpec extends WordSpec with Matchers with MessagesSupport with 
     }
 
     "render the contents of the form" in {
-      val content = Html("<p>Content</p>")
+      val content     = Html("<p>Content</p>")
       val formElement =
         jsoupDocument(form(action = simpleCall)(content))
           .select("p")
@@ -84,7 +84,7 @@ class FormWithCSRFSpec extends WordSpec with Matchers with MessagesSupport with 
 
     "not render the CSRF token if the request does not contain the token" in {
       implicit val request = FakeRequest()
-      val formElement =
+      val formElement      =
         jsoupDocument(form(action = simpleCall)(HtmlFormat.empty))
 
       val input = formElement.select("input")
@@ -98,8 +98,8 @@ class FormWithCSRFSpec extends WordSpec with Matchers with MessagesSupport with 
       val input = formElement.select("input")
       input.size shouldBe 1
 
-      input.attr("type")         shouldBe "hidden"
-      input.attr("name")         shouldBe "csrfToken"
+      input.attr("type")       shouldBe "hidden"
+      input.attr("name")       shouldBe "csrfToken"
       input.attr("value").length should be > 0
     }
   }

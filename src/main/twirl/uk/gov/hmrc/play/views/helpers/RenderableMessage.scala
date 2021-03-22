@@ -30,7 +30,8 @@ case class MoneyPounds(value: BigDecimal, decimalPlaces: Int = 2, roundUp: Boole
     s"%,.${decimalPlaces}f".format(
       value
         .setScale(decimalPlaces, if (roundUp) BigDecimal.RoundingMode.CEILING else BigDecimal.RoundingMode.FLOOR)
-        .abs)
+        .abs
+    )
 }
 
 object RenderableMessageProperty extends Enumeration {

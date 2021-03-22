@@ -15,13 +15,13 @@ object LibDependencies {
       val compile = Seq(
         "com.typesafe.play" %% "play"            % playVersion,
         "com.typesafe.play" %% "filters-helpers" % playVersion,
-        "org.joda"          % "joda-convert"     % "2.0.2"
+        "org.joda"           % "joda-convert"    % "2.0.2"
       )
 
       val test = Seq(
         "org.scalatest"     %% "scalatest"  % "3.0.8",
-        "org.pegdown"       % "pegdown"     % "1.6.0",
-        "org.jsoup"         % "jsoup"       % "1.11.3",
+        "org.pegdown"        % "pegdown"    % "1.6.0",
+        "org.jsoup"          % "jsoup"      % "1.11.3",
         "com.typesafe.play" %% "play-test"  % playVersion,
         "org.scalacheck"    %% "scalacheck" % "1.14.0"
       ).map(_ % Test)
@@ -39,7 +39,7 @@ object LibDependencies {
         // Removed from play 2.7 but required by play-ui
         "org.apache.commons" % "commons-lang3" % "3.8.1"
       )
-      val test = Seq(
+      val test    = Seq(
         "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"
       ).map(_ % Test)
       compile ++ test

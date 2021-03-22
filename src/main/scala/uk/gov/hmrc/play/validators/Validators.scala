@@ -34,19 +34,23 @@ trait Validators {
     addressLine2 -> optional(
       smallText
         .verifying("error.address.optional.line.max.length.violation", e => isOptionalAddressLineLengthValid(e))
-        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))),
+        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))
+    ),
     addressLine3 -> optional(
       smallText
         .verifying("error.address.optional.line.max.length.violation", e => isOptionalAddressLineLengthValid(e))
-        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))),
+        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))
+    ),
     addressLine4 -> optional(
       smallText
         .verifying("error.address.optional.line.max.length.violation", e => isOptionalAddressLineLengthValid(e))
-        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))),
-    postcode -> optional(
+        .verifying("error.address.invalid.character", e => characterValidator.containsValidAddressCharacters(e))
+    ),
+    postcode     -> optional(
       smallText
         .verifying("error.postcode.length.violation", e => isPostcodeLengthValid(e))
-        .verifying("error.postcode.invalid.character", e => characterValidator.containsValidPostCodeCharacters(e)))
+        .verifying("error.postcode.invalid.character", e => characterValidator.containsValidPostCodeCharacters(e))
+    )
   )
 
   // Small text prevents injecting large data into fields

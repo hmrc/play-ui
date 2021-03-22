@@ -32,14 +32,15 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
     Form(
       mapping(
         "exampleCheckbox" -> optional(boolean)
-      )(DummyFormData.apply)(DummyFormData.unapply))
+      )(DummyFormData.apply)(DummyFormData.unapply)
+    )
 
   val singleCheckbox = new SingleCheckbox()
 
   "Have the checked attribute when value is 'true'" in {
 
     val WithTrueCheckboxValueForm = dummyForm.fill(DummyFormData(Some(true)))
-    val doc = Jsoup.parse(
+    val doc                       = Jsoup.parse(
       contentAsString(
         singleCheckbox(
           WithTrueCheckboxValueForm("exampleCheckbox"),
@@ -87,7 +88,7 @@ class SingleCheckboxSpec extends WordSpec with Matchers with MessagesSupport {
 
     "Not have the checked attribute when value is 'false'" in {
       val WithFalseCheckboxValueForm = dummyForm.fill(DummyFormData(Some(false)))
-      val doc = Jsoup.parse(
+      val doc                        = Jsoup.parse(
         contentAsString(
           singleCheckbox(
             WithFalseCheckboxValueForm("exampleCheckbox"),

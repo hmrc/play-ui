@@ -34,23 +34,25 @@ object Dates {
     9  -> "Medi",
     10 -> "Hydref",
     11 -> "Tachwedd",
-    12 -> "Rhagfyr")
-  private val WeekDaysInWelsh = Map(
+    12 -> "Rhagfyr"
+  )
+  private val WeekDaysInWelsh   = Map(
     1 -> "Dydd Llun",
     2 -> "Dydd Mawrth",
     3 -> "Dydd Mercher",
     4 -> "Dydd Iau",
     5 -> "Dydd Gwener",
     6 -> "Dydd Sadwrn",
-    7 -> "Dydd Sul")
+    7 -> "Dydd Sul"
+  )
 
-  private[formatting] val dateFormat =
+  private[formatting] val dateFormat                 =
     DateTimeFormat.forPattern("d MMMM y").withZone(DateTimeZone.forID("Europe/London"))
-  private[formatting] val dateFormatAbbrMonth =
+  private[formatting] val dateFormatAbbrMonth        =
     DateTimeFormat.forPattern("d MMM y").withZone(DateTimeZone.forID("Europe/London"))
-  private[formatting] val shortDateFormat =
+  private[formatting] val shortDateFormat            =
     DateTimeFormat.forPattern("yyyy-MM-dd").withZone(DateTimeZone.forID("Europe/London"))
-  private[formatting] val easyReadingDateFormat =
+  private[formatting] val easyReadingDateFormat      =
     DateTimeFormat.forPattern("EEEE d MMMM yyyy").withZone(DateTimeZone.forID("Europe/London"))
   private[formatting] val easyReadingTimestampFormat =
     DateTimeFormat.forPattern("h:mmaa").withZone(DateTimeZone.forID("Europe/London"))
@@ -69,10 +71,11 @@ object Dates {
   def formatEasyReadingTimestamp(date: Option[DateTime], default: String)(implicit lang: Lang) = {
     val englishEasyDate: DateTime => String = d =>
       s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${easyReadingDateFormat.print(d)}"
-    val welshEasyDate: DateTime => String = d =>
-      s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${WeekDaysInWelsh(d.getDayOfWeek)} ${d.getDayOfMonth} ${MonthNamesInWelsh(
-        d.getMonthOfYear)} ${d.getYear}"
-    val formatter = lang.code match {
+    val welshEasyDate: DateTime => String   = d =>
+      s"${easyReadingTimestampFormat.print(d).toLowerCase}, ${WeekDaysInWelsh(
+        d.getDayOfWeek
+      )} ${d.getDayOfMonth} ${MonthNamesInWelsh(d.getMonthOfYear)} ${d.getYear}"
+    val formatter                           = lang.code match {
       case "cy" => welshEasyDate
       case _    => englishEasyDate
     }
