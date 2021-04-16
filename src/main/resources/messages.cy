@@ -62,8 +62,8 @@ common.signOut=Sign out
 
 # Attorney Banner
 
-attorney.banner.link=Return to your account
-attorney.banner.user=You’re using this service for <span class="heading-small">{0}</span>.
+attorney.banner.link=Yn ôl i’ch cyfrif
+attorney.banner.user=Rydych yn defnyddio’r gwasanaeth hwn ar gyfer <span class="heading-small">{0}</span>.
 pertax.attorney.banner.link=Return to your own account
 pertax.attorney.banner.user=You’re in <span class="heading-small">{0}’s</span> account.
 attorney.banner.nan=name not defined
