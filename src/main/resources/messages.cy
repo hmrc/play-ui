@@ -36,6 +36,15 @@ footer.links.terms_and_conditions.url=/help/terms-and-conditions
 
 common.firstlogin={0}, dyma’r tro cyntaf i chi fewngofnodi
 common.previousLoginTime={0}, y tro diwethaf i chi fewngofnodi oedd {1}
+common.signOut=Allgofnodi
+
+# Attorney Banner
+
+attorney.banner.link=Yn ôl i’ch cyfrif
+attorney.banner.user=Rydych yn defnyddio’r gwasanaeth hwn ar gyfer <span class="heading-small">{0}</span>.
+pertax.attorney.banner.link=Yn ôl i’ch cyfrif eich hun
+pertax.attorney.banner.user=Rydych o fewn cyfrif <span class="heading-small">{0}</span>.
+attorney.banner.nan=enw heb ei ddiffinio
 
 ######################################################
 # MESSAGES BELOW THIS LINE STILL REQUIRE TRANSLATION #
@@ -57,13 +66,3 @@ error.address.blank=This address line field must not be blank
 error.address.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 - ’ , / & space
 error.postcode.length.violation=Postcode is incorrect
 error.postcode.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 space
-
-common.signOut=Sign out
-
-# Attorney Banner
-
-attorney.banner.link=Return to your account
-attorney.banner.user=You’re using this service for <span class="heading-small">{0}</span>.
-pertax.attorney.banner.link=Return to your own account
-pertax.attorney.banner.user=You’re in <span class="heading-small">{0}’s</span> account.
-attorney.banner.nan=name not defined
