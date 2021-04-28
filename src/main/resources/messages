@@ -45,6 +45,10 @@ common.signOut=Sign out
 
 report.a.problem.link=Is this page not working properly?
 
+language.toggle.hidden.english=Change language to English
+language.toggle.hidden.cymraeg=Newid yr iaith ir Gymraeg
+language.toggle.aria.label=Language switcher
+
 # Attorney Banner
 
 attorney.banner.link=Return to your account
