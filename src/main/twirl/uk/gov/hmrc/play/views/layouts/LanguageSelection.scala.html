@@ -21,7 +21,7 @@
     @langMap.map { case (key: String, value: Lang) =>
         @if(messages.lang.code != value.code) {
             <li class="hmrc-language-select__list-item" style="display: inline-block;" >
-                <a id="@key-switch" href="@langToCall(key)" target="_self" data-sso="false" data-journey-click="@{appName.map(name => s"$name:language: ${value.code}")}">
+                <a id="@key-switch" href="@langToCall(key)" hreflang="@value.code" lang="@value.code" rel="alternate" target="_self" data-sso="false" data-journey-click="@{appName.map(name => s"$name:language: ${value.code}")}">
                     <span class="visually-hidden">@messages(s"language.toggle.hidden.$key")</span>
                     <span aria-hidden="true">@key.capitalize</span>
                 </a>
