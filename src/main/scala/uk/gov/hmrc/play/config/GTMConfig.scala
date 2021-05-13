@@ -27,9 +27,8 @@ class GTMConfig @Inject() (configuration: Configuration) {
     readConfig(_ => "gtm.data.layer.url")
 
   def readConfig(configKey: String => String): Option[String] =
-    configuration.getString("gtm.container").map { container =>
+    configuration.getOptional[String]("gtm.container").map { container =>
       configuration
-        .getString(configKey(container))
-        .getOrElse(throw new RuntimeException(s"Missing configuration ${configKey(container)}"))
+        .get[String](configKey(container))
     }
 }

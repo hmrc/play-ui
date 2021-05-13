@@ -1,4 +1,4 @@
-import uk.gov.hmrc.playcrosscompilation.PlayVersion.Play25
+import uk.gov.hmrc.playcrosscompilation.PlayVersion
 
 val appName         = "play-ui"
 val silencerVersion = "1.4.4"
@@ -9,7 +9,7 @@ lazy val root = Project(appName, file("."))
   .settings(
     majorVersion := 9,
     scalaVersion := "2.12.10",
-    crossScalaVersions := List("2.11.12", "2.12.10"),
+    crossScalaVersions := List("2.12.10"),
     libraryDependencies ++= LibDependencies.libDependencies,
     resolvers :=
       Seq(
@@ -38,7 +38,12 @@ lazy val root = Project(appName, file("."))
     libraryDependencies ++= Seq(
       compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
       "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
-    )
+    ),
+    excludeFilter in unmanagedSources := {
+      if (PlayCrossCompilation.playVersion == PlayVersion.Play28)
+        "deprecatedPlay26Helpers.scala" || "BackwardsCompatibilityDIAndStaticSpec.scala"
+      else ""
+    }
     // ***************
   )
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")

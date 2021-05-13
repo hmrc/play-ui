@@ -18,11 +18,11 @@ package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.Application
 import play.api.i18n.{Lang, Messages}
+import play.api.inject.guice.GuiceApplicationBuilder
+import uk.gov.hmrc.play.views.html.layouts.TrackingConsentSnippet
 import uk.gov.hmrc.play.{JsoupHelpers, MessagesSupport}
-import uk.gov.hmrc.play.views.html.layouts.trackingConsentSnippet
 
 class TrackingConsentSnippetSpec
     extends WordSpec
@@ -43,6 +43,8 @@ class TrackingConsentSnippetSpec
       .build()
 
   "TrackingConsentSnippet" should {
+    val trackingConsentSnippet = app.injector.instanceOf[TrackingConsentSnippet]
+
     "include the tracking consent script tag" in {
       val content = trackingConsentSnippet()
       val scripts = content.select("script#tracking-consent-script-tag")

@@ -1,6 +1,6 @@
-import sbt.{ModuleID, _}
-import uk.gov.hmrc.playcrosscompilation.PlayVersion.{Play25, Play26, Play27}
 import PlayCrossCompilation.dependencies
+import sbt.{ModuleID, _}
+import uk.gov.hmrc.playcrosscompilation.PlayVersion.{Play26, Play27, Play28}
 
 object LibDependencies {
 
@@ -10,12 +10,14 @@ object LibDependencies {
       val playVersion = PlayCrossCompilation.playVersion match {
         case Play26 => "2.6.20"
         case Play27 => "2.7.4"
+        case Play28 => "2.8.7"
       }
 
       val compile = Seq(
         "com.typesafe.play" %% "play"            % playVersion,
         "com.typesafe.play" %% "filters-helpers" % playVersion,
-        "org.joda"           % "joda-convert"    % "2.0.2"
+        "org.joda"           % "joda-convert"    % "2.0.2",
+        "org.apache.commons" % "commons-text"    % "1.9"
       )
 
       val test = Seq(
@@ -35,14 +37,16 @@ object LibDependencies {
       test
     },
     play27 = {
-      val compile = Seq(
-        // Removed from play 2.7 but required by play-ui
-        "org.apache.commons" % "commons-lang3" % "3.8.1"
-      )
-      val test    = Seq(
+      val test = Seq(
         "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"
       ).map(_ % Test)
-      compile ++ test
+      test
+    },
+    play28 = {
+      val test = Seq(
+        "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3"
+      ).map(_ % Test)
+      test
     }
   )
 }

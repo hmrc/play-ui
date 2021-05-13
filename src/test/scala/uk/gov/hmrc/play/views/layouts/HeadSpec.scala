@@ -19,15 +19,12 @@ package uk.gov.hmrc.play.views.layouts
 import org.scalatest.{Matchers, WordSpec}
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
-import uk.gov.hmrc.play.test.NoStartedPlayApp
 import uk.gov.hmrc.play.views.html.layouts.{GTMSnippet, Head}
 import uk.gov.hmrc.play.views.layouts.test.TestConfigs._
 
-class HeadSpec extends WordSpec with Matchers with NoStartedPlayApp {
+class HeadSpec extends WordSpec with Matchers {
   "head" should {
-    "be renderable without a started Play application" in {
-      thereShouldBeNoStartedPlayApp()
-
+    "be renderable" in {
       val head = new Head(
         testAssetsConfig,
         new GTMSnippet(testGTMConfig)

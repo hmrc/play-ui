@@ -19,44 +19,36 @@ package uk.gov.hmrc.play.views.layouts
 import org.joda.time.{DateTime, DateTimeZone}
 import org.scalatest.{Matchers, WordSpec}
 import play.api.i18n._
-import play.api.inject.guice.GuiceApplicationBuilder
-import play.api.test.Helpers.contentAsString
-import uk.gov.hmrc.play.views.html.layouts.loginStatus
-import play.api.test.Helpers._
-import play.api.i18n.Messages.Implicits._
+import play.api.test.Helpers.{contentAsString, _}
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.layouts.LoginStatus
 
-class LoginStatusSpec extends WordSpec with Matchers {
-  implicit val application =
-    new GuiceApplicationBuilder()
-      .configure(Map("play.i18n.langs" -> List("en", "cy")))
-      .build()
+class LoginStatusSpec extends WordSpec with Matchers with MessagesSupport {
 
   "The loginStatus" should {
-
+    val loginStatus          = new LoginStatus()
     val userName             = "Ivor"
     val previouslyLoggedInAt = new DateTime(2018, 4, 20, 16, 20, 0, 0, DateTimeZone.forID("Europe/London"))
 
     "show the first login message in English" in {
-      implicit val lang = Lang("en")
-      val content       = contentAsString(loginStatus(userName, None, "logoutUrl"))
+      val content = contentAsString(loginStatus(userName, None, "logoutUrl"))
       content should include("Ivor, this is the first time you have logged in")
     }
 
     "show the first login message in Welsh" in {
-      implicit val lang = Lang("cy")
-      val content       = contentAsString(loginStatus(userName, None, "logoutUrl"))
+      val welshMessages = messagesApi.preferred(Seq(Lang("cy")))
+      val content       = contentAsString(loginStatus(userName, None, "logoutUrl")(welshMessages))
       content should include("Ivor, dyma’r tro cyntaf i chi fewngofnodi")
     }
 
     "show the previous login message in English" in {
-      implicit val lang = Lang("en")
-      val content       = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl"))
+      val content = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl"))
       content should include("Ivor, you last signed in 4:20pm, Friday 20 April 2018")
     }
 
     "show the previous login message in Welsh (with the day and month in Welsh)" in {
-      implicit val lang = Lang("cy")
-      val content       = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl"))
+      val welshMessages = messagesApi.preferred(Seq(Lang("cy")))
+      val content       = contentAsString(loginStatus(userName, Some(previouslyLoggedInAt), "logoutUrl")(welshMessages))
       content should include("Ivor, y tro diwethaf i chi fewngofnodi oedd 4:20pm, Dydd Gwener 20 Ebrill 2018")
     }
 

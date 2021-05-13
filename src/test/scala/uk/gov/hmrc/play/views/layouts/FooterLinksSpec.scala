@@ -21,16 +21,16 @@ import org.scalatest.{Matchers, WordSpec}
 import play.api.i18n.Lang
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.views.html.layouts.FooterLinks
-import play.api.i18n.Messages.Implicits._
 import play.api.inject.guice.GuiceApplicationBuilder
-import java.util.{List => JavaList}
 
+import java.util.{List => JavaList}
 import play.api.test.FakeRequest
+import uk.gov.hmrc.play.MessagesSupport
 
 import scala.collection.JavaConverters._
 import scala.collection.immutable.List
 
-class FooterLinksSpec extends WordSpec with Matchers {
+class FooterLinksSpec extends WordSpec with Matchers with MessagesSupport {
 
   implicit val application =
     new GuiceApplicationBuilder()
@@ -57,14 +57,12 @@ class FooterLinksSpec extends WordSpec with Matchers {
 
     val footerLinks = application.injector.instanceOf[FooterLinks]
 
-    implicit val lang = Lang("en")
-    val content       = contentAsString(footerLinks())
-    val document      = Jsoup.parse(content)
-    val links         = document.getElementsByTag("a")
+    val content  = contentAsString(footerLinks())
+    val document = Jsoup.parse(content)
+    val links    = document.getElementsByTag("a")
 
     "include visually hidden h2 text in English" in {
-      implicit val lang = Lang("en")
-      val content       = contentAsString(footerLinks())
+      val content = contentAsString(footerLinks())
       content should include("<h2 class=\"visually-hidden\">Support links</h2>")
     }
 
@@ -78,8 +76,8 @@ class FooterLinksSpec extends WordSpec with Matchers {
 
     val footerLinks = application.injector.instanceOf[FooterLinks]
 
-    implicit val lang = Lang("cy")
-    val content       = contentAsString(footerLinks())
+    val welshMessages = messagesApi.preferred(Seq(Lang("cy")))
+    val content       = contentAsString(footerLinks()(welshMessages, fakeRequest))
     val document      = Jsoup.parse(content)
     val links         = document.getElementsByTag("a")
 

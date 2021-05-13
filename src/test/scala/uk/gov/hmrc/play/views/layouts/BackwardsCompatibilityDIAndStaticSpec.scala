@@ -25,7 +25,7 @@ import play.api.inject.guice.GuiceApplicationBuilder
  * Verifies that old pre play 2.6 way of accessing templates
  * continues to work after we've made them injectable.
  */
-class BackwardsCompatibilitySpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
+class BackwardsCompatibilityDIAndStaticSpec extends WordSpec with Matchers with GuiceOneAppPerSuite {
   import uk.gov.hmrc.play.views.html.layouts._
 
   override def fakeApplication(): Application =

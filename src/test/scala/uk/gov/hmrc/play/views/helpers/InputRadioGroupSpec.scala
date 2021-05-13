@@ -18,9 +18,8 @@ package uk.gov.hmrc.play.views
 package helpers
 
 import org.scalatest.{Matchers, WordSpec}
-import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
-import play.api.test.FakeRequest
+import play.api.data.{Field, Form, FormError}
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.MessagesSupport
 import uk.gov.hmrc.play.views.html.helpers.InputRadioGroup
@@ -105,16 +104,17 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
     }
 
     "renders errors" in {
-
-      val field = dummyForm
-        .bindFromRequest()(FakeRequest().withFormUrlEncodedBody("radioValue" -> "Value is too long!"))
-        .fold(
-          error => error("radioValue"),
-          data => throw new Exception
-        )
-      val doc   = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
+      val field: Field = Field(
+        form = dummyForm,
+        name = "",
+        constraints = Seq.empty,
+        format = None,
+        errors = Seq(FormError("error.maxLength", "too long")),
+        value = None
+      )
+      val doc          = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
       doc.getElementsByTag("div").first().attr("class")             should include("form-field--error")
-      doc.getElementsByClass("error-notification").first().text() shouldBe messages("error.maxLength", max)
+      doc.getElementsByClass("error-notification").first().text() shouldBe "too long"
     }
   }
 
