@@ -122,6 +122,17 @@ assets {
 }
 ```
 
+### Play Framework and Scala compatibility notes
+
+This library is currently compatible with:
+
+- Scala 2.12
+- Play 2.6, Play 2.7, Play 2.8
+
+And with the addition of support for Play 2.8 we have had to remove compatibility with Scala 2.11.
+
+Additionally, the deprecated static helpers for components available in versions targeting up to Play 2.7 have been excluded from versions targeting Play 2.8. When upgrading your service to Play 2.8 you will now need to include components via [Dependency Injection within templates](https://www.playframework.com/documentation/2.8.x/ScalaTemplatesDependencyInjection) instead. 
+
 ### How to test changes locally
 
 Publish the library locally with

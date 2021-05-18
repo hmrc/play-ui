@@ -19,16 +19,15 @@ package uk.gov.hmrc.play.views.layouts
 import org.jsoup.Jsoup
 import org.scalatest.{Matchers, WordSpec}
 import play.api.i18n.Lang
-import play.api.i18n.Messages.Implicits._
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
-import java.util.{List => JavaList}
-import uk.gov.hmrc.play.views.html.layouts.eu_exit_links
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.layouts.EuExitLinks
 
+import java.util.{List => JavaList}
 import scala.collection.JavaConverters._
 import scala.collection.immutable.List
 
-class EuExitLinksSpec extends WordSpec with Matchers {
+class EuExitLinksSpec extends WordSpec with Matchers with MessagesSupport {
 
   val englishLinkTextEntries: JavaList[String] = List(
     "Prepare your business for the UK leaving the EU",
@@ -44,16 +43,12 @@ class EuExitLinksSpec extends WordSpec with Matchers {
     "Parhau i fyw yn y DU ar ôl iddi adael yr UE (Saesneg yn unig)"
   ).asJava
 
-  implicit val application =
-    new GuiceApplicationBuilder()
-      .configure(Map("play.i18n.langs" -> List("en", "cy")))
-      .build()
+  val eu_exit_links = new EuExitLinks()
 
   "Eu Exit Links on an English Language Page" should {
-    implicit val lang = Lang("en")
-    val markup        = contentAsString(eu_exit_links())
-    val document      = Jsoup.parse(markup)
-    val links         = document.getElementsByTag("a")
+    val markup   = contentAsString(eu_exit_links())
+    val document = Jsoup.parse(markup)
+    val links    = document.getElementsByTag("a")
 
     "Include the section header" in {
       markup should include("<h2 class=\"heading-medium\">Prepare for EU Exit</h2>")
@@ -67,8 +62,8 @@ class EuExitLinksSpec extends WordSpec with Matchers {
   }
 
   "Eu Exit Links on a Welsh Language Page" should {
-    implicit val lang = Lang("cy")
-    val markup        = contentAsString(eu_exit_links())
+    val welshMessages = messagesApi.preferred(Seq(Lang("cy")))
+    val markup        = contentAsString(eu_exit_links()(welshMessages))
     val document      = Jsoup.parse(markup)
     val links         = document.getElementsByTag("a")
 

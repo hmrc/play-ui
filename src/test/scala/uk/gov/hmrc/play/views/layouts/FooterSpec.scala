@@ -19,18 +19,15 @@ package uk.gov.hmrc.play.views.layouts
 import org.scalatest.{Matchers, WordSpec}
 import play.api.test.Helpers.{contentAsString, defaultAwaitTimeout}
 import play.twirl.api.Html
-import uk.gov.hmrc.play.test.NoStartedPlayApp
 import uk.gov.hmrc.play.views.html.layouts.Footer
 import uk.gov.hmrc.play.views.layouts.test.TestConfigs._
 
-class FooterSpec extends WordSpec with Matchers with NoStartedPlayApp {
+class FooterSpec extends WordSpec with Matchers {
   "footer" should {
 
     val footer = new Footer(testAssetsConfig)
 
-    "be renderable without a started Play application" in {
-      thereShouldBeNoStartedPlayApp()
-
+    "be renderable" in {
       val rendered = contentAsString(
         footer(
           analyticsToken = None,

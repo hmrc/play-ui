@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.play.views.formatting
 
-import org.apache.commons.lang3.text.WordUtils
+import org.apache.commons.text.WordUtils
 import play.api.i18n.Messages
 
 object Strings {

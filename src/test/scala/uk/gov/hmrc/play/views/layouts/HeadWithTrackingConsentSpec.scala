@@ -22,7 +22,7 @@ import play.api.Application
 import play.api.i18n.{Lang, Messages}
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.twirl.api.Html
-import uk.gov.hmrc.play.views.html.layouts.{headWithTrackingConsent, trackingConsentSnippet}
+import uk.gov.hmrc.play.views.html.layouts.HeadWithTrackingConsent
 import uk.gov.hmrc.play.{JsoupHelpers, MessagesSupport}
 
 class HeadWithTrackingConsentSpec
@@ -46,8 +46,9 @@ class HeadWithTrackingConsentSpec
       .build()
 
   "HeadWithTrackingConsent" should {
-    val linkElem    = Some(Html("<script src='doesnt-matter.js'></script>"))
-    val headScripts = Some(Html("<link rel='stylesheet' href='doesnt-matter.css' />"))
+    val headWithTrackingConsent = app.injector.instanceOf[HeadWithTrackingConsent]
+    val linkElem                = Some(Html("<script src='doesnt-matter.js'></script>"))
+    val headScripts             = Some(Html("<link rel='stylesheet' href='doesnt-matter.css' />"))
 
     "include the tracking script first" in {
       val content = headWithTrackingConsent(linkElem, headScripts)

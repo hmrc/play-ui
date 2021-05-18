@@ -16,18 +16,18 @@
 
 package uk.gov.hmrc.play.views
 package helpers
-import uk.gov.hmrc.play.MessagesSupport
-import play.twirl.api.Html
-import play.api.test.Helpers._
 import org.scalatest.{Matchers, WordSpec}
 import play.api.mvc.Call
 import play.api.test.FakeRequest
-import play.twirl.api.HtmlFormat
-import uk.gov.hmrc.play.views.html.helpers.form
+import play.api.test.Helpers._
+import play.twirl.api.{Html, HtmlFormat}
+import uk.gov.hmrc.play.MessagesSupport
+import uk.gov.hmrc.play.views.html.helpers.FormWithCSRF
 
 class FormWithCSRFSpec extends WordSpec with Matchers with MessagesSupport with CSRFSpec {
 
   "@helpers.formWithCSRF" should {
+    val form       = new FormWithCSRF()
     val simpleCall = Call(method = "POST", url = "/the-post-url")
 
     "render with the correct action attribute" in {
