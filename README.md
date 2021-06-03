@@ -16,8 +16,6 @@ limitations under the License.
 play-ui
 =======
 
-[ ![Download](https://api.bintray.com/packages/hmrc/releases/play-ui/images/download.svg) ](https://bintray.com/hmrc/releases/play-ui/_latestVersion)
-
 Micro-library containing core for HMRC's Play UI:
 
 ### Formatters
@@ -105,12 +103,19 @@ If using Play 2.7 and CSPFilter, the nonce can be passed to tracking consent as 
 
 ## Adding to your service
 
-Include the following dependency in your SBT build
+Add the library to the project dependencies:
+
+``` scala~~~~
+libraryDependencies += "uk.gov.hmrc" %% "play-language" % "[INSERT VERSION]"
+```
+
+Ensure to add the resolvers to your `plugins.sbt`:
 
 ```scala
-resolvers += Resolver.bintrayRepo("hmrc", "releases")
+resolvers += MavenRepository("HMRC-open-artefacts-maven2", "https://open.artefacts.tax.service.gov.uk/maven2")
+resolvers += Resolver.url("HMRC-open-artefacts-ivy", url("https://open.artefacts.tax.service.gov.uk/ivy2"))(Resolver.ivyStylePatterns)
 
-libraryDependencies += "uk.gov.hmrc" %% "play-ui" % "x.x.x"
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "[INSERT VERSION 3.0.0 OR HIGHER]")
 ```
 
 If you require either [head](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/head.scala.html) or [footer](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/footer.scala.html) you'll also need to add some config to your `application.conf` file in order to build the complete urls for assets:

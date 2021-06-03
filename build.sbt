@@ -13,7 +13,6 @@ lazy val root = Project(appName, file("."))
     libraryDependencies ++= LibDependencies.libDependencies,
     resolvers :=
       Seq(
-        "HMRC Releases" at "https://dl.bintray.com/hmrc/releases",
         "typesafe-releases" at "https://repo.typesafe.com/typesafe/releases/"
       )
   )
@@ -31,7 +30,7 @@ lazy val root = Project(appName, file("."))
       "_root_.play.twirl.api.TwirlHelperImports._"
     ),
     PlayCrossCompilation.playCrossCompilationSettings,
-    makePublicallyAvailableOnBintray := true,
+    isPublicArtefact := true,
     // ***************
     // Use the silencer plugin to suppress warnings from unused imports in compiled twirl templates
     scalacOptions += "-P:silencer:pathFilters=views;routes",
