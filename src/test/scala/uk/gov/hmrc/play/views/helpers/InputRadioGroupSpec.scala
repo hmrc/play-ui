@@ -113,7 +113,7 @@ class InputRadioGroupSpec extends WordSpec with Matchers with MessagesSupport {
         value = None
       )
       val doc          = jsoupDocument(inputRadioGroup(field, Seq("myValue" -> "myLabel"), '_inputClass -> "myInputClass"))
-      doc.getElementsByTag("div").first().attr("class")             should include("form-field--error")
+      doc.getElementsByTag("fieldset").first().attr("class")             should include("form-field--error")
       doc.getElementsByClass("error-notification").first().text() shouldBe "too long"
     }
   }
