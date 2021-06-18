@@ -28,7 +28,7 @@
 @fieldsetClass = {@elements.args.get('_groupClass)@if(elements.hasErrors){ form-field--error}}
 @labelAfter = @{ elements.args.get('_labelAfter).getOrElse(false).asInstanceOf[Boolean] }
 
-<div class="@groupDivClass">
+@if(elements.args.get('_groupDivClass).isDefined) {<div class="@groupDivClass">}
     <fieldset class="@fieldsetClass"
     @if(elements.args.get('_fieldsetAttributes).isDefined) {@elements.args.get('_fieldsetAttributes)}>
     @if(elements.args.get('_legend).isDefined) {
@@ -79,4 +79,4 @@
         }
     }
     </fieldset>
-</div>
+@if(elements.args.get('_groupDivClass).isDefined) {</div>}
