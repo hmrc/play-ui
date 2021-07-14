@@ -46,6 +46,10 @@ pertax.attorney.banner.link=Yn ôl i’ch cyfrif eich hun
 pertax.attorney.banner.user=Rydych o fewn cyfrif <span class="heading-small">{0}</span>.
 attorney.banner.nan=enw heb ei ddiffinio
 
+language.toggle.hidden.english=Change language to English
+language.toggle.hidden.cymraeg=Newid yr iaith ir Gymraeg
+language.toggle.aria.label=Switcher iaith
+
 ######################################################
 # MESSAGES BELOW THIS LINE STILL REQUIRE TRANSLATION #
 ######################################################
@@ -66,3 +70,4 @@ error.address.blank=This address line field must not be blank
 error.address.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 - ’ , / & space
 error.postcode.length.violation=Postcode is incorrect
 error.postcode.invalid.character=This line contains an invalid character. Valid characters are: A-Z a-z 0-9 space
+
