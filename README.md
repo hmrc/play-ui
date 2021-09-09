@@ -118,7 +118,7 @@ resolvers += Resolver.url("HMRC-open-artefacts-ivy", url("https://open.artefacts
 addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "[INSERT VERSION 3.0.0 OR HIGHER]")
 ```
 
-If you require either [head](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/head.scala.html) or [footer](https://github.com/hmrc/play-ui/blob/master/src/main/twirl/uk/gov/hmrc/play/views/layouts/footer.scala.html) you'll also need to add some config to your `application.conf` file in order to build the complete urls for assets:
+If you require either [Head](src/main/twirl/uk/gov/hmrc/play/views/layouts/Head.scala.html) or [Footer](src/main/twirl/uk/gov/hmrc/play/views/layouts/Footer.scala.html) you'll also need to add some config to your `application.conf` file in order to build the complete urls for assets:
 
 ```
 assets {
