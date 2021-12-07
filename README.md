@@ -13,10 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
+
+# Deprecation
+
+:rotating_light: **play-ui has been deprecated in favour of [play-frontend-hmrc](https://www.github.com/hmrc/play-frontend-hmrc).** :rotating_light:
+
+This library is no longer supported, and teams need to be aware of the vulnerabilities via the dependency on [assets-frontend](https://github.com/hmrc/assets-frontend/security/dependabot).  There are also known accessibility issues with `play-ui` which will cause delays with going live.  We won't be making updates to `play-ui` so we recommend moving over to the latest [play-frontend-hmrc](https://www.github.com/hmrc/play-frontend-hmrc)
+
 play-ui
 =======
 
-Micro-library containing core for HMRC's Play UI:
+Deprecated micro-library containing core for HMRC's Play UI:
 
 ### Formatters
 * `Dates` provides various human-readable date formats
