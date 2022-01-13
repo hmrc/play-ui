@@ -18,7 +18,7 @@ limitations under the License.
 
 :rotating_light: **play-ui has been deprecated in favour of [play-frontend-hmrc](https://www.github.com/hmrc/play-frontend-hmrc).** :rotating_light:
 
-This library is no longer supported, and teams need to be aware of the vulnerabilities via the dependency on [assets-frontend](https://github.com/hmrc/assets-frontend/security/dependabot).  There are also known accessibility issues with `play-ui` which will cause delays with going live.  We won't be making updates to `play-ui` so we recommend moving over to the latest [play-frontend-hmrc](https://www.github.com/hmrc/play-frontend-hmrc)
+This library is no longer supported, and teams need to be aware of the vulnerabilities via the dependency on [assets-frontend](https://github.com/hmrc/assets-frontend/security/dependabot).  There are also known accessibility issues with `play-ui` which will cause delays with going live. As of 13th October 2021, we won't be making updates to `play-ui` so we recommend moving over to the latest [play-frontend-hmrc](https://www.github.com/hmrc/play-frontend-hmrc)
 
 play-ui
 =======
