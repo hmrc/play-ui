@@ -1,20 +1,19 @@
 import uk.gov.hmrc.playcrosscompilation.PlayVersion
 
+val scala2_12 = "2.12.15"
+val scala2_13 = "2.13.7"
+
 val appName         = "play-ui"
-val silencerVersion = "1.4.4"
+val silencerVersion = "1.7.7"
 
 lazy val root = Project(appName, file("."))
-  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtTwirl)
+  .enablePlugins(SbtTwirl)
   .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
     majorVersion := 9,
-    scalaVersion := "2.12.10",
-    crossScalaVersions := List("2.12.10"),
-    libraryDependencies ++= LibDependencies.libDependencies,
-    resolvers :=
-      Seq(
-        "typesafe-releases" at "https://repo.typesafe.com/typesafe/releases/"
-      )
+    scalaVersion := scala2_12,
+    crossScalaVersions := Seq(scala2_12, scala2_13),
+    libraryDependencies ++= LibDependencies.libDependencies
   )
   .settings(
     TwirlKeys.templateImports := Seq(
