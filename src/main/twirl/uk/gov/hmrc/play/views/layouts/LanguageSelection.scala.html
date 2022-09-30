@@ -1,0 +1,39 @@
+@*
+ * Copyright 2021 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *@
+
+@(langMap: Map[String, Lang], langToCall: String => Call, customClass: Option[String] = None, appName: Option[String] = None)(implicit messages: Messages)
+
+<nav class="@if(customClass.isDefined) {@customClass.get} hmrc-language-select" aria-label="@messages("language.toggle.aria.label")">
+    <ul class="hmrc-language-select__list language-toggle" style="display: block;" >
+    @langMap.map { case (key: String, value: Lang) =>
+        @if(messages.lang.code != value.code) {
+            <li class="hmrc-language-select__list-item" style="display: inline-block;" >
+                <a id="@key-switch" href="@langToCall(key)" hreflang="@value.code" lang="@value.code" rel="alternate" target="_self" data-sso="false" data-journey-click="@{appName.map(name => s"$name:language: ${value.code}")}">
+                    <span class="visually-hidden">@messages(s"language.toggle.hidden.$key")</span>
+                    <span aria-hidden="true">@key.capitalize</span>
+                </a>
+            </li>
+        } else {
+            <li class="hmrc-language-select__list-item" style="display: inline-block;" >
+                <span aria-current="true">@key.capitalize</span>
+            </li>
+        }
+        @if(key != langMap.last._1) {
+            @Html(" | ")
+        }
+    }
+    </ul>
+</nav>
