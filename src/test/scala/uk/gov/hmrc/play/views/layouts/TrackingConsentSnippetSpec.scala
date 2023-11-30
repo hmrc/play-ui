@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,29 @@
 package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.Application
+import play.api.{Configuration, Environment}
 import play.api.i18n.{Lang, Messages}
-import play.api.inject.guice.GuiceApplicationBuilder
+import uk.gov.hmrc.play.config.{OptimizelyConfig, TrackingConsentConfig}
 import uk.gov.hmrc.play.views.html.layouts.TrackingConsentSnippet
 import uk.gov.hmrc.play.{JsoupHelpers, MessagesSupport}
 
-class TrackingConsentSnippetSpec
-    extends WordSpec
-    with Matchers
-    with GuiceOneAppPerSuite
-    with JsoupHelpers
-    with MessagesSupport {
-  override def fakeApplication(): Application =
-    new GuiceApplicationBuilder()
-      .configure(
-        Map(
-          "play.allowGlobalApplication"             -> "true",
-          "optimizely.url"                          -> "https://cdn.optimizely.com/",
-          "optimizely.projectId"                    -> "1234567",
-          "tracking-consent-frontend.gtm.container" -> "d"
-        )
-      )
-      .build()
+class TrackingConsentSnippetSpec extends WordSpec with Matchers with JsoupHelpers with MessagesSupport {
 
   "TrackingConsentSnippet" should {
-    val trackingConsentSnippet = app.injector.instanceOf[TrackingConsentSnippet]
+    val config = Configuration.load(
+      Environment.simple(),
+      Map(
+        "play.allowGlobalApplication"             -> "true",
+        "optimizely.url"                          -> "https://cdn.optimizely.com/",
+        "optimizely.projectId"                    -> "1234567",
+        "tracking-consent-frontend.gtm.container" -> "d"
+      )
+    )
+
+    val trackingConsentSnippet = new TrackingConsentSnippet(
+      new TrackingConsentConfig(config),
+      new OptimizelyConfig(config)
+    )
 
     "include the tracking consent script tag" in {
       val content = trackingConsentSnippet()

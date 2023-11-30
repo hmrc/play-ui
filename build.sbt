@@ -1,19 +1,27 @@
-import uk.gov.hmrc.playcrosscompilation.PlayVersion
-
 val scala2_12 = "2.12.15"
 val scala2_13 = "2.13.7"
 
-val appName         = "play-ui"
 val silencerVersion = "1.7.7"
 
-lazy val root = Project(appName, file("."))
+lazy val root = Project("play-ui-play-28", file("."))
   .enablePlugins(SbtTwirl)
   .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
     majorVersion := 9,
-    scalaVersion := scala2_12,
+    scalaVersion := scala2_13,
     crossScalaVersions := Seq(scala2_12, scala2_13),
-    libraryDependencies ++= LibDependencies.libDependencies
+    libraryDependencies ++= Seq(
+      "com.typesafe.play" %% "play"            % "2.8.7",
+      "com.typesafe.play" %% "filters-helpers" % "2.8.7",
+      "org.joda"           % "joda-convert"    % "2.0.2",
+      "org.apache.commons" % "commons-text"    % "1.9",
+      "org.scalatest"     %% "scalatest"       % "3.0.8"  % Test,
+      "org.pegdown"        % "pegdown"         % "1.6.0"  % Test,
+      "org.jsoup"          % "jsoup"           % "1.11.3" % Test,
+      "com.typesafe.play" %% "play-test"       % "2.8.7"  % Test,
+      "org.scalacheck"    %% "scalacheck"      % "1.14.0" % Test
+    ),
+    libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always // required since we're cross building for Play 2.8 which isn't compatible with sbt 1.9
   )
   .settings(
     TwirlKeys.templateImports := Seq(
@@ -28,7 +36,6 @@ lazy val root = Project(appName, file("."))
       "_root_.play.twirl.api.TwirlFeatureImports._",
       "_root_.play.twirl.api.TwirlHelperImports._"
     ),
-    PlayCrossCompilation.playCrossCompilationSettings,
     isPublicArtefact := true,
     // ***************
     // Use the silencer plugin to suppress warnings from unused imports in compiled twirl templates
@@ -36,12 +43,7 @@ lazy val root = Project(appName, file("."))
     libraryDependencies ++= Seq(
       compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
       "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
-    ),
-    excludeFilter in unmanagedSources := {
-      if (PlayCrossCompilation.playVersion == PlayVersion.Play28)
-        "deprecatedPlay26Helpers.scala" || "BackwardsCompatibilityDIAndStaticSpec.scala"
-      else ""
-    }
+    )
     // ***************
   )
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")
