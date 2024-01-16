@@ -36,14 +36,8 @@ lazy val root = Project("play-ui-play-29", file("."))
       "_root_.play.twirl.api.TwirlHelperImports._"
     ),
     isPublicArtefact := true,
-    // ***************
-    // Use the silencer plugin to suppress warnings from unused imports in compiled twirl templates
-    scalacOptions += "-P:silencer:pathFilters=views;routes",
-    libraryDependencies ++= Seq(
-      compilerPlugin("com.github.ghik" % "silencer-plugin" % silencerVersion cross CrossVersion.full),
-      "com.github.ghik" % "silencer-lib" % silencerVersion % Provided cross CrossVersion.full
-    )
-    // ***************
+    scalacOptions += "-Wconf:src=routes/.*:s",
+    scalacOptions += "-Wconf:src=views/.*:s"
   )
   .settings(TwirlKeys.constructorAnnotations += "@javax.inject.Inject()")
   .settings(unmanagedSourceDirectories in sbt.Compile += baseDirectory.value / "src/main/twirl")
