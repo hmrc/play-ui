@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.play
 
-import akka.util.Timeout
+import org.apache.pekko.util.Timeout
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import play.api.test.Helpers.contentAsString

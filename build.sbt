@@ -1,24 +1,22 @@
 val scala2_13 = "2.13.12"
 
-val silencerVersion = "1.7.7"
-
-lazy val root = Project("play-ui-play-29", file("."))
+lazy val root = Project("play-ui-play-30", file("."))
   .enablePlugins(SbtTwirl)
   .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
-    majorVersion := 10,
+    majorVersion := 11,
     scalaVersion := scala2_13,
     crossScalaVersions := Seq(scala2_13),
     libraryDependencies ++= Seq(
-      "com.typesafe.play" %% "play"                 % "2.9.0",
-      "com.typesafe.play" %% "play-filters-helpers" % "2.9.0",
+      "org.playframework" %% "play"                 % "3.0.0",
+      "org.playframework" %% "play-filters-helpers" % "3.0.0",
       "joda-time"          % "joda-time"            % "2.12.5",
       "org.joda"           % "joda-convert"         % "2.0.2",
       "org.apache.commons" % "commons-text"         % "1.9",
       "org.scalatest"     %% "scalatest"            % "3.0.8"  % Test,
       "org.pegdown"        % "pegdown"              % "1.6.0"  % Test,
       "org.jsoup"          % "jsoup"                % "1.11.3" % Test,
-      "com.typesafe.play" %% "play-test"            % "2.9.0"  % Test,
+      "org.playframework" %% "play-test"            % "3.0.0"  % Test,
       "org.scalacheck"    %% "scalacheck"           % "1.14.0" % Test
     )
   )
