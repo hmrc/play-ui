@@ -1,4 +1,4 @@
-val scala2_13 = "2.13.7"
+val scala2_13 = "2.13.12"
 
 val silencerVersion = "1.7.7"
 
