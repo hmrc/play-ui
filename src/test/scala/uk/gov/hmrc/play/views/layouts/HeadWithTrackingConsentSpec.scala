@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,36 +17,35 @@
 package uk.gov.hmrc.play.views.layouts
 
 import org.scalatest.{Matchers, WordSpec}
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.Application
+import play.api.{Configuration, Environment}
 import play.api.i18n.{Lang, Messages}
-import play.api.inject.guice.GuiceApplicationBuilder
 import play.twirl.api.Html
-import uk.gov.hmrc.play.views.html.layouts.HeadWithTrackingConsent
+import uk.gov.hmrc.play.config.{AssetsConfig, OptimizelyConfig, TrackingConsentConfig}
+import uk.gov.hmrc.play.views.html.layouts.{HeadWithTrackingConsent, TrackingConsentSnippet}
 import uk.gov.hmrc.play.{JsoupHelpers, MessagesSupport}
 
-class HeadWithTrackingConsentSpec
-    extends WordSpec
-    with Matchers
-    with GuiceOneAppPerSuite
-    with JsoupHelpers
-    with MessagesSupport {
-  override def fakeApplication(): Application =
-    new GuiceApplicationBuilder()
-      .configure(
-        Map(
-          "play.allowGlobalApplication"             -> "true",
-          "optimizely.url"                          -> "https://cdn.optimizely.com/",
-          "optimizely.projectId"                    -> "1234567",
-          "tracking-consent-frontend.gtm.container" -> "d",
-          "assets.url"                              -> "doesnt-matter",
-          "assets.version"                          -> "doesnt-matter"
-        )
-      )
-      .build()
+class HeadWithTrackingConsentSpec extends WordSpec with Matchers with JsoupHelpers with MessagesSupport {
 
   "HeadWithTrackingConsent" should {
-    val headWithTrackingConsent = app.injector.instanceOf[HeadWithTrackingConsent]
+    val config = Configuration.load(
+      Environment.simple(),
+      Map(
+        "play.allowGlobalApplication"             -> "true",
+        "optimizely.url"                          -> "https://cdn.optimizely.com/",
+        "optimizely.projectId"                    -> "1234567",
+        "tracking-consent-frontend.gtm.container" -> "d",
+        "assets.url"                              -> "doesnt-matter",
+        "assets.version"                          -> "doesnt-matter"
+      )
+    )
+
+    val headWithTrackingConsent = new HeadWithTrackingConsent(
+      new TrackingConsentSnippet(
+        new TrackingConsentConfig(config),
+        new OptimizelyConfig(config)
+      ),
+      new AssetsConfig(config)
+    )
     val linkElem                = Some(Html("<script src='doesnt-matter.js'></script>"))
     val headScripts             = Some(Html("<link rel='stylesheet' href='doesnt-matter.css' />"))
 
